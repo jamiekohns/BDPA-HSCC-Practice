@@ -1,0 +1,6 @@
+19:12:18	 From Eddie Gichuhi : git commit -m "comment" applies to all files in the commit.
+19:12:58	 From Eddie Gichuhi : If you wanted different comments for each file(s), then you would just commit each set of files separately
+19:23:01	 From Saleem Saafir : $ git statusOn branch masterYour branch is based on 'origin/master', but the upstream is gone.  (use "git branch --unset-upstream" to fixup)nothing to commit, working tree clean
+19:44:09	 From Suchit Vemula : me
+19:46:53	 From Eddie Gichuhi : some suggestions: all file names should be lower case; no spaces; no camel case; separate word with dashes for readability
+19:55:10	 From Suchit Vemula : Bye
