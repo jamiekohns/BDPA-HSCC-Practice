@@ -1,0 +1,3 @@
+Jamie Kohns - instructor
+Full-stack developer
+Strengths: PHP, HTML, JavaScript, and MySql
