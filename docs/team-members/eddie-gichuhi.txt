@@ -1,0 +1,5 @@
+Eddie Gichuhi - instructor
+Full-stack developer
+Strengths: Linux, AWS, PHP, HTML, JavaScript, MySql, Bootstrap
+Fun activities: software development, business, golf, music, travel
+--- This is a new line ---
