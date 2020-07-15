@@ -1,4 +1,0 @@
-Saleem Saafir - Student
-Full Stack dev in training
-Strengths: PHP, html, sql, js, bootstrap, batch
-Interests: Everything good!
