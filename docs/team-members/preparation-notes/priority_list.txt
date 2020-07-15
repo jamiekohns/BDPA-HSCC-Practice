@@ -1,0 +1,48 @@
+BDPA HSCC Meeting 7-13-2020
+
+Top Priority marked with asterisk *
+
+Booking/Viewing Flights:
+  Requirement 2
+    Flights view: users can view, search through, and sort through a paginated list of all "recent" and future flights.
+  Requirement 3
+    Booking view: users can book flights.
+  *Requirement 11* (ajax)
+    All views displaying flight/ticket information will ensure that information updates asynchronously.
+
+
+Login system:
+  Requirement 1
+    Your app will support 3 types for users: guest, customer, and admin.
+  Requirement 7
+    Guests can sign up for new customer accounts; admins can create new customer accounts.
+  Requirement 8
+    Guests can authenticate (login) using at minimum their first name, last name, and password.
+  Requirement 10
+    If a customer does not remember their password, they can use their security questions to recover their account.
+
+
+Dashboard:
+  *Requirement 6*
+  Dashboard: admins will have access to an administration dashboard.
+
+  Requirement 4
+    Ticket view: users can view tickets.
+  Requirement 5
+    Dashboard: each customer will have access to their own private dashboard.
+
+
+Security:
+  *Requirement 13*
+  Security: no XSS, SQL injection, or related security vulnerabilities.
+  Requirement 9
+    Your app must cross-check flyer information against the No Fly List when booking a ticket.
+
+
+UX:
+  *Requirement 14* (Exception Handler)
+    Your app will fail gracefully when exceptional conditions are encountered.
+  *Requirement 15* (Mobile-first Development)
+    The front-end UI will be responsive to mobile, tablet, and desktop viewports.
+  Requirement 12
+    All results and lists of items displayed in the frontend UI will be paginated where appropriate.
