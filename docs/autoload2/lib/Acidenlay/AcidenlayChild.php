@@ -13,6 +13,6 @@ class AcidenlayChild extends Acidenlay
             'I am %s, my parent is %s',
             $me,
             $parent
-        );
+        ) . "\n";
     }
 }
