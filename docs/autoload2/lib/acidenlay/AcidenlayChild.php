@@ -6,6 +6,13 @@ class AcidenlayChild extends Acidenlay
 {
     function getName()
     {
-        return 'AcidenlayChild';
+        $parent = parent::getName();
+        $me = 'AcidenlayChild';
+
+        return sprintf(
+            'I am %s, my parent is %s',
+            $me,
+            $parent
+        );
     }
 }
