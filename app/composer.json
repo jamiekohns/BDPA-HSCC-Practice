@@ -1,0 +1,11 @@
+{
+    "name": "bdpa-hscc/flights",
+    "description": "App to view and book flights",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Flights\\": "src/"
+        }
+    }
+}
