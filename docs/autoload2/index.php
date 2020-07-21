@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL);
 include_once('autoloader.php');
 
 // Write an autoloader function in autoloader.php.
@@ -8,8 +8,12 @@ include_once('autoloader.php');
 // you may NOT use any other includes!
 
 use \Acidenlay\Den\Den;
+use \FinatiTaing\Fashlorton\Fashlorton;
 
-$den = new Den();
-echo $den->getName();
+$den = new Den(1);
+echo $den->getName() . "\n";
+$denAlso = new Den(2);
+echo $denAlso->getName() . "\n";
+
 
 // echo 'getName()' for each class found in /lib
