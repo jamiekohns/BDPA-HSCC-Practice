@@ -1,6 +1,6 @@
 {
     "name": "bdpa-hscc/flights",
-    "description": "App to view and book flights",
+    "description": "Flights app for BDPS HSCC 2020",
     "type": "project",
     "require": {},
     "autoload": {
