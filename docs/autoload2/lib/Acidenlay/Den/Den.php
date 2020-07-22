@@ -4,8 +4,14 @@ namespace Acidenlay\Den;
 
 class Den
 {
+    public $str;
+
+    function __construct($arg) {
+        $this->str = $arg;
+    }
+
     function getName()
     {
-        return 'Den';
+        return 'Den ' . $this->str;
     }
 }
