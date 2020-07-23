@@ -51,7 +51,7 @@ ALTER TABLE `users`
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
 
-  CREATE TABLE `tickets` (
+CREATE TABLE `tickets` (
     `id` int(11) NOT NULL,
     `first_name` varchar(255) NOT NULL,
     `middle_name` varchar(255) NOT NULL,
@@ -64,9 +64,19 @@ ALTER TABLE `users`
     `seat_assignment` varchar(20) NOT NULL,
     `bags` int(2) NOT NULL,
     `flight_id` varchar(128) NOT NULL,
-    `status_id` int(11) NOT NULL
-  ) ENGINE=InnoDB;
+    `status_id` int(11) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
 
-  ALTER TABLE `tickets`
-    ADD PRIMARY KEY (`id`),
-    ADD KEY `tickets_ibfk_1` (`status_id`);
+CREATE TABLE `flight_status` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `status` varchar(64) NOT NULL,
+    `abbr` varchar(6) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+ALTER TABLE `tickets`
+    ADD FOREIGN KEY (`status_id`)
+    REFERENCES `flight_status`(`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
