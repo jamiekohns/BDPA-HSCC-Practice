@@ -1,0 +1,27 @@
+
+
+Bookings / Tickets:
+
+    `flights`.`tickets`
+    - first_name
+    - middle_name (optional)
+    - last_name
+    - gender
+    - birthdate (dob)
+    - phone_number
+    - email_address
+    - payment_id
+    - seat_assignment
+    - bags (int)
+    - flight_id (string)
+    - status
+
+Payments:
+     `flights`.`payments`
+     ...
+
+User Log:
+
+    `flights`.`user_log`
+     - last_login_ip
+     - last_login_datetime
