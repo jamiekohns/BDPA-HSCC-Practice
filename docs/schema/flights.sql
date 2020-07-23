@@ -50,3 +50,23 @@ ALTER TABLE `users`
     REFERENCES `user_type`(`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
+
+  CREATE TABLE `tickets` (
+    `id` int(11) NOT NULL,
+    `first_name` varchar(255) NOT NULL,
+    `middle_name` varchar(255) NOT NULL,
+    `last_name` varchar(255) NOT NULL,
+    `gender` varchar(1) NOT NULL,
+    `dob` date NOT NULL,
+    `phone_number` varchar(255) NOT NULL,
+    `email_address` varchar(255) NOT NULL,
+    `payment_id` int(11) NOT NULL,
+    `seat_assignment` varchar(20) NOT NULL,
+    `bags` int(2) NOT NULL,
+    `flight_id` varchar(128) NOT NULL,
+    `status_id` int(11) NOT NULL
+  ) ENGINE=InnoDB;
+
+  ALTER TABLE `tickets`
+    ADD PRIMARY KEY (`id`),
+    ADD KEY `tickets_ibfk_1` (`status_id`);
