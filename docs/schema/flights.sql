@@ -80,3 +80,16 @@ ALTER TABLE `tickets`
     REFERENCES `flight_status`(`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
+
+CREATE TABLE `flights`.`user_log`
+  (
+     `id`                  INT(11) NOT NULL auto_increment,
+     `user_id`             INT(11) NOT NULL,
+     `last_login_ip`       VARCHAR(15) NOT NULL,
+     `last_login_datetime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+     PRIMARY KEY (`id`)
+  ) ENGINE = InnoDB;
+
+ALTER TABLE `user_log` 
+  ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE no action ON
+  UPDATE no action;
