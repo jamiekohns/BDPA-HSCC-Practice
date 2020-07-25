@@ -52,13 +52,15 @@ ALTER TABLE `users`
     ON UPDATE NO ACTION;
 
 CREATE TABLE `payments` (
-    `id` int(11) NOT NULL,
-    `card_number` varchar(16) NOT NULL,
-    `expiration_date` date() NOT NULL,
-    `cvc` varchar(5) NOT NULL,
-    `cardholder_name` varchar(255) NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `card_number` varchar(16) NOT NULL,
+ `expiration_date` date NOT NULL,
+ `cvc` varchar(5) NOT NULL,
+ `cardholder_name` varchar(255) NOT NULL,
+ `address_id` int(11) NOT NULL,
+ `user_id` int(11) NOT NULL,
+ PRIMARY KEY (`id`),
+) ENGINE=InnoDB ;
 
 ALTER TABLE `payments`
     ADD CONSTRAINT `payments_users_fk`
