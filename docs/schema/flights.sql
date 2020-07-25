@@ -80,3 +80,20 @@ ALTER TABLE `tickets`
     REFERENCES `flight_status`(`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
+
+CREATE TABLE `payments` (
+    `id` int(11) NOT NULL,
+    `user_id` int(11) DEFAULT NULL,
+    `card_number` varchar(255) NOT NULL,
+    `expiration_date` date NOT NULL,
+    `CVC` varchar(64) NOT NULL,
+    `cardholder_name` varchar(255) NOT NULL,
+    `billing_address` varchar(255) NOT NULL,
+    `zip` varchar(32) NOT NULL
+) ENGINE=InnoDB;
+
+ALTER TABLE `payments`
+    ADD FOREIGN KEY (`user_id`)
+    REFERENCES `users`(`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
