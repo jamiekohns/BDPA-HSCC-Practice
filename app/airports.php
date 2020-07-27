@@ -1,15 +1,11 @@
 <?php
 require 'vendor/autoload.php';
 
-use \Flights\RestRequest\RestRequest;
+use \Flights\RestRequest\ApiInfo;
 
 $apiKey = 'atlfb92a-5a76-4422-9997-4568b163b0fb';
-$url = 'https://airports.api.hscc.bdpa.org/v1/info/airports';
+$url = 'https://airports.api.hscc.bdpa.org/v1/info';
 
-$restRequest = new RestRequest($apiKey, $url);
+$request = new ApiInfo($apiKey, $url);
 
-$response = $restRequest->send();
-
-
-
-var_dump($response);
+echo($request->airports());
