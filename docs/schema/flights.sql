@@ -35,7 +35,15 @@ CREATE TABLE `addresses` (
   `zip` varchar(16) NOT NULL,
   `country` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB;email_address` varchar(255) NOT NULL,
+`payment_id` int(11) NOT NULL,
+`seat_assignment` varchar(20) NOT NULL,
+`bags` int(2) NOT NULL,
+`flight_id` varchar(128) NOT NULL,
+`status_id` int(11) NOT NULL,
+`address_id` int(11) NOT NULL,
+`user_id` int(11) NULL,
+`payment_id` int(11) NOT NULL,
 
 ALTER TABLE `users`
     ADD CONSTRAINT `addresses_fk`
@@ -59,7 +67,7 @@ CREATE TABLE `payments` (
  `cardholder_name` varchar(255) NOT NULL,
  `address_id` int(11) NOT NULL,
  `user_id` int(11) NOT NULL,
- PRIMARY KEY (`id`),
+ PRIMARY KEY (`id`)
 ) ENGINE=InnoDB ;
 
 ALTER TABLE `payments`
@@ -88,7 +96,6 @@ CREATE TABLE `tickets` (
     `status_id` int(11) NOT NULL,
     `address_id` int(11) NOT NULL,
     `user_id` int(11) NULL,
-    `payment_id` int(11) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 

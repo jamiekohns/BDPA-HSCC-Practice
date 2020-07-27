@@ -3,18 +3,24 @@
 namespace Flights\RestRequest;
 
 class RestRequest {
-    private $apiKey;
-    private $url;
+    protected $apiKey;
+    protected $baseUrl;
 
-    public function __construct(string $apiKey, string $url){
+    public function __construct(string $apiKey, string $baseUrl){
         $this->apiKey = $apiKey;
-        $this->url = $url;
+        $this->baseUrl = $baseUrl;
     }
 
-    public function send(){
+    protected function send(string $endpoint){
+        $url = sprintf(
+            '%s/%s',
+            $this->baseUrl,
+            $endpoint
+        );
+
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, $this->url);
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
