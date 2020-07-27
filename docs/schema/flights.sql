@@ -51,6 +51,27 @@ ALTER TABLE `users`
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
 
+CREATE TABLE `payments` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `card_number` varchar(16) NOT NULL,
+ `expiration_date` date NOT NULL,
+ `cvc` varchar(5) NOT NULL,
+ `cardholder_name` varchar(255) NOT NULL,
+ `address_id` int(11) NOT NULL,
+ `user_id` int(11) NOT NULL,
+ PRIMARY KEY (`id`),
+) ENGINE=InnoDB ;
+
+ALTER TABLE `payments`
+    ADD CONSTRAINT `payments_users_fk`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`);
+
+ALTER TABLE `payments`
+    ADD CONSTRAINT `payments_addresses_fk`
+    FOREIGN KEY (`address_id`)
+    REFERENCES `addresses` (`id`);
+
 CREATE TABLE `tickets` (
     `id` int(11) NOT NULL,
     `first_name` varchar(255) NOT NULL,
@@ -65,6 +86,9 @@ CREATE TABLE `tickets` (
     `bags` int(2) NOT NULL,
     `flight_id` varchar(128) NOT NULL,
     `status_id` int(11) NOT NULL,
+    `address_id` int(11) NOT NULL,
+    `user_id` int(11) NULL,
+    `payment_id` int(11) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -81,7 +105,19 @@ ALTER TABLE `tickets`
     ON DELETE NO ACTION
     ON UPDATE NO ACTION;
 
-CREATE TABLE `flights`.`user_log`
+ALTER TABLE `tickets`
+    ADD FOREIGN KEY (`address_id`)
+    REFERENCES `addresses` (`id`);
+
+ALTER TABLE `tickets`
+    ADD FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`);
+
+ALTER TABLE `tickets`
+    ADD FOREIGN KEY (`payment_id`)
+    REFERENCES `payments` (`id`);
+
+CREATE TABLE `user_log`
   (
      `id`                  INT(11) NOT NULL auto_increment,
      `user_id`             INT(11) NOT NULL,
@@ -90,6 +126,6 @@ CREATE TABLE `flights`.`user_log`
      PRIMARY KEY (`id`)
   ) ENGINE = InnoDB;
 
-ALTER TABLE `user_log` 
+ALTER TABLE `user_log`
   ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE no action ON
   UPDATE no action;
