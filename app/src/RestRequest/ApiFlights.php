@@ -34,8 +34,7 @@ class ApiFlights extends RestRequest
         $finalMatch = urlencode(json_encode($match));
         $endUrl .= '&match=' . $finalMatch;
       }elseif($regexMatch !== NULL){
-        $finalRegexMatch = json_encode($regexMatch);
-        $finalRegexMatch = urlencode($finalRegexMatch);
+        $finalRegexMatch = urlencode(json_encode($regexMatch));
         $endUrl .=  '&regexMatch=' . $finalRegexMatch;
       }if($sort !== NULL){
         if($sort == 'asc' | $sort == 'desc'){
