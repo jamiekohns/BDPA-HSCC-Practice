@@ -1,32 +1,33 @@
 <?php
-
 namespace Flights\RestRequest;
 
 use Flights\RestRequest\RestRequest;
 
-class ApiInfo extends RestRequest {
+class ApiInfo extends RestRequest{
 
-    public function __construct(string $apiKey, string $baseUrl)
-    {
-        parent::__construct($apiKey, $baseUrl);
-    }
+  public function __construct(string $apiKey, string $baseurl)
+  {
+      parent::__construct($apiKey, $baseurl);
 
-    public function airports()
-    {
-        $response = $this->send('airports');
+  }
 
-        return $response;
-    }
+  public function airport()
+  {
+      $response = $this->send('airports');
+      return $response;
+  }
 
-    public function airlines()
-    {
-        $response = $this->send('airlines');
+  public function airlines()
+  {
+    $response = $this->send('airlines');
+    return $response;
+  }
 
-        return $response;
-    }
+  public function noFlyList()
+  {
+    $response = $this->send('no-fly-list');
+    return $response;
+  }
 
-    public function noFlyList()
-    {
-        return $this->send('no-fly-list');
-    }
+
 }
