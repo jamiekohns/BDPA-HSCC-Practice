@@ -21,4 +21,9 @@ $sort = 'asc';
 $ids = ["5f0b87e09c4d62d7b65bb3c8", "5f0b87e09c4d62d7b65bb3e6"];
 
 $request = new ApiFlights($apiKey, $baseUrl);
+
+echo($request->all($afterAll));
+
+echo($request->search($afterSearch, $match, $regexMatch, $sort));
+
 echo($request->with_ids($ids));
