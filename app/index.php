@@ -2,10 +2,10 @@
 
 require 'vendor/autoload.php';
 
-use Flights\RestRequest\RestRequest;
-use Flights\Api\Test;
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-$rest = new RestRequest();
-echo $rest->getName();
+use Flights\RestRequest\ApiInfo;
 
-$test = new Test();
+$rest = new ApiInfo();
+echo $rest->airports();

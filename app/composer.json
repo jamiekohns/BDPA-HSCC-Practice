@@ -2,7 +2,9 @@
     "name": "bdpa-hscc/flights",
     "description": "Flights app for BDPS HSCC 2020",
     "type": "project",
-    "require": {},
+    "require": {
+        "vlucas/phpdotenv": "^5.1"
+    },
     "autoload": {
         "psr-4": {
             "Flights\\": "src/"

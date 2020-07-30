@@ -6,9 +6,10 @@ use Flights\RestRequest\RestRequest;
 
 class ApiInfo extends RestRequest {
 
-    public function __construct(string $apiKey, string $baseUrl)
+    public function __construct()
     {
-        parent::__construct($apiKey, $baseUrl);
+        $baseUrl = $_ENV['API_BASE_URL'] . '/info';
+        parent::__construct($baseUrl);
     }
 
     public function airports()
