@@ -6,3 +6,4 @@ tmp
 .localized
 app/vendor
 app/composer.lock
+.env
