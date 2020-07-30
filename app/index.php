@@ -1,11 +1,7 @@
-<?php
-
+<?php session_start();
 require 'vendor/autoload.php';
-
-use Flights\RestRequest\RestRequest;
-use Flights\Api\Test;
-
-$rest = new RestRequest();
-echo $rest->getName();
-
-$test = new Test();
+if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
+    echo '<form action="login.php">
+    <button type="submit" name="submit" class="btn btn-primary">Log in</button>';
+}
+?>
