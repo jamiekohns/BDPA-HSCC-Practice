@@ -1,0 +1,21 @@
+
+
+
+index.php - Home page
+-- commercial elements (images, deals, alerts)
+login.php - Login
+- forgot_password.php
+flights.php - flights listing
+
+booking.php - book a flight
+- seating_chart.php
+create_account.php
+ticket.php
+
+/user
+-- dashboard.php
+-- settings.php
+-- tickets.php - show purchased tickets
+/admin
+-- dashboard.php
+-- create_account.php
