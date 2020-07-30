@@ -17,6 +17,7 @@ class RestRequest {
             $this->baseUrl,
             $endpoint
         );
+
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -27,7 +28,9 @@ class RestRequest {
             "key: $this->apiKey",
             "content-type: application/json",
         ]);
+
         $response = curl_exec($ch);
+
         return $response;
     }
 }
