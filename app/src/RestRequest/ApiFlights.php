@@ -16,7 +16,7 @@ class ApiFlights extends RestRequest
   public function all(string $afterAll = NULL)
   {
     if($after !== NULL){
-      $response = $this->send('all/' . $after);
+      $response = $this->send('all?' . 'after=' . $after);
       return $response;
     }else{
       $response = $this->send('all');
@@ -29,7 +29,7 @@ class ApiFlights extends RestRequest
       $endUrl = 'search?';
       if($afterSearch !== NULL){
 
-        $endUrl .= 'after=' . $this->afterSearch;
+        $endUrl .= 'after=' . $afterSearch;
       }elseif($match !== NULL){
         $finalMatch = urlencode(json_encode($match));
         $endUrl .= '&match=' . $finalMatch;
