@@ -1,5 +1,5 @@
 <?php session_start();
-require 'vendor/autoload.php';
+require 'init.php';
 use Flights\Database\User;
 
 $users = new User();
@@ -11,19 +11,20 @@ if(isset($_COOKIE['user'])){
     header('location: user_dashboard.php');
 
 }
-$error = NULL;
-$positive = NULL;
-//This part should be in Config.php since we didn;t make one yet I put it here
-$dsn = 'mysql:dbname=flights;host=192.168.64.2;port=3306';
-$user = 'flights';
-$password = 'Password';
 
-try {
-    $db = new PDO($dsn, $user, $password);
-} catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
-}
-//Until here
+ $error = NULL;
+ $positive = NULL;
+// //This part should be in Config.php since we didn;t make one yet I put it here
+// $dsn = 'mysql:dbname=flights;host=192.168.64.2;port=3306';
+// $user = 'flights';
+// $password = 'Password';
+//
+// try {
+//     $db = new PDO($dsn, $user, $password);
+// } catch (PDOException $e) {
+//     echo 'Connection failed: ' . $e->getMessage();
+// }
+// //Until here
 
 
 if(isset($_POST['submit'])){
@@ -39,7 +40,7 @@ if(isset($_POST['submit'])){
     elseif($_POST['password']== NULL){
         $error = 'Please Enter Your Password';
     }
-    elseif(!$users->login($db, $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'])){
+    elseif(!$users->login($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'])){
         $error = 'Name or Password Do Not Match Please Try Again Later';
 
     }elseif (isset($_POST['remmemberPass'])) {
