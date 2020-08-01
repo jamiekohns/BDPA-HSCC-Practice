@@ -6,8 +6,8 @@ class RestRequest {
     protected $apiKey;
     protected $baseUrl;
 
-    public function __construct(string $apiKey, string $baseUrl){
-        $this->apiKey = $apiKey;
+    public function __construct(string $baseUrl){
+        $this->apiKey = $_ENV['API_KEY'];
         $this->baseUrl = $baseUrl;
     }
 
@@ -17,6 +17,8 @@ class RestRequest {
             $this->baseUrl,
             $endpoint
         );
+
+        var_dump($url);
 
         $ch = curl_init();
 
