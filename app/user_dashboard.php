@@ -1,9 +1,6 @@
 <?php session_start();
-<<<<<<< HEAD
 require 'init.php';
-=======
 require 'vendor/autoload.php';
->>>>>>> 0782ace9e66a28c6fe70729191e5d920e709ff54
 if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2){
     header('location: admin_dashboard.php');
 }

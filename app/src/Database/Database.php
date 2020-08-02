@@ -1,7 +1,7 @@
 <?php
-
 namespace Flights\Database;
 
+use PDO;
 class Database {
     protected $db;
 
