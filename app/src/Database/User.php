@@ -118,10 +118,12 @@ class User extends Database {
     }
 
     public function change_password(string $first_name, string $last_name, string $email, string $password_hash){
-        $query = $this->db->prepare('UPDATE `users` SET password_hash = :password_hash WHERE first_name = :first_name and last_name = :last_name and email_address = :email');
+        if(!$query = $this->db->prepare('UPDATE `users` SET `password_hash` = :password_hash WHERE `first_name` = :first_name and `last_name` = :last_name and `email_address` = :email')){
+            echo '';
+        }
 
         $query->execute([
-            ':password' => $password_hash,
+            ':password_hash' => $password_hash,
             ':first_name' => $first_name,
             ':last_name' => $last_name,
             ':email' => $email,

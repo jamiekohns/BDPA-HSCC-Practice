@@ -31,6 +31,7 @@ if(isset($_POST['submit'])){
     $_POST['security_question_3'], $_POST['security_answer_1'], $_POST['security_answer_2'], $_POST['security_answer_3'],
     1, $_POST['address'], $_POST['city'], $_POST['state'], $_POST['zip'], $_POST['country']);
     $password_hash = NULL;
+    header('location: login.php');
 }
 ?>
 
