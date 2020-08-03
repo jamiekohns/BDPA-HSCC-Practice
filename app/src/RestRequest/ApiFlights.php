@@ -15,11 +15,11 @@ class ApiFlights extends RestRequest
 
   public function all(string $afterAll = NULL)
   {
-    if($after !== NULL){
-      $response = $this->send('all?' . 'after=' . $after);
+    if($afterAll !== NULL){
+      $response = $this->send('all?' . 'after=' . $afterAll);
       return $response;
     }else{
-      $response = $this->send('all');
+      $response = $this->send('/all');
       return $response;
     }
   }
