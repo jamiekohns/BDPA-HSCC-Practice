@@ -1,5 +1,9 @@
 <?php session_start();
 require 'init.php';
+<<<<<<< HEAD
+=======
+require 'vendor/autoload.php';
+>>>>>>> f76fd9fecd161fe0792418d2867c3a644e99f611
 use Flights\Database\User;
 
 $users = new User();
@@ -11,8 +15,21 @@ if(isset($_COOKIE['user'])){
     header('location: user_dashboard.php');
 
 }
+<<<<<<< HEAD
 $error = '';
 $positive = '';
+=======
+
+
+ $error = NULL;
+ $positive = NULL;
+
+
+$error = NULL;
+$positive = NULL;
+
+
+>>>>>>> f76fd9fecd161fe0792418d2867c3a644e99f611
 
 
 if(isset($_POST['submit'])){
@@ -24,7 +41,12 @@ if(isset($_POST['submit'])){
         $error = 'Please Enter Your Email Address';
     } elseif ($_POST['password'] == NULL){
         $error = 'Please Enter Your Password';
+<<<<<<< HEAD
     } elseif (!$users->login($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'])){
+=======
+    }
+    elseif(!$users->login($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'])){
+>>>>>>> f76fd9fecd161fe0792418d2867c3a644e99f611
         $error = 'Name or Password Do Not Match Please Try Again Later';
 
     } elseif (isset($_POST['remmemberPass'])) {
