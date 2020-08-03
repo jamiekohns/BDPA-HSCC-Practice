@@ -1,6 +1,5 @@
 <?php
 namespace Flights\Database;
-
 use PDO;
 
 class User extends Database {
@@ -68,11 +67,65 @@ class User extends Database {
             ':user_type_id' => $user_type_id,
             ':address_id' => $address_id,
             ]);
+    }
+
+    public function get_questions(string $first_name, string $last_name, string $email){
+
+        $query = $this->db->prepare('SELECT * from `users` join `user_type` on (`user_type`.`id` = `users`.`user_type_id`)
+        WHERE `users`.`first_name` = :firstname and `users` . `last_name` = :lastname and `users` . `email_address` = :email');
+
+        $query->execute([
+            ':firstname' => $first_name,
+            ':lastname' => $last_name,
+            ':email' => $email
+        ]);
+
+        $forgot = $query->fetch(PDO::FETCH_ASSOC);
+
+        $_SESSION['forgot_password'] = [
+            'security_question_1' => $forgot['security_question_1'],
+            'security_question_2' => $forgot['security_question_2'],
+            'security_question_3' => $forgot['security_question_3'],
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+
+        ];
+
+    }
+
+    public function verify_answers(string $first_name, string $last_name, string $email, string $answer1, string $answer2, string $answer3){
+        $query = $this->db->prepare('SELECT * from `users` join `user_type` on (`user_type`.`id` = `users`.`user_type_id`)
+        WHERE `users`.`first_name` = :firstname and `users` . `last_name` = :lastname and `users` . `email_address` = :email');
+
+        $query->execute([
+            ':firstname' => $first_name,
+            ':lastname' => $last_name,
+            ':email' => $email
+        ]);
+
+        $forgot = $query->fetch(PDO::FETCH_ASSOC);
+
+        if($forgot['security_answer_1'] == $answer1 && $forgot['security_answer_2'] == $answer3 && $forgot['security_answer_3'] == $answer3){
+
+            return true;
+        } else {
+
+            return false;
+        }
 
 
+    }
 
+    public function change_password(string $first_name, string $last_name, string $email, string $password_hash){
+        $query = $this->db->prepare('UPDATE `users` SET password_hash = :password_hash WHERE first_name = :first_name and last_name = :last_name and email_address = :email');
 
-
+        $query->execute([
+            ':password' => $password_hash,
+            ':first_name' => $first_name,
+            ':last_name' => $last_name,
+            ':email' => $email,
+        ]);
     }
 
 }

@@ -2,6 +2,10 @@
 require 'init.php';
 use Flights\Database\User;
 
+if(isset($_SESSION['user']) && isset($_COOKIE['user']) ){
+    header('location: user_dashboard.php');
+}
+
 $error = '';
 
 //This part should be in Config.php since we didn;t make one yet I put it here

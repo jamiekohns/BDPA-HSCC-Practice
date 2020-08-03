@@ -1,6 +1,5 @@
 <?php session_start();
 require 'init.php';
-require 'vendor/autoload.php';
 use Flights\Database\User;
 
 $users = new User();
@@ -12,43 +11,32 @@ if(isset($_COOKIE['user'])){
     header('location: user_dashboard.php');
 
 }
-
-
- $error = NULL;
- $positive = NULL;
-
-
-$error = NULL;
-$positive = NULL;
-
-
+$error = '';
+$positive = '';
 
 
 if(isset($_POST['submit'])){
     if($_POST['first_name'] == NULL){
         $error = 'Please Enter Your First Name';
-    }
-    elseif($_POST['last_name'] == NULL){
+    } elseif ($_POST['last_name'] == NULL){
         $error = 'Please Enter Your Last Name';
-    }
-    elseif($_POST['email'] == NULL){
+    } elseif ($_POST['email'] == NULL){
         $error = 'Please Enter Your Email Address';
-    }
-    elseif($_POST['password']== NULL){
+    } elseif ($_POST['password'] == NULL){
         $error = 'Please Enter Your Password';
-    }
-    elseif(!$users->login($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'])){
+    } elseif (!$users->login($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'])){
         $error = 'Name or Password Do Not Match Please Try Again Later';
 
-    }elseif (isset($_POST['remmemberPass'])) {
+    } elseif (isset($_POST['remmemberPass'])) {
         $_SESSION['user'] = $_POST['first_name'];
         setcookie('user', $_POST['first_name'], time()+(10 * 365 * 24 * 60 * 60));
         $positive = 'You Have Logged In';
         header('location: user_dashboard.php');
-    } else
+    } else {
         $_SESSION['user'] = $_POST['first_name'];
         header('location: user_dashboard.php');
         $positive = 'You Have Logged In';
+    }
 
 
 }
@@ -99,10 +87,16 @@ if(isset($_POST['submit'])){
                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
              </form>
+             <form action="forgot_password.php">
+                 <div class="col-md-6">
+
+                 <button type="submit" name="submit2" class="btn btn-secondary">Forgot Password</button>
+                </div>
+            </form>
              <form action="user_signup.php">
                  <div class="col-md-6">
 
-                 <button type="submit" name="submit" class="btn btn-success">Sign Up</button>
+                 <button type="submit" name="submit3" class="btn btn-success">Sign Up</button>
                 </div>
             </form>
 
