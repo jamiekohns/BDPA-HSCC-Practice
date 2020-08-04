@@ -1,9 +1,14 @@
-<?php session_start();
-require 'init.php';
+
+<!DOCTYPE html>
+<?php require 'init.php';?>
+<?php $page_title = 'Create New User' ?>
+<?php include_once 'web-assets/tpl/app_header.php'; ?>
+<?php include_once 'web-assets/tpl/app_nav.php'; ?>
+<?php
 use Flights\Database\User;
 use Flights\RestRequest\ApiInfo;
 
-if(isset($_SESSION['user']) && isset($_COOKIE['user']) ){
+if(isset($_SESSION['user']) || isset($_COOKIE['user']) ){
     header('location: user_dashboard.php');
 }
 
@@ -12,7 +17,9 @@ $error = '';
     $make_user = new User();
 
     if(isset($_POST['submit'])){
-        if($_POST['first_name'] == NULL){
+        if($_POST['captcha'] !== '4'){
+            $error = 'Invalid Captcha Please Try Again';
+        } elseif($_POST['first_name'] == NULL){
             $error = 'Please Enter Your First Name';
         } elseif ($_POST['last_name'] == NULL){
             $error = 'Please Enter Your Last Name';
@@ -45,7 +52,7 @@ $error = '';
     $make_user->create_user($_POST['first_name'], $_POST['last_name'], $password_hash, $_POST['title'], $_POST['middle_name'],
     $_POST['suffix'], $_POST['dob'], $_POST['gender'], $phone, $_POST['email'], $_POST['security_question_1'], $_POST['security_question_2'],
     $_POST['security_question_3'], $_POST['security_answer_1'], $_POST['security_answer_2'], $_POST['security_answer_3'],
-    1, $_POST['address'], $_POST['city'], $_POST['state'], $_POST['zip'], $_POST['country']);
+    1, $_POST['address'], $_POST['city'], $_POST['state'], $_POST['zip'], $_POST['country'], 1);
     $password_hash = NULL;
     header('location: login.php');
 }
@@ -55,7 +62,6 @@ $error = '';
 
 <html>
     <head>
-        <title>Create New User</title>
         <script src="web-assets/js/jquery-3.5.1.min.js"></script>
         <script src="web-assets/js/bootstrap.min.js"></script>
         <link href="web-assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
@@ -70,7 +76,7 @@ $error = '';
                 }
             ?>
             <form action="user_signup.php" method="post">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 ">
                     <label for="first_name">First Name</label>
                     <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Please Enter Your First Name">
                 </div>
@@ -168,6 +174,10 @@ $error = '';
                         <option value="Ms.">Ms.</option>
                         <option value="Mrs.">Mrs.</option>
                     </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Captcha">Captcha</label>
+                    <input type="text" class="form-control" id="captcha" name="captcha" placeholder="2+2">
                 </div>
                 <div class="col-md-6">
 

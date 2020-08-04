@@ -1,6 +1,12 @@
-<?php session_start();
+<!DOCTYPE html>
+<?php require 'init.php';?>
+<?php $page_title = 'Forgot Password' ?>
+<?php include_once 'web-assets/tpl/app_header.php'; ?>
+<?php include_once 'web-assets/tpl/app_nav.php'; ?>
+<?php
 require 'init.php';
 use Flights\Database\User;
+
 if(isset($_SESSION['user']) && isset($_COOKIE['user'])){
     header('location: user_dashboard.php');
 }
@@ -33,7 +39,6 @@ if(isset($_POST['submit'])){
 
 <html>
 <head>
-    <title> Forgot Password </title>
     <script src="web-assets/js/jquery-3.5.1.min.js"></script>
     <script src="web-assets/js/bootstrap.min.js"></script>
     <link href="web-assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
@@ -41,6 +46,8 @@ if(isset($_POST['submit'])){
 </head>
 
 <body>
+    <br>
+    <br>
     <?php
         if ($error) {
             echo '<div class="alert alert-danger">'.$error.'</div>';

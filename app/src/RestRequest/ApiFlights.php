@@ -2,14 +2,13 @@
 
 namespace Flights\RestRequest;
 
-use Flights\RestRequest\RestRequest;
 
 class ApiFlights extends RestRequest
 {
-    public function __construct(string $apiKey, string $baseurl)
+    public function __construct(string $baseurl)
     {
 
-        parent::__construct($apiKey, $baseurl);
+        parent::__construct($baseurl);
     }
 
 
