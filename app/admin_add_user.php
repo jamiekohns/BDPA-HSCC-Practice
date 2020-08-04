@@ -33,7 +33,7 @@ $error = '';
         } else {
             $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 //17
-    $make_user->create_user($_POST['first_name'], $_POST['last_name'], $password_hash, NULL, $_POST['middle_name'], NULL,NULL,NULL,NULL,$_POST['email'],NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL, 0);
+    $make_user->create_user($_POST['first_name'], $_POST['last_name'], $password_hash, 'M.', $_POST['middle_name'], NULL,NULL,NULL,NULL,$_POST['email'],NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL, 0);
 
     $password_hash = NULL;
     //header('location: login.php');

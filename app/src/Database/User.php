@@ -31,12 +31,30 @@ class User extends Database {
         header('location: sign_in_info.php');
     }
     }
-    public function create_user (string $first_name, string $last_name, string $password_hash,
-    $title = NULL, string $middle_name = NULL, string $suffix = NULL, string $dob  = NULL, string $gender  = NULL,
-    int $phone_number  = NULL, string $email_address, string $security_question_1  = NULL,
-    string $security_question_2  = NULL, string $security_question_3  = NULL, string $security_answer_1  = NULL,
-    string $security_answer_2  = NULL, string $security_answer_3  = NULL, int $user_type_id,
-    string $address  = NULL, string $city  = NULL, string $state  = NULL, int $zip  = NULL, string $country  = NULL, int $confirmed) {
+    public function create_user (string $first_name,
+        string $last_name,
+        string $password_hash,
+        string $title,
+        string $middle_name = NULL,
+        string $suffix = NULL,
+        string $dob  = NULL,
+        string $gender  = NULL,
+        int $phone_number  = NULL,
+        string $email_address,
+        string $security_question_1  = NULL,
+        string $security_question_2  = NULL,
+        string $security_question_3  = NULL,
+        string $security_answer_1  = NULL,
+        string $security_answer_2  = NULL,
+        string $security_answer_3  = NULL,
+        int $user_type_id,
+        string $address  = NULL,
+        string $city  = NULL,
+        string $state  = NULL,
+        int $zip  = NULL,
+        string $country  = NULL,
+        int $confirmed) {
+
         if($confirmed == 1){
         $address_query = $this->db->prepare('INSERT INTO `addresses` (address, city, state, zip, country) VALUES
         (:address, :city, :state, :zip, :country)');
@@ -50,9 +68,6 @@ class User extends Database {
         ]);
     }
 
-        if($title = NULL){
-            $title = 'M.';
-        }
 
 
         if($confirmed == 1){
@@ -61,15 +76,47 @@ class User extends Database {
         $address_id = NULL;
     }
 
-        $insert_user = $this->db->prepare('INSERT INTO `users`(first_name, last_name, password_hash,
-            title, middle_name, suffix, dob, gender, phone_number, email_address, security_question_1,
-            security_question_2, security_question_3, security_answer_1, security_answer_2,
-            security_answer_3, user_type_id, address_id, confirmed) VALUES (:first_name, :last_name, :password_hash,
-            :title, :middle_name, :suffix, :dob, :gender, :phone_number, :email_address, :security_question_1,
-            :security_question_2, :security_question_3, :security_answer_1, :security_answer_2,
-            :security_answer_3, :user_type_id, :address_id, :confirmed)');
+        $insert_user = $this->db->prepare('INSERT INTO `users`(
+            first_name,
+            last_name,
+            password_hash,
+            title,
+            middle_name,
+            suffix,
+            dob,
+            gender,
+            phone_number,
+            email_address,
+            security_question_1,
+            security_question_2,
+            security_question_3,
+            security_answer_1,
+            security_answer_2,
+            security_answer_3,
+            user_type_id,
+            address_id,
+            confirmed) VALUES
+            (:first_name,
+            :last_name,
+            :password_hash,
+            :title,
+            :middle_name,
+            :suffix,
+            :dob,
+            :gender,
+            :phone_number,
+            :email_address,
+            :security_question_1,
+            :security_question_2,
+            :security_question_3,
+            :security_answer_1,
+            :security_answer_2,
+            :security_answer_3,
+            :user_type_id,
+            :address_id,
+            :confirmed)');
 
-        $insert_user->execute([
+        if(!$insert_user->execute([
             ':first_name' => $first_name,
             ':last_name' => $last_name,
             ':password_hash' => $password_hash,
@@ -89,7 +136,12 @@ class User extends Database {
             ':user_type_id' => $user_type_id,
             ':address_id' => $address_id,
             ':confirmed' => $confirmed
-            ]);
+        ])){
+            die(var_dump($insert_user->debugDumpParams()));
+
+
+        }
+
     }
 
     public function confirmed(string $first_name, string $last_name, string $email, string $password_hash, string $title, string $suffix = NULL, string $dob, string $gender,
