@@ -6,10 +6,10 @@ use Flights\RestRequest\RestRequest;
 
 class ApiFlights extends RestRequest
 {
-    public function __construct(string $apiKey, string $baseurl)
+    public function __construct()
     {
 
-        parent::__construct($apiKey, $baseurl);
+        parent::__construct('flights');
     }
 
 
@@ -19,7 +19,7 @@ class ApiFlights extends RestRequest
       $response = $this->send('all?' . 'after=' . $afterAll);
       return $response;
     }else{
-      $response = $this->send('/all');
+      $response = $this->send('all');
       return $response;
     }
   }
