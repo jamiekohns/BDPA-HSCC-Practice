@@ -51,31 +51,37 @@ if(isset($_POST['submit'])){
          <link href="web-assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
          <link href="web-assets/css/style.css" type="text/css" rel="stylesheet">
      </head>
-     <body>
+     <body bgcolor="000000">
+         <h1 class="text-center"> Log In </h1>
          <div class="container">
              <?php
                  if ($error) {
                      echo '<div class="alert alert-danger">'.$error.'</div>';
                  }
              ?>
-             <form action="login.php" method="post">
-                 <div class="form-group col-md-6">
+        <form action="login.php" method="post">
+            <div class="row justify-content-center"> <!-- Start Row -->
+                 <div class="col-md-4 justify-content-center">
                      <label for="first_name">First Name</label>
                      <input type="text" class="form-control" id="first_name" name="first_name">
                  </div>
-                 <div class="form-group col-md-6">
+                 <div class="w-100"></div>
+                 <div class="col-md-4 justify-content-center">
                      <label for="first_name">Last Name</label>
                      <input type="text" class="form-control" id="last_name" name="last_name">
                  </div>
-                 <div class="form-group col-md-6">
+                 <div class="w-100"></div>
+                 <div class="col-md-4 justify-content-centerr">
                      <label for="email">Email</label>
                      <input type="email" class="form-control" id="email" name="email">
                  </div>
-                 <div class="form-group col-md-6">
+                 <div class="w-100"></div>
+                 <div class="col-md-4 justify-content-center">
                      <label for="password">Password</label>
                      <input type="password" class="form-control" id="password" name="password">
                  </div>
-                 <div class="form-group form-group col-md-6">
+                 <div class="w-100"></div>
+                 <div class="col-md-4 justify-content-center">
                      <div class="form-check">
                          <input class="form-check-input" type="checkbox" id="gridCheck" value = 'remmemberPass' name="remmemberPass">
                          <label class="form-check-label" for="gridCheck">
@@ -83,22 +89,30 @@ if(isset($_POST['submit'])){
                          </label>
                      </div>
                  </div>
-                 <div class="col-md-6">
+                 <div class="w-100"></div>
+                 <div class="col-md-4 justify-content-center">
 
                  <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>
+                <div class="w-100"></div>
+            </div> <!-- End Row -->
              </form>
-             <form action="forgot_password.php">
-                 <div class="col-md-6">
+        <form action="forgot_password.php">
+            <div class="row justify-content-center"> <!-- Start Row -->
+                 <div class="col-md-4 justify-content-center">
 
                  <button type="submit" name="submit2" class="btn btn-secondary">Forgot Password</button>
                 </div>
+            </div> <!-- End Row -->
+            <div class="w-100"></div>
             </form>
              <form action="user_signup.php">
-                 <div class="col-md-6">
+                 <div class="row justify-content-center"> <!-- Start Row -->
+                 <div class="col-md-4 justify-content-center">
 
                  <button type="submit" name="submit3" class="btn btn-success">Sign Up</button>
                 </div>
+            </div> <!-- End Row -->
             </form>
 
          </div>

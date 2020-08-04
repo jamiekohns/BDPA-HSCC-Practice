@@ -18,7 +18,6 @@ class RestRequest {
             $endpoint
         );
 
-        var_dump($url);
 
         $ch = curl_init();
 

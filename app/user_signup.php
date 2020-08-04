@@ -1,6 +1,7 @@
 <?php session_start();
 require 'init.php';
 use Flights\Database\User;
+use Flights\RestRequest\ApiInfo;
 
 if(isset($_SESSION['user']) && isset($_COOKIE['user']) ){
     header('location: user_dashboard.php');
@@ -8,21 +9,36 @@ if(isset($_SESSION['user']) && isset($_COOKIE['user']) ){
 
 $error = '';
 
-//This part should be in Config.php since we didn;t make one yet I put it here
-$dsn = 'mysql:dbname=flights;host=192.168.64.2;port=3306';
-$user = 'flights';
-$password = 'Password';
+    $make_user = new User();
 
-try {
-    $db = new PDO($dsn, $user, $password);
-} catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
-}
-//Until here
-
-$make_user = new User();
-
-if(isset($_POST['submit'])){
+    if(isset($_POST['submit'])){
+        if($_POST['first_name'] == NULL){
+            $error = 'Please Enter Your First Name';
+        } elseif ($_POST['last_name'] == NULL){
+            $error = 'Please Enter Your Last Name';
+        } elseif ($_POST['password'] == NULL){
+            $error = 'Please Enter Your Password';
+        }elseif ($_POST['password2'] !== $_POST['password']){
+            $error = 'The Two Passwords Do Not Match';
+        }elseif ($_POST['dob'] == NULL){
+            $error = 'Please Enter Your Date Of Birth';
+        }elseif ($_POST['phone'] == NULL){
+            $error = 'Please Enter Your Phone Number';
+        }elseif ($_POST['email'] == NULL){
+            $error = 'Please Enter Your Email Address';
+        }elseif ($_POST['security_question_1'] == NULL){
+            $error = 'Please Enter Your Security Questions';
+        }elseif ($_POST['security_answer_1'] == NULL){
+            $error = 'Please Answer Your Security Questions';
+        }elseif ($_POST['security_question_2'] == NULL){
+            $error = 'Please Enter Your Security Questions';
+        }elseif ($_POST['security_answer_2'] == NULL){
+            $error = 'Please Answer Your Security Questions';
+        }elseif ($_POST['security_question_3'] == NULL){
+            $error = 'Please Enter Your Security Questions';
+        }elseif ($_POST['security_answer_3'] == NULL){
+            $error = 'Please Answer Your Security Questions';
+        } else {
     $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $phone = intval($_POST['phone']);
 
@@ -33,6 +49,8 @@ if(isset($_POST['submit'])){
     $password_hash = NULL;
     header('location: login.php');
 }
+}
+
 ?>
 
 <html>
