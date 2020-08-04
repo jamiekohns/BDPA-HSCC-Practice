@@ -9,52 +9,82 @@
 ?>
 <?php
 
-        $w = isset($_GET['w']);
+         $w = isset($_GET['w']);
         if ($w == 'search'){
-            
+            // isset($afterSearch) ?? NULL, isset($match) ?? NULL, isset($regexMatch) ?? NULL
+            $match = [
+
+            ];
+            $sort = 'desc';
             $rest = new ApiFlights();
-            $response = $rest->search();
+            $response = $rest->search(NULL , 'status: cancelled', NULL, NULL, $sort);
             $response = json_decode($response, true);
-            var_dump($response['flights']);
+            // var_dump($response['flights']);
         } else {
             $rest = new ApiFlights();
             $response = $rest->all();
             $response = json_decode($response, true);
-            var_dump($response['flights']);
+            // var_dump($response['flights']);
         }
 ?>
 <div class="container mb-4">
-    <div class="row pt-4 mb-4">
+    <div class="row pt-0 mb-4">
         <div class="col"></div>
     </div>
     <div class="row">
-        <div class="col col-md-4 col-sm-12">
+        <div class="col col-12 col-md-4 col-sm-12">
             <div class="card mb-4">
-                <div class="card-body">
+                <div class="card-header">Search Flights</div>
+                <div class="card-body pb-1">
+
                     <form class="form">
                         <div class="form-group">
                             <div class="form-row">
-                                <div class="col">
-                                    <input class="form-control" type="date" />
+                                <div class="col col-7 mb-3">
+                                    <input type="text" class="form-control" id="form_flightNumber" placeholder="Flight number e.g. U5946">
                                 </div>
-                                <div class="col">
-                                    <input class="form-control" type="date" />
+                                <div class="col mb-3">
+                                    <select class="custom-select mr-2" id="match_type">
+                                        <option selected>Type</option>
+                                        <option value="arrival">Arrival</option>
+                                        <option value="departure">Departure</option>
+                                    </select>
+                                </div>
+                                <div class="col mb-3">
+                                    <select class="custom-select mr-2" id="match_type">
+                                        <option selected>Airline</option>
+                                        <option value="arrival">Arrival</option>
+                                        <option value="departure">Departure</option>
+                                    </select>
+                                </div>
+                                <div class="col mb-3">
+                                    <select class="custom-select mrs-2" id="match_airline">
+                                        <option selected></option>
+                                        <option value="">Arrival</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="col mb-3">
+                                    <select class="custom-select mr-2" id="match_airline">
+                                        <option selected></option>
+                                        <option value="">Arrival</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                                <div class="col col-12">
+                                    <button type="submit" class="btn btn-primary w-100">Search Flights</button>
                                 </div>
                             </div>
                         </div>
                     </form>
-                    <h5 class="card-title">Details</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <!-- <ul class="list-group list-group-flush">
                     <li class="list-group-item">Cras justo odio</li>
                     <li class="list-group-item">Dapibus ac facilisis in</li>
                     <li class="list-group-item">Vestibulum at eros</li>
                 </ul> -->
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
             </div>
         </div>
 
@@ -95,9 +125,6 @@
                     $flight_id = $flight['flight_id'] ?? "";
                     $bookable = $flight['bookable'] ?? "";
                     $status = ucfirst($flight['status']) ?? "";
-                    switch ($status) {
-                        case '':
-                    }
                     $arriveAtReciever = epochToTime($flight['arriveAtReciever'] ?? 0, 'h:ia'); //.ENV
                     $departFromSender = epochToTime($flight['departFromSender'] ?? 0, 'h:ia');
                     $departFromReciever = epochToTime($flight['departFromReciever'] ?? 0, 'h:ia');
@@ -105,21 +132,45 @@
                     $flight_modal_label = $flight_id . "_modal_label";
                     $flight_modal_id = $flight_id . "_modal_id";
                     $seatPrice = $flight['seatPrice'];
-                    echo $departFromSender;
+                    switch ($status) {
+                        case 'Past':
+                            $status_color = 'secondary';
+                            break;
+                        case 'Scheduled':
+                            $status_color = 'info';
+                            break;
+                        case 'Cancelled':
+                            $status_color = 'light';
+                            break;
+                        case 'Delayed':
+                            $status_color = 'danger';
+                            break;
+                        case 'On time':
+                            $status_color = 'primary';
+                            break;
+                        case 'Landed':
+                            $status_color = 'success';
+                            break;
+                        case 'Boarding':
+                            $status_color = 'warning';
+                            break;
+                        case 'Arrived':
+                            $status_color = 'danger';
+                            break;
+                        default: $status_color = "white";
+                    }
                     $output = <<<HEREDOC
-
-
-        <div class="card mb-4">
+            <div class="card mb-4">
                 <div class="card-body pt-3">
-                    <span class="badge badge-primary font-weight-heavy mb-3">$status</span>
-                    <span class="text-muted float-right">$airline</span>
+                    <span class="badge badge-$status_color font-weight-normal h6 mb-3">$status</span>
+                    <span class="text-muted float-right"></span>
                     <ul class="list-inline mb-0">
                         <li class="h6 list-inline-item font-weight-normal">$flightNumber</li>
-                        <li class="h6 list-inline-item float-right font-weight-normal">$flight_time</li>
+                        <li class="h6 list-inline-item float-right font-weight-normal">$type</li>
                     </ul>
                     <ul class="list-inline mb-0">
                         <li class="h4 list-inline-item">$departFromSender</li>
-                        <li class="h5 list-inline-item font-weight-normal text-muted m-0"><u>$type</u></li>
+                        <li class="h5 list-inline-item font-weight-normal ">----</li>
                         <li class="h4 list-inline-item float-right">$arriveAtReciever</li>
                     </ul>
                     <ul class="list-inline text-muted mb-2">
@@ -131,8 +182,8 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header bg-light">
-                                <ul class="list-group list-group-horizontal">
-                                    <li class="list-group-item"><h5 class="modal-title font-weight-heavy" id="$flight_modal_label">$departingTo 🡪 $landingAt</h5></li>
+                                <ul class="list-group">
+                                        <li class="list-group-item"><h5 class="modal-title font-weight-heavy" id="$flight_modal_label">$departingTo 🡪 $landingAt</h5></li>
                                     <li class="list-group-item font-weight-bold h4">$flightNumber</li>
                                     <li class="list-group-item font-weight-bold h4">$$seatPrice</li>
                                 </ul>
@@ -157,6 +208,7 @@
                     <a class="float-left stretched link mr-4" href="#" data-toggle="modal" data-target="#$flight_modal_id">
                         Details
                     </a>
+                    <span class="text-muted float-left mr-4">|</span>
                     <a class="float-left stretched link" href="#" data-toggle="modal" data-target="#$flight_modal_id">
                         Seats
                     </a>
@@ -167,6 +219,7 @@ HEREDOC;
 
     return $output;
 }
+
 
 foreach ($response['flights'] as $key => $value) {
 

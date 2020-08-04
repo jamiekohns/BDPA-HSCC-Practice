@@ -2,8 +2,6 @@
 
 namespace Flights\RestRequest;
 
-use Flights\RestRequest\RestRequest;
-
 class ApiInfo extends RestRequest {
 
     public function __construct()
