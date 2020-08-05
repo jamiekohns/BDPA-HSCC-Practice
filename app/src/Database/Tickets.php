@@ -17,23 +17,40 @@ class Tickets extends Database {
         $last_name,
         $confirmation_id) {
 
-        $sql = "SELECT
-              *
+            $sql = "SELECT
+            *
             FROM
-              `tickets`
+            `tickets`
             WHERE
-              `first_name` = :first_name
+            `first_name` = :first_name
             AND `last_name` = :last_name
             AND `confirmationid` = :confirmationid";
 
-        $sth = $this->db->prepare($sql);
-        $sth->execute([
-            ':first_name' => $first_name,
-            ':last_name' => $last_name,
-            ':conformationid' => $confirmation_id,
-        ]);
-        $ticket = $sth->fetch(PDO::FETCH_ASSOC);
+            $sth = $this->db->prepare($sql);
+            $sth->execute([
+                ':first_name' => $first_name,
+                ':last_name' => $last_name,
+                ':conformationid' => $confirmation_id,
+            ]);
+            $ticket = $sth->fetch(PDO::FETCH_ASSOC);
 
-        return $ticket;
+            return $ticket;
+
+        }
+
+        public function getSoldSeats($flight_id) {
+            $seats = [];
+            $sql = "select * from `tickets` where `flight_id` = :flight_id";
+            $sth = $this->db->prepare($sql);
+            $sth->execute([':flight_id' => $flight_id]);
+            $tickets = $sth->fetch(PDO::FETCH_ASSOC);
+
+            foreach($tickets as $ticket) {
+
+                $seats[] = $ticket["seat_assignment"];
+
+            }
+            return $seats;
+        }
+
     }
-}
