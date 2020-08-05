@@ -2,10 +2,10 @@
 -- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 29, 2020 at 01:32 AM
+-- Host: localhost
+-- Generation Time: Aug 05, 2020 at 03:18 AM
 -- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,6 +36,12 @@ CREATE TABLE `addresses` (
   `zip` varchar(16) NOT NULL,
   `country` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `addresses`
+--
+
+
 
 -- --------------------------------------------------------
 
@@ -101,19 +107,25 @@ CREATE TABLE `users` (
   `title` enum('M.','Ms.','Mrs.','Mr.') NOT NULL DEFAULT 'M.',
   `middle_name` varchar(128) DEFAULT NULL,
   `suffix` varchar(6) DEFAULT NULL,
-  `dob` date NOT NULL,
-  `gender` varchar(1) NOT NULL,
-  `address_id` int(11) NOT NULL,
+  `dob` date DEFAULT NULL,
+  `gender` varchar(1) DEFAULT NULL,
+  `address_id` int(11) DEFAULT NULL,
   `phone_number` varchar(32) DEFAULT NULL,
-  `email_address` varchar(255) NOT NULL,
-  `security_question_1` varchar(255) NOT NULL,
-  `security_question_2` varchar(255) NOT NULL,
-  `security_question_3` varchar(255) NOT NULL,
-  `security_answer_1` varchar(255) NOT NULL,
-  `security_answer_2` varchar(255) NOT NULL,
-  `security_answer_3` varchar(255) NOT NULL,
-  `user_type_id` int(11) NOT NULL
+  `email_address` varchar(255) DEFAULT NULL,
+  `security_question_1` varchar(255) DEFAULT NULL,
+  `security_question_2` varchar(255) DEFAULT NULL,
+  `security_question_3` varchar(255) DEFAULT NULL,
+  `security_answer_1` varchar(255) DEFAULT NULL,
+  `security_answer_2` varchar(255) DEFAULT NULL,
+  `security_answer_3` varchar(255) DEFAULT NULL,
+  `user_type_id` int(11) NOT NULL,
+  `confirmed` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
 
 -- --------------------------------------------------------
 
@@ -138,6 +150,14 @@ CREATE TABLE `user_type` (
   `id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_type`
+--
+
+INSERT INTO `user_type` (`id`, `name`) VALUES
+(1, 'Costumer'),
+(2, 'Administrator');
 
 --
 -- Indexes for dumped tables
@@ -195,6 +215,12 @@ ALTER TABLE `user_type`
 --
 
 --
+-- AUTO_INCREMENT for table `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT for table `flight_status`
 --
 ALTER TABLE `flight_status`
@@ -207,6 +233,12 @@ ALTER TABLE `payments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `user_log`
 --
 ALTER TABLE `user_log`
@@ -217,6 +249,12 @@ ALTER TABLE `user_type`
 
 ALTER TABLE `addresses`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user_type`
+--
+ALTER TABLE `user_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -242,7 +280,6 @@ ALTER TABLE `users`
   ADD CONSTRAINT `addresses_fk` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `user_type_fk` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
