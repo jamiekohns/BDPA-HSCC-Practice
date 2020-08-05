@@ -1,5 +1,5 @@
 
-<div class="container col-md-11 mt-3">
+<div class="container col-md-11 mt-3 sticky-top mb-1">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark rounded">
         <span class="navbar-brand mb-0 h1">BDPA Flights</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
