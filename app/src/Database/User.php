@@ -253,5 +253,3 @@ class User extends Database {
     }
 
 }
-
- ?>

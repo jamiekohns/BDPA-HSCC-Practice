@@ -6,7 +6,7 @@ class ApiInfo extends RestRequest {
 
     public function __construct()
     {
-        $baseUrl = $_ENV['API_BASE_URL'] . '/info';
+        $baseUrl = 'info';
         parent::__construct($baseUrl);
     }
 

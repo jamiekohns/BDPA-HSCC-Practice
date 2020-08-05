@@ -2,12 +2,13 @@
 
 namespace Flights\Database;
 
+use PDO;
 class Database {
     protected $db;
 
-    public function __construct() {
+    public function __construct(){
         $dsn = sprintf(
-            'mysql:dbname=@;host=%2;port=3306',
+            'mysql:dbname=%s;host=%s;port=3306',
             $_ENV['DB_NAME'],
             $_ENV['DB_HOST']
         );

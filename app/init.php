@@ -5,7 +5,6 @@ $dotenv->load();
 
 session_start();
 
-
 if(isset($_SESSION['user'])){
     if(!isset($_COOKIE['user'])){
         if(time() - $_SESSION['last_active'] > 900){

@@ -270,6 +270,12 @@ ALTER TABLE `users`
 ALTER TABLE `user_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `user_type`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `addresses`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `user_type`
 --
