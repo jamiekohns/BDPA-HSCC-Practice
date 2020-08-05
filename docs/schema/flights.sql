@@ -41,31 +41,7 @@ CREATE TABLE `addresses` (
 -- Dumping data for table `addresses`
 --
 
-INSERT INTO `addresses` (`id`, `address`, `city`, `state`, `zip`, `country`) VALUES
-(1, '1980 shoal crest way', 'cumming', 'GA', '30041', 'USA'),
-(4, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(5, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(6, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(7, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(8, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(9, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(10, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(11, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(12, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(13, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(14, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(15, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(16, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(17, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(18, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(19, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(20, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(21, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(22, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(23, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(24, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(25, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States'),
-(26, '1980 shoal crest way', 'cumming', 'GA', '30041', 'United States');
+
 
 -- --------------------------------------------------------
 
@@ -150,8 +126,6 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `password_hash`, `title`, `middle_name`, `suffix`, `dob`, `gender`, `address_id`, `phone_number`, `email_address`, `security_question_1`, `security_question_2`, `security_question_3`, `security_answer_1`, `security_answer_2`, `security_answer_3`, `user_type_id`, `confirmed`) VALUES
-(14, 'Suchit', 'Vemula', '$2y$10$fGflYzC1CWQhAVJEGUix2uwGFvPMJJUJAaAmO.NeaajjkcqxH2mVu', 'M.', 'm.', 'jr.', '2020-05-13', 'M', 26, '4078088396', 'vemulasuchit3@gmail.com', '1+1', '1+1', '1+1', '2', '2', '2', 2, 1);
 
 -- --------------------------------------------------------
 
