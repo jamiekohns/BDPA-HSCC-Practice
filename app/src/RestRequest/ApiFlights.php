@@ -5,17 +5,17 @@ namespace Flights\RestRequest;
 
 class ApiFlights extends RestRequest
 {
-    public function __construct(string $baseurl)
+    public function __construct()
     {
 
-        parent::__construct($baseurl);
+        parent::__construct('flights');
     }
 
 
   public function all(string $afterAll = NULL)
   {
-    if($after !== NULL){
-      $response = $this->send('all?' . 'after=' . $after);
+    if($afterAll !== NULL){
+      $response = $this->send('all?' . 'after=' . $afterAll);
       return $response;
     }else{
       $response = $this->send('all');
@@ -23,7 +23,7 @@ class ApiFlights extends RestRequest
     }
   }
 
-  public function search(string $afterSearch = NULL, object $match = NULL, object $regexMatch = NULL, string $sort = NULL)
+  public function search(string $afterSearch = NULL, array $match = NULL, array $regexMatch = NULL, string $sort = NULL)
   {
       $endUrl = 'search?';
       if($afterSearch !== NULL){

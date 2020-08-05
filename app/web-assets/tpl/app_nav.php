@@ -1,7 +1,7 @@
 
-<div class="container col-md-11 mt-3">
+<div class="container col-md-11 mt-3 sticky-top mb-1">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark rounded">
-        <a href="index.php" class="navbar-brand mb-0 h1">BDPA Flights</a>
+        <span class="navbar-brand mb-0 h1">BDPA Flights</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,19 +22,14 @@
                             echo "Session is disabled!";
                             break;
                         case 1:
-                            echo <<<HEREDOC
-                            <a class="nav-item nav-link mr-auto" href="user_signup.php
+                            echo <a class="nav-item nav-link mr-auto" href="user_signup.php
                             ">Signup</a>
-                            <a class="nav-item nav-link mr-auto" href="login.php">Login</a>
-HEREDOC;
+                            <a class="nav-item nav-link mr-auto" href="login.php">Login</a>;
                             break;
                         case 2:
-                            echo <<<HEREDOC
-
-                                <a class="nav-item nav-link" href="#">My Account</a>
+                            echo <a class="nav-item nav-link" href="#">My Account</a>
 
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
                                 </a>
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="#">Dashboard</a>
@@ -43,8 +38,7 @@ HEREDOC;
 
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-muted" href="logout.php">Logout</a>
-                                </div>
-HEREDOC;
+                                </div>;
                             break;
                     }?>
             </div>
