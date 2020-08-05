@@ -18,8 +18,6 @@ class RestRequest {
             $endpoint
         );
 
-        // var_dump($url);
-
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);

@@ -1,4 +1,5 @@
 <?php
+
 namespace Flights\Database;
 
 use PDO;

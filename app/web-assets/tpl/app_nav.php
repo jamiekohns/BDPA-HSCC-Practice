@@ -12,23 +12,24 @@
 
                 <?php
                     $session_status = session_status();
-                    switch (1) {
+                    if(isset($_SESSION['user'])|| isset($_COOKIE['user'])){
+                        $status = 2;
+                    } else{
+                        $status = 1;
+                    }
+                    switch ($status) {
                         case 0:
                             echo "Session is disabled!";
                             break;
                         case 1:
-                            echo <<<HEREDOC
-                            <a class="nav-item nav-link mr-auto" href="#">Signup</a>
-                            <a class="nav-item nav-link mr-auto" href="#">Login</a>
-HEREDOC;
+                            echo <a class="nav-item nav-link mr-auto" href="user_signup.php
+                            ">Signup</a>
+                            <a class="nav-item nav-link mr-auto" href="login.php">Login</a>;
                             break;
                         case 2:
-                            echo <<<HEREDOC
-
-                                <a class="nav-item nav-link" href="#">My Account</a>
+                            echo <a class="nav-item nav-link" href="#">My Account</a>
 
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    John Doe
                                 </a>
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="#">Dashboard</a>
@@ -36,9 +37,8 @@ HEREDOC;
                                     <a class="dropdown-item" href="#"></a>
 
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-muted" href="#">Logout</a>
-                                </div>
-HEREDOC;
+                                    <a class="dropdown-item text-muted" href="logout.php">Logout</a>
+                                </div>;
                             break;
                     }?>
             </div>
