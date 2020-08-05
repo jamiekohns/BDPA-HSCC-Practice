@@ -24,7 +24,7 @@ class ApiFlights extends RestRequest
     }
   }
 
-  public function search(string $afterSearch = NULL, object $match = NULL, object $regexMatch = NULL, string $sort = NULL)
+  public function search(string $afterSearch = NULL, array $match = NULL, array $regexMatch = NULL, string $sort = NULL)
   {
       $endUrl = 'search?';
       if($afterSearch !== NULL){
