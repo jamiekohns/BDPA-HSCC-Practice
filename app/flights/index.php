@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<?php require __DIR__ . '/../init.php'; ?>
+<?php require __DIR__ . 'init.php'; ?>
 <?php $page_title = 'Flights' ?>
-<?php include_once __DIR__ . '/../web-assets/tpl/app_header.php'; ?>
-<?php include_once __DIR__ . '/../web-assets/tpl/app_nav.php'; ?>
+<?php include_once __DIR__ . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once __DIR__ . '/web-assets/tpl/app_nav.php'; ?>
 
 <?php
     use Flights\RestRequest\ApiFlights;

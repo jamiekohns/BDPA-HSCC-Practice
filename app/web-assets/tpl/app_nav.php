@@ -22,13 +22,15 @@
                             echo "Session is disabled!";
                             break;
                         case 1:
-                            echo <a class="nav-item nav-link mr-auto" href="user_signup.php
+                            ?>
+                            <a class="nav-item nav-link mr-auto" href="user_signup.php
                             ">Signup</a>
                             <a class="nav-item nav-link mr-auto" href="login.php">Login</a>;
+                            <?php
                             break;
                         case 2:
-                            echo <a class="nav-item nav-link" href="#">My Account</a>
-
+                            ?>
+                            <a class="nav-item nav-link" href="#">My Account</a>
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 </a>
                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -39,6 +41,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-muted" href="logout.php">Logout</a>
                                 </div>;
+                            <?php
                             break;
                     }?>
             </div>
