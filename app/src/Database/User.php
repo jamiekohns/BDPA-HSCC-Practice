@@ -116,7 +116,7 @@ class User extends Database {
             :address_id,
             :confirmed)');
 
-        if(!$insert_user->execute([
+        $insert_user->execute([
             ':first_name' => $first_name,
             ':last_name' => $last_name,
             ':password_hash' => $password_hash,
@@ -136,13 +136,12 @@ class User extends Database {
             ':user_type_id' => $user_type_id,
             ':address_id' => $address_id,
             ':confirmed' => $confirmed
-        ])){
-            die(var_dump($insert_user->debugDumpParams()));
+        ]);
 
 
         }
 
-    }
+
 
     public function confirmed(string $first_name, string $last_name, string $email, string $password_hash, string $title, string $suffix = NULL, string $dob, string $gender,
     int $phone_number, string $security_question_1,
@@ -162,11 +161,11 @@ class User extends Database {
 
         $address_id = $this->db->lastInsertId();
         $query = $this->db->prepare('UPDATE `users` set password_hash = :password_hash,
-            title = :title, set suffix = :suffix, dob = :dob, gender = :gender,
+            title = :title, suffix = :suffix, dob = :dob, gender = :gender,
             phone_number = :phone_number, security_question_1 = :security_question_1,
             security_question_2 = :security_question_2, security_question_3 = :security_question_3,
             security_answer_1 = :security_answer_1, security_answer_2 = :security_answer_2,
-            security_answer_3 = :security_answer_3, address_id = :address_id, confirmed = :confirmed');
+            security_answer_3 = :security_answer_3, address_id = :address_id, confirmed = :confirmed WHERE first_name = :first_name and last_name = :last_name and email_address = :email');
 
         $query->execute([
             ':password_hash' => $password_hash,
@@ -183,7 +182,11 @@ class User extends Database {
             ':security_answer_3' => $security_answer_3,
             ':address_id' => $address_id,
             ':confirmed' => 1,
+            ':first_name' => $first_name,
+            ':last_name' => $last_name,
+            ':email' => $email,
         ]);
+
 
 
     }

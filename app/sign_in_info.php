@@ -38,19 +38,17 @@ if(isset($_POST['submit'])){
         $error = 'Please Answer Your Security Questions';
     } else {
         $user = new User();
-        if(!$user->confirmed($_SESSION['user_info']['first_name'],$_SESSION['user_info']['last_name'],$_SESSION['user_info']['email'], $_POST['password'],$_POST['title'],$_POST['suffix'],$_POST['dob'],$_POST['gender'],
+        $user->confirmed($_SESSION['user_info']['first_name'],$_SESSION['user_info']['last_name'],$_SESSION['user_info']['email'], $_POST['password'],$_POST['title'],$_POST['suffix'],$_POST['dob'],$_POST['gender'],
         $_POST['phone'], $_POST['security_question_1'],
         $_POST['security_question_2'], $_POST['security_question_3'], $_POST['security_answer_1'],
         $_POST['security_answer_2'], $_POST['security_answer_3'],
-        $_POST['address'], $_POST['city'], $_POST['state'], $_POST['zip'], $_POST['country'])){
-            $error = 'Could Not Connect, Please Try Again Later';
-        } else{
-
+        $_POST['address'], $_POST['city'], $_POST['state'], $_POST['zip'], $_POST['country']);
         $user->login($_SESSION['user_info']['first_name'], $_SESSION['user_info']['last_name'], $_SESSION['user_info']['email'], $_POST['password']);
         $_SESSION['last_active'] = time();
         $_SESSION['user'] = $_POST['first_name'];
+        $_SESSION['user_info'] = NULL;
         header('location: user_dashboard.php');
-    }
+
 
 
     }

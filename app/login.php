@@ -19,7 +19,9 @@ $users = new User();
 $error    = '';
 $positive = '';
 
-
+if(isset($_SESSION['user'])||isset($_COOKIE['user'])){
+    header('location: user_dashboard.php');
+}
 if (isset($_POST['submit'])) {
     if ($_POST['first_name'] == NULL) {
         $error = 'Please Enter Your First Name';

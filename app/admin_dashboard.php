@@ -1,5 +1,5 @@
 <?php require 'init.php';?>
-<?php $page_title = 'Log In' ?>
+<?php $page_title = 'Dashboard' ?>
 <?php include_once 'web-assets/tpl/app_header.php'; ?>
 <?php include_once 'web-assets/tpl/app_nav.php'; ?>
 <?php
@@ -25,3 +25,7 @@ echo '<h1> Hello' . ' ' . $_COOKIE['user']. '</h1>';
         <link href="web-assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
         <link href="web-assets/css/style.css" type="text/css" rel="stylesheet">
     </head>
+    <body>
+        <form action="admin_add_user.php">
+            <button type="submit"> Create User</button>
+        </form>
