@@ -8,7 +8,6 @@
     use Flights\RestRequest\ApiInfo;
 ?>
 <?php
-        unset($_SESSION['airports'], $_SESSION['airlines']);
 
         if (!isset($_SESSION['airports']) || !$_SESSION['airports']) {
            $info = new ApiInfo();
@@ -26,12 +25,30 @@
 
         if (isset($_POST['submit'])){
             // isset($afterSearch) ?? NULL, isset($match) ?? NULL, isset($regexMatch) ?? NULL
-            $match = [
-                'type' => $_POST['type'] ?? NULL,
-                'comingFrom' => $_POST['comingFrom'] ?? NULL,
-                'landingAt' => $_POST['landingAt'] ?? NULL,
-                'airline' => $_POST['airline'] ?? NULL
-            ];
+            if (isset($_POST['submit'])) {
+                $validFields = [
+                    'type',
+                    'comingFrom',
+                    'landingAt',
+                    'airline',
+                ];
+                $match = [];
+                foreach ($validFields as $field) {
+                    if (isset($_POST[$field]) && !empty($_POST[$field])) {
+                         $match[$field] = $_POST[$field];
+                    }
+                }
+                $rest = new ApiFlights();
+                $response = $rest->search(null, $match, null, null, null);
+                $response = json_decode($response, true);
+                // var_dump($response);
+                // var_dump($response['flights']);
+            } else {
+                $rest = new ApiFlights();
+                $response = $rest->all();
+                $response = json_decode($response, true);
+                // var_dump($response['flights']);
+            }
 
             $rest = new ApiFlights();
             $response = $rest->search(NULL, $match, NULL, NULL, NULL);
@@ -69,7 +86,7 @@
 
                       <div class="col col-6 mb-3">
                           <select class="custom-select mr-2" id="comingFrom" name="comingFrom">
-                              <option selected>Location...</option>
+                              <option value="">Not Location</option>
                               <?php
                                   foreach ($_SESSION['airports'] as $row) {
 
@@ -82,7 +99,7 @@
 
                       <div class="col col-6 mb-3">
                           <select class="custom-select mrs-2" id="landingAt" name="landingAt">
-                              <option selected>Location...</option>
+                              <option value="">Not Location 2</option>
                               <?php
                                   foreach ($_SESSION['airports'] as $row) {
 
@@ -94,7 +111,7 @@
                       </div>
                       <div class="col mb-3">
                           <select class="custom-select mr-2" id="type" name="type">
-                              <option selected>Type</option>
+                              <option value="">Type</option>
                               <option value="arrival">Arrival</option>
                               <option value="departure">Departure</option>
                           </select>
@@ -102,7 +119,7 @@
 
                       <div class="col mb-3">
                           <select class="custom-select mr-2" id="airline" name="airline">
-                              <option selected>Airline</option>
+                              <option value="">Airline</option>
                               <?php
                                   foreach ($_SESSION['airlines'] as $row) {
 
@@ -112,13 +129,13 @@
                                ?>
                           </select>
                       </div>
-                      <div class="col mb-3">
+                      <!-- <div class="col mb-3">
                           <select class="custom-select mr-2">
-                              <option selected></option>
+                              <option></option>
                               <option value="">...</option>
                               <option value="2">...</option>
                           </select>
-                      </div>
+                      </div> -->
                       <div class="col col-12">
                           <button type="submit" name="submit" value="1" class="btn btn-outline-primary w-100">Search Flights</button>
                       </div>
@@ -176,7 +193,7 @@
                         $t = ltrim($dt->format($format), '0'); // trim off all leading zeroes
                         return $t; // !!! PHP date !!!
                     } catch (\Exception $e){
-                        return "0:00" . $e;
+                        die($e->getMessage());
                     }
                 }
 
@@ -190,9 +207,9 @@
                     $flight_id = $flight['flight_id'] ?? "";
                     $bookable = $flight['bookable'] ?? "";
                     $status = ucfirst($flight['status']) ?? "";
-                    $arriveAtReciever = epochToTime($flight['arriveAtReciever'] ?? 0, 'h:ia'); //.ENV
+                    $arriveAtReceiver = epochToTime($flight['arriveAtReceiver'] ?? 0, 'h:ia'); //.ENV
                     $departFromSender = epochToTime($flight['departFromSender'] ?? 0, 'h:ia');
-                    $departFromReciever = epochToTime($flight['departFromReciever'] ?? 0, 'h:ia');
+                    $departFromReceiver = epochToTime($flight['departFromReceiver'] ?? 0, 'h:ia');
                     $flight_time = epochToTime(1594151700108 - 159416003850, 'h:i');
                     $flight_modal_label = $flight_id . "_modal_label";
                     $flight_modal_id = $flight_id . "_modal_id";
@@ -236,7 +253,7 @@
                     <ul class="list-inline mb-0">
                         <li class="h4 list-inline-item">$departFromSender</li>
                         <li class="h5 list-inline-item font-weight-normal ">----</li>
-                        <li class="h4 list-inline-item float-right">$arriveAtReciever</li>
+                        <li class="h4 list-inline-item float-right">$arriveAtReceiver</li>
                     </ul>
                     <ul class="list-inline text-muted mb-2">
                         <li class="h6 list-inline-item font-weight-normal">$comingFrom</li>
@@ -270,13 +287,14 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="float-left stretched link mr-4" href="#" data-toggle="modal" data-target="#$flight_modal_id">
+                    <!-- <a class="float-left stretched link mr-4" href="#" data-toggle="modal" data-target="#$flight_modal_id">
                         Details
                     </a>
-                    <span class="text-muted float-left mr-4">|</span>
                     <a class="float-left stretched link" href="#" data-toggle="modal" data-target="#$flight_modal_id">
                         Seats
-                    </a>
+                    </a> -->
+
+                    <a class="btn btn-success float-right" href="/booking?flight_id=$flight_id">Book for $$seatPrice</a>
                 </div>
             </div>
 
@@ -303,6 +321,7 @@ foreach ($response['flights'] as $key => $value) {
 </div>
 <div class="col-sm">
     <div class="card"></div>
+</div>
 </div>
 
 <?php include_once __DIR__ . '/web-assets/tpl/app_footer.php'; ?>

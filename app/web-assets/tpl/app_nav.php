@@ -30,17 +30,17 @@
                             break;
                         case 2:
                             ?>
-                            <a class="nav-item nav-link" href="#">My Account</a>
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                </a>
-                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Dashboard</a>
-                                    <a class="dropdown-item" href="#">My Tickets</a>
-                                    <a class="dropdown-item" href="#"></a>
 
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-muted" href="logout.php">Logout</a>
-                                </div>;
+                                <div class="dropdown">
+                                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Account
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="user_dashboard.php">Dashboard</a>
+                                        <a class="dropdown-item" href="#">My Tickets</a>
+                                        <a class="dropdown-item" href="logout.php">Logout</a>
+                                    </div>
+                                </div>
                             <?php
                             break;
                     }?>

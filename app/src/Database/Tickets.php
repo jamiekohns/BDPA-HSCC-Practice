@@ -7,7 +7,7 @@ class Tickets extends Database {
         $sql = "select * from `tickets` where `id` = :id";
         $sth = $this->db->prepare($sql);
         $sth->execute([':id' => $id]);
-        $ticket = $sth->fetch(PDO::FETCH_ASSOC);
+        $ticket = $sth->fetch(\PDO::FETCH_ASSOC);
 
         return $ticket;
     }
@@ -32,7 +32,7 @@ class Tickets extends Database {
                 ':last_name' => $last_name,
                 ':conformationid' => $confirmation_id,
             ]);
-            $ticket = $sth->fetch(PDO::FETCH_ASSOC);
+            $ticket = $sth->fetch(\PDO::FETCH_ASSOC);
 
             return $ticket;
 
@@ -43,7 +43,7 @@ class Tickets extends Database {
             $sql = "select * from `tickets` where `flight_id` = :flight_id";
             $sth = $this->db->prepare($sql);
             $sth->execute([':flight_id' => $flight_id]);
-            $tickets = $sth->fetch(PDO::FETCH_ASSOC);
+            $tickets = $sth->fetch(\PDO::FETCH_ASSOC);
 
             foreach($tickets as $ticket) {
 

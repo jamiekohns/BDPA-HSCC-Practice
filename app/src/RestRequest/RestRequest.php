@@ -17,7 +17,7 @@ class RestRequest {
             $this->baseUrl,
             $endpoint
         );
-
+// die($url);
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
