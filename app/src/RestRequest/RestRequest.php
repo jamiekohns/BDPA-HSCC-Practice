@@ -17,7 +17,7 @@ class RestRequest {
             $this->baseUrl,
             $endpoint
         );
-
+// die($url);
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -30,6 +30,7 @@ class RestRequest {
         ]);
 
         $response = curl_exec($ch);
+        $response = json_decode($response, true);
 
         return $response;
     }

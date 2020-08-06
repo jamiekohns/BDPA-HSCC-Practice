@@ -14,6 +14,7 @@ class ApiFlights extends RestRequest
 
   public function all(string $afterAll = NULL)
   {
+
     if($afterAll !== NULL){
       $response = $this->send('all?' . 'after=' . $afterAll);
       return $response;
@@ -21,10 +22,11 @@ class ApiFlights extends RestRequest
       $response = $this->send('all');
       return $response;
     }
-  }
+    }
 
   public function search(string $afterSearch = NULL, array $match = NULL, array $regexMatch = NULL, string $sort = NULL)
   {
+      // var_dump($_REQUEST);
       $endUrl = 'search?';
       if($afterSearch !== NULL){
 
@@ -43,6 +45,7 @@ class ApiFlights extends RestRequest
 
        }
       }
+      // die($endUrl);
       $response = $this->send($endUrl);
       return $response;
   }

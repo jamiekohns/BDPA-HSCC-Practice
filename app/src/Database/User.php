@@ -12,7 +12,9 @@ class User extends Database {
         ':lastname' => $last_name,
         ':email' => $email]);
         $login = $query->fetch(PDO::FETCH_ASSOC);
+
     if($login['confirmed'] == 1 ?? '1'){
+
         if(password_verify($password, $login['password_hash'] ?? 'default')){
             $_SESSION['type'] = $login['user_type_id'];
             setcookie('type', $login['user_type_id'], time()+(10 * 365 * 24 * 60 * 60));
