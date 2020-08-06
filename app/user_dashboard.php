@@ -5,7 +5,7 @@
 <?php
 use Flights\Database\User;
 
-if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2){
+if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2||$_SESSION['type'] == 3 || $_COOKIE['type'] == 3){
     header('location: admin_dashboard.php');
 }
 if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
