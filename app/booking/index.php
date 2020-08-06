@@ -1,18 +1,11 @@
-<!doctype html>
-<html lang="en">
-
 <?php require __DIR__ . '/../init.php'; ?>
 <?php $page_title = 'Flights' ?>
-<?php include_once __DIR__ . '/../web-assets/tpl/app_header.php'; ?>
-<?php include_once __DIR__ . '/../web-assets/tpl/app_nav.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php'; ?>
+<?php use Flights\Database\Tickets; ?>
 <?php
-// TODO: get flight_id from url
-
-$flight_id = NULL;
-
-
-
-
+$flight_id = $_GET['flight_id'];
+// echo $flight_id;
  ?>
 <head>
     <meta charset="utf-8">
@@ -369,7 +362,7 @@ $flight_id = NULL;
                     unset($map[$seat]);
                 }
 
-                var_dump($map);
+                // var_dump($map);
                 ?>
 
                 <hr class="mb-4">
@@ -859,17 +852,5 @@ $flight_id = NULL;
                     </form>
                 </div>
             </div>
-
-            <footer class="my-5 pt-5 text-muted text-center text-small">
-                <p class="mb-1">&copy; 2017-2020 Company Name</p>
-                <ul class="list-inline">
-                    <li class="list-inline-item"><a href="#">Privacy</a></li>
-                    <li class="list-inline-item"><a href="#">Terms</a></li>
-                    <li class="list-inline-item"><a href="#">Support</a></li>
-                </ul>
-            </footer>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script>
-        <script src="form-validation.js"></script></body>
-        </html>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
