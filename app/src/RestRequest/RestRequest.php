@@ -30,6 +30,7 @@ class RestRequest {
         ]);
 
         $response = curl_exec($ch);
+        $response = json_decode($response, true);
 
         return $response;
     }

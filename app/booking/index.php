@@ -1,13 +1,11 @@
-<!doctype html>
-<html lang="en">
-
 <?php require __DIR__ . '/../init.php'; ?>
 <?php $page_title = 'Flights' ?>
-<?php include_once __DIR__ . '/../web-assets/tpl/app_header.php'; ?>
-<?php include_once __DIR__ . '/../web-assets/tpl/app_nav.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php'; ?>
 <?php use Flights\Database\Tickets; ?>
 <?php
 $flight_id = $_GET['flight_id'];
+// echo $flight_id;
  ?>
 <head>
     <meta charset="utf-8">
@@ -364,7 +362,7 @@ $flight_id = $_GET['flight_id'];
                     unset($map[$seat]);
                 }
 
-                var_dump($map);
+                // var_dump($map);
                 ?>
 
                 <hr class="mb-4">
@@ -855,3 +853,4 @@ $flight_id = $_GET['flight_id'];
                 </div>
             </div>
         </div>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>

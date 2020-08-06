@@ -44,12 +44,12 @@ class Tickets extends Database {
             $sth = $this->db->prepare($sql);
             $sth->execute([':flight_id' => $flight_id]);
             $tickets = $sth->fetch(\PDO::FETCH_ASSOC);
-
-            foreach($tickets as $ticket) {
-
-                $seats[] = $ticket["seat_assignment"];
-
-            }
+            var_dump($tickets);
+            // foreach($tickets as $ticket) {
+            //
+            //     $seats[] = $ticket["seat_assignment"];
+            //
+            // }
             return $seats;
         }
 

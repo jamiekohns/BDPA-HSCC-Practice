@@ -1,15 +1,12 @@
 
 <div class="container col-md-11 mt-3 sticky-top mb-1">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark rounded">
-        <span class="navbar-brand mb-0 h1">BDPA Flights</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
+        <img src="/web-assets/images/BDPA-Flights-Black.jpeg" class="rounded" width="44" height="44" alt="" loading="lazy">
+        <span class="navbar-brand mb-0 h1 ml-3">BDPA Flights</span>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="#">Book</a>
-                <a class="nav-item nav-link" href="#">My Flights</a>
-
+                <a class="nav-item nav-link" href="/">Flights</a>
                 <?php
                     $session_status = session_status();
                     if(isset($_SESSION['user'])|| isset($_COOKIE['user'])){

@@ -1,7 +1,7 @@
-<?php require __DIR__ . '/init.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'] . '/init.php'; ?>
 <?php $page_title = 'Flights' ?>
-<?php include_once __DIR__ . '/web-assets/tpl/app_header.php'; ?>
-<?php include_once __DIR__ . '/web-assets/tpl/app_nav.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php'; ?>
 
 <?php
     use Flights\RestRequest\ApiFlights;
@@ -9,58 +9,48 @@
 ?>
 <?php
 
-        if (!isset($_SESSION['airports']) || !$_SESSION['airports']) {
-           $info = new ApiInfo();
-           $airports = $info->airports();
-           $airports = json_decode($airports, true);
-           $_SESSION['airports'] = $airports['airports'];
-        }
+if (!isset($_SESSION['airports']) || !$_SESSION['airports']) {
+    $info = new ApiInfo();
+    $airports = $info->airports();
+    if (isset($airports['error'])){
+        $_SESSION['airports'] = [];
+    } else {
+        $_SESSION['airports'] = $airports['airports'];
+    }
+}
 
-        if (!isset($_SESSION['airlines']) || !$_SESSION['airlines']) {
-           $info = new ApiInfo();
-           $airlines = $info->airlines();
-           $airlines = json_decode($airlines, true);
-           $_SESSION['airlines'] = $airlines['airlines'];
-        }
 
-        if (isset($_POST['submit'])){
-            // isset($afterSearch) ?? NULL, isset($match) ?? NULL, isset($regexMatch) ?? NULL
-            if (isset($_POST['submit'])) {
-                $validFields = [
-                    'type',
-                    'comingFrom',
-                    'landingAt',
-                    'airline',
-                ];
-                $match = [];
-                foreach ($validFields as $field) {
-                    if (isset($_POST[$field]) && !empty($_POST[$field])) {
-                         $match[$field] = $_POST[$field];
-                    }
-                }
-                $rest = new ApiFlights();
-                $response = $rest->search(null, $match, null, null, null);
-                $response = json_decode($response, true);
-                // var_dump($response);
-                // var_dump($response['flights']);
-            } else {
-                $rest = new ApiFlights();
-                $response = $rest->all();
-                $response = json_decode($response, true);
-                // var_dump($response['flights']);
-            }
+if (!isset($_SESSION['airlines']) || !$_SESSION['airlines']) {
+    $info = new ApiInfo();
+    $airlines = $info->airlines();
+    if (isset($airlines['error'])){
+        $_SESSION['airlines'] = [];
+    } else {
+        $_SESSION['airlines'] = $airlines['airlines'];
+    }
+}
 
-            $rest = new ApiFlights();
-            $response = $rest->search(NULL, $match, NULL, NULL, NULL);
-            $response = json_decode($response, true);
-            var_dump($response);
-            // var_dump($response['flights']);
-        } else {
-            $rest = new ApiFlights();
-            $response = $rest->all();
-            $response = json_decode($response, true);
-            // var_dump($response['flights']);
+
+if (isset($_POST['submit'])){
+    $validFields = [
+        'type',
+        'comingFrom',
+        'landingAt',
+        'airline',
+    ];
+    $match = [];
+    foreach ($validFields as $field) {
+        if (isset($_POST[$field]) && !empty($_POST[$field])) {
+            $match[$field] = $_POST[$field];
         }
+    }
+    $rest = new ApiFlights();
+    $response = $rest->search(null, $match, null, null, null);
+} else {
+    $rest = new ApiFlights();
+
+    $response = $rest->all();
+}
 ?>
 <div class="container mb-4 mt-2">
     <div class="row pt-0 mb-4">
@@ -86,7 +76,7 @@
 
                       <div class="col col-6 mb-3">
                           <select class="custom-select mr-2" id="comingFrom" name="comingFrom">
-                              <option value="">Not Location</option>
+                              <option value="">From</option>
                               <?php
                                   foreach ($_SESSION['airports'] as $row) {
 
@@ -99,7 +89,7 @@
 
                       <div class="col col-6 mb-3">
                           <select class="custom-select mrs-2" id="landingAt" name="landingAt">
-                              <option value="">Not Location 2</option>
+                              <option value="">To</option>
                               <?php
                                   foreach ($_SESSION['airports'] as $row) {
 
@@ -206,6 +196,12 @@
                     $flightNumber = $flight['flightNumber'] ?? "";
                     $flight_id = $flight['flight_id'] ?? "";
                     $bookable = $flight['bookable'] ?? "";
+                    if ($bookable == false){
+                        $submit_button = 'btn btn-secondary float-right disabled';
+                        echo $bookable;
+                    } elseif ($bookable == true){
+                        $submit_button = 'btn btn-success float-right';
+                    }
                     $status = ucfirst($flight['status']) ?? "";
                     $arriveAtReceiver = epochToTime($flight['arriveAtReceiver'] ?? 0, 'h:ia'); //.ENV
                     $departFromSender = epochToTime($flight['departFromSender'] ?? 0, 'h:ia');
@@ -252,7 +248,7 @@
                     </ul>
                     <ul class="list-inline mb-0">
                         <li class="h4 list-inline-item">$departFromSender</li>
-                        <li class="h5 list-inline-item font-weight-normal ">----</li>
+                        <li class="h5 list-inline-item font-weight-normal ml-3"></li>
                         <li class="h4 list-inline-item float-right">$arriveAtReceiver</li>
                     </ul>
                     <ul class="list-inline text-muted mb-2">
@@ -294,7 +290,7 @@
                         Seats
                     </a> -->
 
-                    <a class="btn btn-success float-right" href="/booking?flight_id=$flight_id">Book for $$seatPrice</a>
+                    <a class="$submit_button" href="/booking?flight_id=$flight_id">Book for $$seatPrice</a>
                 </div>
             </div>
 
@@ -303,17 +299,18 @@ HEREDOC;
     return $output;
 }
 
+if (isset($response['error'])){
+    echo "<div class='alert alert-danger'>". $response['error'] ."</div>";
+} else {
+    foreach ($response['flights'] ?? [] as $key => $value) {
 
-foreach ($response['flights'] as $key => $value) {
+        if ($key > 49) {
+            break;
+        }
+        echo flight_card($value);
 
-    if ($key > 49) {
-        break;
     }
-    echo flight_card($value);
-
 }
-
-
 
 ?>
         </div>
@@ -324,4 +321,4 @@ foreach ($response['flights'] as $key => $value) {
 </div>
 </div>
 
-<?php include_once __DIR__ . '/web-assets/tpl/app_footer.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
