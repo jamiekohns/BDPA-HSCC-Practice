@@ -1,8 +1,8 @@
 
-<div class="container col-md-11 mt-3 sticky-top mb-1">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark rounded">
+<div style="z-index:3000" class="container col-md-12 mt-0  sticky-top mb-1">
+    <nav class="navbar navbar-expand-md navbar-light bg-light rounded-bottom">
 
-        <img src="/web-assets/images/BDPA-Flights-Black.jpeg" class="rounded" width="44" height="44" alt="" loading="lazy">
+        <!-- <img src="/web-assets/images/BDPA-Flights-Black.jpeg" class="rounded" width="44" height="44" alt="" loading="lazy"> -->
         <span class="navbar-brand mb-0 h1 ml-3">BDPA Flights</span>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
@@ -22,7 +22,7 @@
                             ?>
                             <a class="nav-item nav-link mr-auto" href="user_signup.php
                             ">Signup</a>
-                            <a class="nav-item nav-link mr-auto" href="login.php">Login</a>;
+                            <a class="nav-item nav-link mr-auto" href="login.php">Login</a>
                             <?php
                             break;
                         case 2:
