@@ -53,115 +53,109 @@ if (isset($_POST['submit'])){
 }
 ?>
 <div class="container mb-4 mt-2">
-    <div class="row pt-0 mb-4">
-        <div class="col"></div>
-    </div>
+
     <div class="row">
         <div class="col col-12 col-md-4 col-sm-12 mb-4">
             <div id="accordion">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Search Flights
-        </button>
-      </h5>
-    </div>
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Search Flights
+                            </button>
+                        </h5>
+                    </div>
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-          <form class="form" action="" method="POST">
-              <div class="form-group">
-                  <div class="form-row">
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <form class="form" action="" method="POST">
+                                <div class="form-group">
+                                    <div class="form-row">
 
-                      <div class="col col-6 mb-3">
-                          <select class="custom-select mr-2" id="comingFrom" name="comingFrom">
-                              <option value="">From</option>
-                              <?php
-                                  foreach ($_SESSION['airports'] as $row) {
+                                        <div class="col col-6 mb-3">
+                                            <select class="custom-select mr-2" id="comingFrom" name="comingFrom">
+                                                <option value="">From</option>
+                                                <?php
+                                                foreach ($_SESSION['airports'] as $row) {
 
-                                      echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
+                                                    echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
 
-                                  }
-                               ?>
-                          </select>
-                      </div>
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
 
-                      <div class="col col-6 mb-3">
-                          <select class="custom-select mrs-2" id="landingAt" name="landingAt">
-                              <option value="">To</option>
-                              <?php
-                                  foreach ($_SESSION['airports'] as $row) {
+                                        <div class="col col-6 mb-3">
+                                            <select class="custom-select mrs-2" id="landingAt" name="landingAt">
+                                                <option value="">To</option>
+                                                <?php
+                                                foreach ($_SESSION['airports'] as $row) {
 
-                                      echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
+                                                    echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
 
-                                  }
-                               ?>
-                          </select>
-                      </div>
-                      <div class="col mb-3">
-                          <select class="custom-select mr-2" id="type" name="type">
-                              <option value="">Type</option>
-                              <option value="arrival">Arrival</option>
-                              <option value="departure">Departure</option>
-                          </select>
-                      </div>
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="col col-6 mb-3">
+                                             <input class="form-control mrs-2" type="date">
+                                        </div>
+                                        <div class="col col-6 mb-3">
+                                             <input class="form-control mrs-2" min="2020-07-08" type="date">
+                                        </div>
+                                        <!-- <div class="col mb-3">
+                                        <select class="custom-select mr-2">
+                                        <option></option>
+                                        <option value="">...</option>
+                                        <option value="2">...</option>
+                                    </select>
+                                </div> -->
 
-                      <div class="col mb-3">
-                          <select class="custom-select mr-2" id="airline" name="airline">
-                              <option value="">Airline</option>
-                              <?php
-                                  foreach ($_SESSION['airlines'] as $row) {
+                                <div class="col">
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body bg-light px-0">
+                                            <div class="col mb-3">
+                                                <select class="custom-select mr-2" id="type" name="type">
+                                                    <option value="">Type</option>
+                                                    <option value="arrival">Arrival</option>
+                                                    <option value="departure">Departure</option>
+                                                </select>
+                                            </div>
 
-                                      echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                            <div class="col mb-3">
+                                                <select class="custom-select mr-2" id="airline" name="airline">
+                                                    <option value="">Airline</option>
+                                                    <?php
+                                                    foreach ($_SESSION['airlines'] as $row) {
 
-                                  }
-                               ?>
-                          </select>
-                      </div>
-                      <!-- <div class="col mb-3">
-                          <select class="custom-select mr-2">
-                              <option></option>
-                              <option value="">...</option>
-                              <option value="2">...</option>
-                          </select>
-                      </div> -->
-                      <div class="col col-12">
-                          <button type="submit" name="submit" value="1" class="btn btn-outline-primary w-100">Search Flights</button>
-                      </div>
-                  </div>
-              </div>
-          </form>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Search Flights by Id
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-      <div class="card-body">
-        <form class="form form-inline">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="e.g. U5946" aria-label="Id" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit">Go</button>
+                                                        echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-12 px-0 mx-0">
+                                        <button type="submit" name="submit" value="1" class="btn btn-outline-primary col-6">Search Flights</button>
+                                        <a class="col-6 text-muted mx-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            More options
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
         </div>
 
-        <div class="col">
-            <div style="height: 500px; overflow-y: scroll;" class="">
+    </div>
+
+</div>
+
+<div class="col">
+    <div style="height: 500px; overflow-y: scroll;" class="">
                 <?php
                 /*airline": "Delta",
             "comingFrom": "SCA",
