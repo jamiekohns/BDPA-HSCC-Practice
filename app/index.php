@@ -6,6 +6,7 @@
 <?php
     use Flights\RestRequest\ApiFlights;
     use Flights\RestRequest\ApiInfo;
+    use Flights\TimeHelper;
 ?>
 <?php
 
@@ -32,13 +33,23 @@ if (!isset($_SESSION['airlines']) || !$_SESSION['airlines']) {
 
 
 if (isset($_POST['submit'])){
+    $match = [];
+
+    if (isset($_POST['dateFrom'])){
+        $match['departFromSender']['$gt'] = TimeHelper::dateToTimeStamp($_POST['dateFrom']);
+    }
+    // if (isset($_POST['dateTo'])){
+    //     $match['departFromSender']['$lt'] = TimeHelper::dateToTimeStamp($_POST['dateTo']);
+    // }
+
     $validFields = [
         'type',
         'comingFrom',
         'landingAt',
         'airline',
+        'flightNumber',
     ];
-    $match = [];
+
     foreach ($validFields as $field) {
         if (isset($_POST[$field]) && !empty($_POST[$field])) {
             $match[$field] = $_POST[$field];
@@ -52,108 +63,148 @@ if (isset($_POST['submit'])){
     $response = $rest->all();
 }
 ?>
-<div class="jumbotron sticky-top mb-0 pb-4 rounded-0">
+<div class="jumbotron sticky-top mb-0 pb-3 rounded-0">
     <div class="container">
-    <h1 class="display-4">Search All Flights</h1>
-    <p class="lead">Your journey awaits.</p>
-  </div>
+        <h1 class="display-4">Search All Flights</h1>
+        <p class="lead">Your journey awaits.</p>
+    </div>
     <div class="container mb-4 mt-2">
 
         <div class="row">
             <div class="col col-12 mb-4">
 
+                <form class="form" action="" method="POST">
+                    <div class="form-group">
+                        <div class="form-row">
 
+                            <div class="col col-6 mb-3">
+                                <select class="custom-select mr-2" id="comingFrom" name="comingFrom"> <!--add btn btn-primary for cool hover effect!!-->
+                                    <option value="">From</option>
+                                    <?php
+                                    foreach ($_SESSION['airports'] as $row) {
 
+                                        echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
 
-                                <form class="form" action="" method="POST">
-                                    <div class="form-group">
-                                        <div class="form-row">
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col col-6 mb-3">
+                                <select class="custom-select mrs-2" id="landingAt" name="landingAt">
+                                    <option value="">To</option>
+                                    <?php
+                                    foreach ($_SESSION['airports'] as $row) {
 
-                                            <div class="col col-6 mb-3">
-                                                <select class="custom-select mr-2" id="comingFrom" name="comingFrom">
-                                                    <option value="">From</option>
-                                                    <?php
-                                                    foreach ($_SESSION['airports'] as $row) {
+                                        echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
 
-                                                        echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col col-6 mb-3">
+                                <input class="form-control mrs-2" name="dateFrom" type="date">
+                            </div>
+                            <div class="col col-6 mb-3">
+                                <input class="form-control mrs-2" name="dateTo" type="date">
+                            </div>
+                            <!-- <div class="col mb-3">
+                            <select class="custom-select mr-2">
+                            <option></option>
+                            <option value="">...</option>
+                            <option value="2">...</option>
+                        </select>
+                    </div> -->
 
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
+                        <div class="collapse" id="collapseExample">
+                            <div class="form-row mx-1 mb-2">
 
-                                            <div class="col col-6 mb-3">
-                                                <select class="custom-select mrs-2" id="landingAt" name="landingAt">
-                                                    <option value="">To</option>
-                                                    <?php
-                                                    foreach ($_SESSION['airports'] as $row) {
+                                <div class="input-group">
+                                    <select class="custom-select bg-light text-dark border-0" id="type" name="type">
+                                        <option value="">Type</option>
+                                        <option value="arrival">Arrival</option>
+                                        <option value="departure">Departure</option>
+                                    </select>
+                                    <select class="custom-select bg-light text-dark border-0" id="status" name="status">
+                                        <option value="">Status</option> <!-- see Requirement 2 -->
+                                        <option value="arrived">Arrived</option>
+                                        <option value="boarding">Boarding</option>
+                                        <option value="cancelled">Cancelled</option>
+                                        <option value="delayed">Delayed</option>
+                                        <option value="departed">Departed</option>
+                                        <option value="landed">Landed</option>
+                                        <option value="on time">On time</option>
+                                        <option value="past">Past</option>
+                                        <option value="scheduled">Scheduled</option>
+                                    </select>
+                                    <select class="custom-select bg-light text-dark border-0 mr-2" id="airline" name="airline">
+                                        <option value="">Airline</option>
+                                        <?php
+                                        foreach ($_SESSION['airlines'] as $row) {
 
-                                                        echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
-
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="col col-6 mb-3">
-                                                 <input class="form-control mrs-2" type="date">
-                                            </div>
-                                            <div class="col col-6 mb-3">
-                                                 <input class="form-control mrs-2" min="2020-07-08" type="date">
-                                            </div>
-                                            <!-- <div class="col mb-3">
-                                            <select class="custom-select mr-2">
-                                            <option></option>
-                                            <option value="">...</option>
-                                            <option value="2">...</option>
-                                        </select>
-                                    </div> -->
-
-                                    <div class="col">
-                                        <div class="collapse" id="collapseExample">
-                                            <div class="card card-body bg-light px-0">
-                                                <div class="col col-4 mb-3">
-                                                    <select class="custom-select" id="type" name="type">
-                                                        <option value="">Type</option>
-                                                        <option value="arrival">Arrival</option>
-                                                        <option value="departure">Departure</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="col col-8 mb-3">
-                                                    <select class="custom-select" id="airline" name="airline">
-                                                        <option value="">Airline</option>
-                                                        <?php
-                                                        foreach ($_SESSION['airlines'] as $row) {
-
-                                                            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
-
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col col-12 px-0 mx-0 mt-2">
-                                            <button type="submit" name="submit" value="1" class="btn btn-outline-primary col-6">Search Flights</button>
-                                            <a class="col-6 text-muted mx-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                More options
-                                            </a>
-                                        </div>
+                                            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                    <div class="form-check form-check-inline mt-1">
+                                        <input type="checkbox" class="form-check-input" id="showPastFlights" name="showPastFlights" value="1">
+                                        <label class="form-check-label" for="showPastFlights">Show past flights</label>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-</div>
 
 
 
-
-
+                        </div>
+                        <div class="col col-12 px-0 mx-0 mt-2">
+                            <button type="submit" name="submit" value="1" class="btn btn-outline-primary col-6 ml-1">Search Flights</button>
+                            <a class="col-6 text-muted mx-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                More options
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+
+
+
+
+
+</div>
 
 </div>
 </div>
 <div style="z-index: 2000;" class="col col-12 bg-light pt-4 mt-0 pt-0 rounded-top">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+        </tbody>
+    </table>
 
                 <?php
                 /*airline": "Delta",
@@ -230,6 +281,7 @@ if (isset($_POST['submit'])){
                             break;
                         default: $status_color = "white";
                     }
+
                     $output = <<<HEREDOC
             <div class="card mb-4">
                 <div class="card-body pt-3">
@@ -291,7 +343,7 @@ HEREDOC;
 
     return $output;
 }
-
+$showPastFlights = isset($_POST['showPastFlights']) ?? 0;
 if (isset($response['error'])){
     echo "<div class='alert alert-danger'>". $response['error'] ."</div>";
 } else {
@@ -300,7 +352,14 @@ if (isset($response['error'])){
         if ($key > 49) {
             break;
         }
-        echo flight_card($value);
+        if ($showPastFlights == 1){
+            echo flight_card($value);
+        } else {
+            if ($value['status'] !== 'past') {
+                echo flight_card($value);
+            }
+        }
+
 
     }
 }

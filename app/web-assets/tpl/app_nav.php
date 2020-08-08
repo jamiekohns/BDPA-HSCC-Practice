@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-light rounded-bottom">
 
         <!-- <img src="/web-assets/images/BDPA-Flights-Black.jpeg" class="rounded" width="44" height="44" alt="" loading="lazy"> -->
-        <span class="navbar-brand mb-0 h1 ml-3">BDPA Flights</span>
+        <span class="navbar-brand mb-0 h1 ml-3">BDPA Flights</span> <!-- Make name Airlanta -->
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/">Flights</a>
@@ -14,7 +14,7 @@
                     } else{
                         $status = 1;
                     }
-                    switch ($status) {
+                    switch (2) {
                         case 0:
                             echo "Session is disabled!";
                             break;
@@ -29,7 +29,7 @@
                             ?>
 
                                 <div class="dropdown">
-                                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Account
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
