@@ -7,6 +7,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/">Flights</a>
+                <a class="nav-item nav-link" href="/">My Trips</a>
+            </div>
+            <div class="navbar-nav">
                 <?php
                     $session_status = session_status();
                     if(isset($_SESSION['user'])|| isset($_COOKIE['user'])){
@@ -14,20 +17,19 @@
                     } else{
                         $status = 1;
                     }
-                    switch (2) {
+                    switch ($status) {
                         case 0:
                             echo "Session is disabled!";
                             break;
                         case 1:
                             ?>
-                            <a class="nav-item nav-link mr-auto" href="user_signup.php
+                            <a class="nav-item nav-link" href="user_signup.php
                             ">Signup</a>
-                            <a class="nav-item nav-link mr-auto" href="login.php">Login</a>
+                            <a class="nav-item nav-link" href="login.php">Login</a>
                             <?php
                             break;
                         case 2:
                             ?>
-
                                 <div class="dropdown">
                                     <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Account

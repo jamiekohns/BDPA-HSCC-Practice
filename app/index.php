@@ -48,6 +48,7 @@ if (isset($_POST['submit'])){
         'landingAt',
         'airline',
         'flightNumber',
+        'status',
     ];
 
     foreach ($validFields as $field) {
@@ -63,7 +64,7 @@ if (isset($_POST['submit'])){
     $response = $rest->all();
 }
 ?>
-<div class="jumbotron sticky-top mb-0 pb-3 rounded-0">
+<div class="jumbotron sticky-top mb-0 pb-3 rounded-0"> <!-- style="background-image: url(/web-assets/images/mountaintest.png); background-size: 1500px auto;" -->
     <div class="container">
         <h1 class="display-4">Search All Flights</h1>
         <p class="lead">Your journey awaits.</p>
@@ -117,14 +118,22 @@ if (isset($_POST['submit'])){
 
                         <div class="collapse" id="collapseExample">
                             <div class="form-row mx-1 mb-2">
-
                                 <div class="input-group">
+                                    <select  class="custom-select bg-light text-dark border-0" id="airline" name="airline">
+                                        <option value="">Airline</option>
+                                        <?php
+                                        foreach ($_SESSION['airlines'] as $row) {
+
+                                            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
                                     <select class="custom-select bg-light text-dark border-0" id="type" name="type">
                                         <option value="">Type</option>
                                         <option value="arrival">Arrival</option>
                                         <option value="departure">Departure</option>
                                     </select>
-                                    <select class="custom-select bg-light text-dark border-0" id="status" name="status">
+                                    <select class="custom-select bg-light text-dark border-0 rounded-right mr-2" id="status" name="status">
                                         <option value="">Status</option> <!-- see Requirement 2 -->
                                         <option value="arrived">Arrived</option>
                                         <option value="boarding">Boarding</option>
@@ -136,19 +145,15 @@ if (isset($_POST['submit'])){
                                         <option value="past">Past</option>
                                         <option value="scheduled">Scheduled</option>
                                     </select>
-                                    <select class="custom-select bg-light text-dark border-0 mr-2" id="airline" name="airline">
-                                        <option value="">Airline</option>
-                                        <?php
-                                        foreach ($_SESSION['airlines'] as $row) {
 
-                                            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
                                     <div class="form-check form-check-inline mt-1">
                                         <input type="checkbox" class="form-check-input" id="showPastFlights" name="showPastFlights" value="1">
                                         <label class="form-check-label" for="showPastFlights">Show past flights</label>
                                     </div>
+                                <div class="input-group-prepend rounded-left">
+                                      <div class="input-group-text">Flight #</div>
+                                    </div>
+                                    <input type="text"  class="form-control" placeholder="e.g. U5946" name="flightNumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" />
                                 </div>
                             </div>
 
@@ -176,7 +181,7 @@ if (isset($_POST['submit'])){
 </div>
 </div>
 <div style="z-index: 2000;" class="col col-12 bg-light pt-4 mt-0 pt-0 rounded-top">
-    <table class="table table-hover">
+    <!-- <table class="table table-hover"> We could switch to using tables like the one below to display flights
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -204,7 +209,7 @@ if (isset($_POST['submit'])){
                 <td>@twitter</td>
             </tr>
         </tbody>
-    </table>
+    </table> -->
 
                 <?php
                 /*airline": "Delta",
@@ -240,12 +245,8 @@ if (isset($_POST['submit'])){
                     $flightNumber = $flight['flightNumber'] ?? "";
                     $flight_id = $flight['flight_id'] ?? "";
                     $bookable = $flight['bookable'] ?? "";
-                    if ($bookable == false){
-                        $submit_button = 'btn btn-secondary float-right disabled';
-                        echo $bookable;
-                    } elseif ($bookable == true){
-                        $submit_button = 'btn btn-success float-right';
-                    }
+
+
                     $status = ucfirst($flight['status']) ?? "";
                     $arriveAtReceiver = epochToTime($flight['arriveAtReceiver'] ?? 0, 'h:ia'); //.ENV
                     $departFromSender = epochToTime($flight['departFromSender'] ?? 0, 'h:ia');
@@ -254,6 +255,16 @@ if (isset($_POST['submit'])){
                     $flight_modal_label = $flight_id . "_modal_label";
                     $flight_modal_id = $flight_id . "_modal_id";
                     $seatPrice = $flight['seatPrice'];
+                    if ($bookable == false) {
+                        $submit_button = 'btn btn-secondary float-right disabled';
+                        echo $bookable;
+                    } elseif ($bookable == true) {
+                        if (!in_array($status, array('Cancelled','Past','Departed'), true)) {
+                            $submit_button = 'btn btn-success float-right';
+                        } else {
+                            $submit_button = 'btn btn-secondary float-right disabled';
+                        }
+                    }
                     switch ($status) {
                         case 'Past':
                             $status_color = 'secondary';
@@ -288,7 +299,7 @@ if (isset($_POST['submit'])){
                     <span class="badge badge-$status_color font-weight-normal h6 mb-3">$status</span>
                     <span class="text-muted float-right"></span>
                     <ul class="list-inline mb-0">
-                        <li class="h6 list-inline-item font-weight-normal">$flightNumber</li>
+                        <li class="h6 list-inline-item font-weight-normal">$flightNumber $airline</li>
                         <li class="h6 list-inline-item float-right font-weight-normal">$type</li>
                     </ul>
                     <ul class="list-inline mb-0">
@@ -372,5 +383,4 @@ if (isset($response['error'])){
     <div class="card"></div>
 </div>
 </div>
-
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
