@@ -64,7 +64,7 @@ if (isset($_POST['submit'])){
     $response = $rest->all();
 }
 ?>
-<div class="jumbotron sticky-top mb-0 pb-3 rounded-0"> <!-- style="background-image: url(/web-assets/images/mountaintest.png); background-size: 1500px auto;" -->
+<div class="jumbotron sticky-top mb-0 pb-3 rounded-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
     <div class="container">
         <h1 class="display-4">Search All Flights</h1>
         <p class="lead">Your journey awaits.</p>
@@ -163,7 +163,7 @@ if (isset($_POST['submit'])){
                         <div class="col col-12 px-0 mx-0 mt-2">
                             <button type="submit" name="submit" value="1" class="btn btn-outline-primary col-6 ml-1">Search Flights</button>
                             <a class="col-6 text-muted mx-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                More options
+                                Show all options
                             </a>
                         </div>
                     </div>
