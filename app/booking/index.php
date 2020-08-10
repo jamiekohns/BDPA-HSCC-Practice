@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/../init.php'; ?>
-<?php $page_title = 'Flights' ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php'; ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php'; ?>
+<?php $page_title = 'Booking' ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
 <?php use Flights\Database\Tickets; ?>
 <?php
 $flight_id = $_GET['flight_id'];
@@ -347,7 +347,7 @@ $flight_id = $_GET['flight_id'];
                     for ($row = 1; $row <= 30; $row++) {
                         for ($seat = 'A'; $seat <= 'C'; $seat++) {
                             $seatName = $row.$seat;
-                            $map[$seatName] = $seatName;
+                            array_push($map, $seatName);
                         }
                     }
 
@@ -370,7 +370,9 @@ $flight_id = $_GET['flight_id'];
 
                 <select class="custom-select d-block w-100" id="seat" required>
                     <option value="">Choose...</option>
-                    <option value="<?php echo seatMap($seat); ?>"><?php echo seatMap($seat); ?></option>
+                    <?php foreach($map as $seat){
+                        echo '<option value='.$seat.'>' . $seat . '</option>';
+                    } ?>">
                 </select>
 
 
@@ -802,17 +804,20 @@ $flight_id = $_GET['flight_id'];
 
                         <div class="d-block my-3">
                             <div class="custom-control custom-radio">
-                                <input id="card_number" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                                <input type="radio" id="credit" name="paymentMethod" value="credit" class="custom-control-input" checked>
                                 <label class="custom-control-label" for="credit">Credit card</label>
                             </div>
+
                             <div class="custom-control custom-radio">
-                                <input id="card_number" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                <input type="radio" id="debit" name="paymentMethod" value="dedit" class="custom-control-input">
                                 <label class="custom-control-label" for="debit">Debit card</label>
                             </div>
+
                             <div class="custom-control custom-radio">
-                                <input id="card_number" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                <input type="radio" id="paypal" name="paymentMethod" value="paypal" class="custom-control-input">
                                 <label class="custom-control-label" for="paypal">PayPal</label>
                             </div>
+
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -853,4 +858,4 @@ $flight_id = $_GET['flight_id'];
                 </div>
             </div>
         </div>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>

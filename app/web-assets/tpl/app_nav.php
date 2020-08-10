@@ -2,8 +2,13 @@
 <div style="z-index:3000" class="container col-md-12 p-0 m-0  sticky-top mb-1">
     <nav class="navbar navbar-expand-md navbar-light bg-light rounded-bottom">
 
+<<<<<<< HEAD
         <!-- <img src="/web-assets/images/BDPA-Flights-Black.jpeg" class="rounded" width="44" height="44" alt="" loading="lazy"> -->
         <span class="navbar-brand mb-0 h1 ml-3">BDPA Flights</span> <!-- Make name Airlanta -->
+=======
+        <img src="<?= $_ENV['BASE_URL']?>/web-assets/Images/BDPA-Flights-Black.jpeg" class="rounded" width="44" height="44" alt="" loading="lazy">
+        <span class="navbar-brand mb-0 h1 ml-3">BDPA Flights</span>
+>>>>>>> booking fix
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/">Flights</a>
