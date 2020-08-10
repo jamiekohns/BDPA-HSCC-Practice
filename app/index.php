@@ -6,6 +6,7 @@
 <?php
     use Flights\RestRequest\ApiFlights;
     use Flights\RestRequest\ApiInfo;
+    use Flights\TimeHelper;
 ?>
 <?php
 
@@ -32,13 +33,24 @@ if (!isset($_SESSION['airlines']) || !$_SESSION['airlines']) {
 
 
 if (isset($_POST['submit'])){
+    $match = [];
+
+    if (isset($_POST['dateFrom'])){
+        $match['departFromSender']['$gt'] = TimeHelper::dateToTimeStamp($_POST['dateFrom']);
+    }
+    // if (isset($_POST['dateTo'])){
+    //     $match['departFromSender']['$lt'] = TimeHelper::dateToTimeStamp($_POST['dateTo']);
+    // }
+
     $validFields = [
         'type',
         'comingFrom',
         'landingAt',
         'airline',
+        'flightNumber',
+        'status',
     ];
-    $match = [];
+
     foreach ($validFields as $field) {
         if (isset($_POST[$field]) && !empty($_POST[$field])) {
             $match[$field] = $_POST[$field];
@@ -52,116 +64,153 @@ if (isset($_POST['submit'])){
     $response = $rest->all();
 }
 ?>
-<div class="container mb-4 mt-2">
-    <div class="row pt-0 mb-4">
-        <div class="col"></div>
+<div class="jumbotron sticky-top mb-0 pb-3 rounded-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
+    <div class="container">
+        <h1 class="display-4">Search All Flights</h1>
+        <p class="lead">Your journey awaits.</p>
     </div>
-    <div class="row">
-        <div class="col col-12 col-md-4 col-sm-12 mb-4">
-            <div id="accordion">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          Search Flights
-        </button>
-      </h5>
-    </div>
+    <div class="container mb-4 mt-2">
 
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-          <form class="form" action="" method="POST">
-              <div class="form-group">
-                  <div class="form-row">
+        <div class="row">
+            <div class="col col-12 mb-4">
 
-                      <div class="col col-6 mb-3">
-                          <select class="custom-select mr-2" id="comingFrom" name="comingFrom">
-                              <option value="">From</option>
-                              <?php
-                                  foreach ($_SESSION['airports'] as $row) {
+                <form class="form" action="" method="POST">
+                    <div class="form-group">
+                        <div class="form-row">
 
-                                      echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
+                            <div class="col col-6 mb-3">
+                                <select class="custom-select mr-2" id="comingFrom" name="comingFrom"> <!--add btn btn-primary for cool hover effect!!-->
+                                    <option value="">From</option>
+                                    <?php
+                                    foreach ($_SESSION['airports'] as $row) {
 
-                                  }
-                               ?>
-                          </select>
-                      </div>
+                                        echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
 
-                      <div class="col col-6 mb-3">
-                          <select class="custom-select mrs-2" id="landingAt" name="landingAt">
-                              <option value="">To</option>
-                              <?php
-                                  foreach ($_SESSION['airports'] as $row) {
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col col-6 mb-3">
+                                <select class="custom-select mrs-2" id="landingAt" name="landingAt">
+                                    <option value="">To</option>
+                                    <?php
+                                    foreach ($_SESSION['airports'] as $row) {
 
-                                      echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
+                                        echo "<option value='" . $row['shortName'] . "'>" . $row['city'] . "</option>";
 
-                                  }
-                               ?>
-                          </select>
-                      </div>
-                      <div class="col mb-3">
-                          <select class="custom-select mr-2" id="type" name="type">
-                              <option value="">Type</option>
-                              <option value="arrival">Arrival</option>
-                              <option value="departure">Departure</option>
-                          </select>
-                      </div>
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col col-6 mb-3">
+                                <input class="form-control mrs-2" name="dateFrom" type="date">
+                            </div>
+                            <div class="col col-6 mb-3">
+                                <input class="form-control mrs-2" name="dateTo" type="date">
+                            </div>
+                            <!-- <div class="col mb-3">
+                            <select class="custom-select mr-2">
+                            <option></option>
+                            <option value="">...</option>
+                            <option value="2">...</option>
+                        </select>
+                    </div> -->
 
-                      <div class="col mb-3">
-                          <select class="custom-select mr-2" id="airline" name="airline">
-                              <option value="">Airline</option>
-                              <?php
-                                  foreach ($_SESSION['airlines'] as $row) {
+                        <div class="collapse" id="collapseExample">
+                            <div class="form-row mx-1 mb-2">
+                                <div class="input-group">
+                                    <select  class="custom-select bg-light text-dark border-0" id="airline" name="airline">
+                                        <option value="">Airline</option>
+                                        <?php
+                                        foreach ($_SESSION['airlines'] as $row) {
 
-                                      echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                    <select class="custom-select bg-light text-dark border-0" id="type" name="type">
+                                        <option value="">Type</option>
+                                        <option value="arrival">Arrival</option>
+                                        <option value="departure">Departure</option>
+                                    </select>
+                                    <select class="custom-select bg-light text-dark border-0 rounded-right mr-2" id="status" name="status">
+                                        <option value="">Status</option> <!-- see Requirement 2 -->
+                                        <option value="arrived">Arrived</option>
+                                        <option value="boarding">Boarding</option>
+                                        <option value="cancelled">Cancelled</option>
+                                        <option value="delayed">Delayed</option>
+                                        <option value="departed">Departed</option>
+                                        <option value="landed">Landed</option>
+                                        <option value="on time">On time</option>
+                                        <option value="past">Past</option>
+                                        <option value="scheduled">Scheduled</option>
+                                    </select>
 
-                                  }
-                               ?>
-                          </select>
-                      </div>
-                      <!-- <div class="col mb-3">
-                          <select class="custom-select mr-2">
-                              <option></option>
-                              <option value="">...</option>
-                              <option value="2">...</option>
-                          </select>
-                      </div> -->
-                      <div class="col col-12">
-                          <button type="submit" name="submit" value="1" class="btn btn-outline-primary w-100">Search Flights</button>
-                      </div>
-                  </div>
-              </div>
-          </form>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Search Flights by Id
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-      <div class="card-body">
-        <form class="form form-inline">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="e.g. U5946" aria-label="Id" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit">Go</button>
+                                    <div class="form-check form-check-inline mt-1">
+                                        <input type="checkbox" class="form-check-input" id="showPastFlights" name="showPastFlights" value="1">
+                                        <label class="form-check-label" for="showPastFlights">Show past flights</label>
+                                    </div>
+                                <div class="input-group-prepend rounded-left">
+                                      <div class="input-group-text">Flight #</div>
+                                    </div>
+                                    <input type="text"  class="form-control" placeholder="e.g. U5946" name="flightNumber" oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" />
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col col-12 px-0 mx-0 mt-2">
+                            <button type="submit" name="submit" value="1" class="btn btn-outline-primary col-6 ml-1">Search Flights</button>
+                            <a class="col-6 text-muted mx-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Show all options
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
-      </div>
     </div>
-  </div>
+
+
+
+
+
 </div>
 
-        </div>
+</div>
+</div>
+<div style="z-index: 2000;" class="col col-12 bg-light pt-4 mt-0 pt-0 rounded-top">
+    <!-- <table class="table table-hover"> We could switch to using tables like the one below to display flights
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+        </tbody>
+    </table> -->
 
-        <div class="col">
-            <div style="height: 500px; overflow-y: scroll;" class="">
                 <?php
                 /*airline": "Delta",
             "comingFrom": "SCA",
@@ -196,12 +245,8 @@ if (isset($_POST['submit'])){
                     $flightNumber = $flight['flightNumber'] ?? "";
                     $flight_id = $flight['flight_id'] ?? "";
                     $bookable = $flight['bookable'] ?? "";
-                    if ($bookable == false){
-                        $submit_button = 'btn btn-secondary float-right disabled';
-                        echo $bookable;
-                    } elseif ($bookable == true){
-                        $submit_button = 'btn btn-success float-right';
-                    }
+
+
                     $status = ucfirst($flight['status']) ?? "";
                     $arriveAtReceiver = epochToTime($flight['arriveAtReceiver'] ?? 0, 'h:ia'); //.ENV
                     $departFromSender = epochToTime($flight['departFromSender'] ?? 0, 'h:ia');
@@ -210,6 +255,16 @@ if (isset($_POST['submit'])){
                     $flight_modal_label = $flight_id . "_modal_label";
                     $flight_modal_id = $flight_id . "_modal_id";
                     $seatPrice = $flight['seatPrice'];
+                    if ($bookable == false) {
+                        $submit_button = 'btn btn-secondary float-right disabled';
+                        echo $bookable;
+                    } elseif ($bookable == true) {
+                        if (!in_array($status, array('Cancelled','Past','Departed'), true)) {
+                            $submit_button = 'btn btn-success float-right';
+                        } else {
+                            $submit_button = 'btn btn-secondary float-right disabled';
+                        }
+                    }
                     switch ($status) {
                         case 'Past':
                             $status_color = 'secondary';
@@ -237,13 +292,14 @@ if (isset($_POST['submit'])){
                             break;
                         default: $status_color = "white";
                     }
+
                     $output = <<<HEREDOC
             <div class="card mb-4">
                 <div class="card-body pt-3">
                     <span class="badge badge-$status_color font-weight-normal h6 mb-3">$status</span>
                     <span class="text-muted float-right"></span>
                     <ul class="list-inline mb-0">
-                        <li class="h6 list-inline-item font-weight-normal">$flightNumber</li>
+                        <li class="h6 list-inline-item font-weight-normal">$flightNumber $airline</li>
                         <li class="h6 list-inline-item float-right font-weight-normal">$type</li>
                     </ul>
                     <ul class="list-inline mb-0">
@@ -298,7 +354,7 @@ HEREDOC;
 
     return $output;
 }
-
+$showPastFlights = isset($_POST['showPastFlights']) ?? 0;
 if (isset($response['error'])){
     echo "<div class='alert alert-danger'>". $response['error'] ."</div>";
 } else {
@@ -307,18 +363,24 @@ if (isset($response['error'])){
         if ($key > 49) {
             break;
         }
-        echo flight_card($value);
+        if ($showPastFlights == 1){
+            echo flight_card($value);
+        } else {
+            if ($value['status'] !== 'past') {
+                echo flight_card($value);
+            }
+        }
+
 
     }
 }
 
 ?>
-        </div>
+
     </div>
 </div>
 <div class="col-sm">
     <div class="card"></div>
 </div>
 </div>
-
 <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
