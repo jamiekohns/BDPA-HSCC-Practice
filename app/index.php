@@ -66,8 +66,8 @@ if (isset($_POST['submit'])){
 ?>
 <div class="jumbotron sticky-top mb-0 pb-3 rounded-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
     <div class="container">
-        <h1 class="display-4">Search All Flights</h1>
-        <p class="lead">Your journey awaits.</p>
+        <h1 class="display-4">Anywhere. Anytime.</h1>
+        <p class="lead">Search All Flights</p>
     </div>
     <div class="container mb-4 mt-2">
 
@@ -103,10 +103,10 @@ if (isset($_POST['submit'])){
                                 </select>
                             </div>
                             <div class="col col-6 mb-3">
-                                <input class="form-control mrs-2" name="dateFrom" type="date">
+                                <input class="form-control mrs-2" name="dateFrom" type="date" placeholder="Departing">
                             </div>
                             <div class="col col-6 mb-3">
-                                <input class="form-control mrs-2" name="dateTo" type="date">
+                                <input class="form-control mrs-2" name="dateTo" type="date" placeholder="Returning">
                             </div>
                             <!-- <div class="col mb-3">
                             <select class="custom-select mr-2">
