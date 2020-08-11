@@ -339,6 +339,55 @@ $flight_id = $_GET['flight_id'];
                         </div>
                     </div>
                 </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <h4> Carry On Bags </h4>
+                        <div class="custom-control custom-radio">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="one" name="CarryOn" value="one" class="custom-control-input" checked>
+                                <label class="custom-control-label" for="one">One Bag</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="two" name="CarryOn" value="two" class="custom-control-input">
+                                <label class="custom-control-label" for="two">Two Bags</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <h4> Check In Bags </h4>
+                        <div class="custom-control custom-radio">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="Checkone" name="CheckIn" value="one" class="custom-control-input" checked>
+                                <label class="custom-control-label" for="Checkone">One Bag</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="Checktwo" name="CheckIn" value="two" class="custom-control-input">
+                                <label class="custom-control-label" for="Checktwo">Two Bags</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="three" name="CheckIn" value="three" class="custom-control-input">
+                                <label class="custom-control-label" for="three">Three Bags</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="four" name="CheckIn" value="four" class="custom-control-input">
+                                <label class="custom-control-label" for="four">Four Bags</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="five" name="CheckIn" value="five" class="custom-control-input">
+                                <label class="custom-control-label" for="five">Five Bags</label>
+                            </div>
+                        </div>
+                </div>
+                </div>
+
 
                 <?php
 
@@ -346,8 +395,9 @@ $flight_id = $_GET['flight_id'];
                     $map = [];
                     for ($row = 1; $row <= 30; $row++) {
                         for ($seat = 'A'; $seat <= 'C'; $seat++) {
-                            $seatName = $row.$seat;
-                            array_push($map, $seatName);
+                            $seatName = $seat.$row;
+                            //array_push($map, $seatName);
+                            $map[$seatName] = $seatName;
                         }
                     }
 
@@ -362,7 +412,7 @@ $flight_id = $_GET['flight_id'];
                     unset($map[$seat]);
                 }
 
-                // var_dump($map);
+                //var_dump($map);
                 ?>
 
                 <hr class="mb-4">
