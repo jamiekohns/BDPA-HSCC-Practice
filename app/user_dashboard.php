@@ -18,5 +18,3 @@ echo '<h1> Hello' . ' ' . $_COOKIE['user']. '</h1>';
 }
  ?>
  <?php include_once 'web-assets/tpl/app_footer.php'; ?>
-
- 
