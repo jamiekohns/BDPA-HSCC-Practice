@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+
 <?php require 'init.php';?>
 <?php $page_title = 'Forgot Password' ?>
-<?php include_once 'web-assets/tpl/app_header.php'; ?>
-<?php include_once 'web-assets/tpl/app_nav.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php'; ?>
 <?php
 use Flights\Database\User;
 if(isset($_SESSION['user']) && isset($_COOKIE['user']) ){
@@ -26,8 +26,6 @@ if(isset($_POST['submit'])){
 
 ?>
 
-    <br>
-    <br>
     <?php
         if ($error) {
             echo '<div class="alert alert-danger">'.$error.'</div>';
@@ -35,22 +33,31 @@ if(isset($_POST['submit'])){
     ?>
     <br>
     <h1 class="text-center"> Forgot Password </h1>
-    <br>
-    <form action="forgot_password.php" method="post">
-        <div class="form-group col-md-6 ">
-            <label for="first_name">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="first_name">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email">
-        </div>
-        <div class="col-md-6">
 
-        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-       </div>
-    </form>
+<form class="container mt-4" action="forgot_password.php" method="post">
+    <div class="row justify-content-center"> <!-- Start Row -->
+        <div class="w-100"></div>
+         <div class="col-md-4 justify-content-center">
+             <label for="first_name">First Name</label>
+             <input type="text" class="form-control" id="first_name" name="first_name">
+         </div>
+         <div class="w-100"></div>
+         <div class="col-md-4 justify-content-center">
+             <label for="last_name">Last Name</label>
+             <input type="text" class="form-control" id="last_name" name="last_name">
+         </div>
+         <div class="w-100"></div>
+         <div class="col-md-4 justify-content-centerr">
+             <label for="email">Email</label>
+             <input type="email" class="form-control" id="email" name="email">
+         </div>
+         <div class="w-100"></div>
+         <div class="col-md-4 justify-content-center">
+         <hr>
+         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="w-100"></div>
+    </div>
+</form>
+
+    <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>

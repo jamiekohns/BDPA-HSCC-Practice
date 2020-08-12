@@ -254,4 +254,25 @@ class User extends Database {
         ]);
     }
 
+    public function search(string $search = null)
+    {
+        if ($search) {
+            $query = $this->db->prepare('SELECT * FROM users WHERE first_name LIKE :search OR last_name LIKE :search OR email LIKE :search');
+            $query->execute([':search' => '%' . $search . '%']);
+        } else {
+            $query = $this->db->prepare('SELECT * FROM users');
+            $query->execute();
+        }
+        return $query->fetchAll();
+    }
+
+    public function delete(string $delete = null)
+    {
+        if (isset($_GET['delete'])){
+            $id = $_GET['delete'];
+            $mysqli->query("DELETE FROM users WHERE id=$id") or die($mysqli->error());
+
+
+        }
+    }
 }
