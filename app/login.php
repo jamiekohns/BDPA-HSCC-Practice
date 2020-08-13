@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <div class="container mt-4">
-         <h1 class="text-center"> Log In </h1>
+         <h1 class="text-center mb-3">Log In</h1>
          <div class="container bg-light">
              <?php
 if ($error) {
@@ -65,26 +65,26 @@ if ($error) {
             <div class="row justify-content-center"> <!-- Start Row -->
                 <div class="w-100"></div>
                  <div class="col-md-4 justify-content-center">
-                     <label for="first_name">First Name</label>
-                     <input type="text" class="form-control" id="first_name" name="first_name">
+
+                     <input type="text" class="form-control mb-3" id="first_name" name="first_name" placeholder="First Name">
                  </div>
                  <div class="w-100"></div>
                  <div class="col-md-4 justify-content-center">
-                     <label for="first_name">Last Name</label>
-                     <input type="text" class="form-control" id="last_name" name="last_name">
-                 </div>
-                 <div class="w-100"></div>
-                 <div class="col-md-4 justify-content-centerr">
-                     <label for="email">Email</label>
-                     <input type="email" class="form-control" id="email" name="email">
+
+                     <input type="text" class="form-control mb-3" id="last_name" name="last_name" placeholder="Last Name">
                  </div>
                  <div class="w-100"></div>
                  <div class="col-md-4 justify-content-center">
-                     <label for="password">Password</label>
-                     <input type="password" class="form-control" id="password" name="password">
+
+                     <input type="email" class="form-control mb-3" id="email" name="email" placeholder="Email">
                  </div>
                  <div class="w-100"></div>
                  <div class="col-md-4 justify-content-center">
+
+                     <input type="password" class="form-control mb-3" id="password" name="password" placeholder="Password">
+                 </div>
+                 <div class="w-100"></div>
+                 <div class="col-md-4 justify-content-center mb-3">
                      <div class="form-check">
                          <input class="form-check-input" type="checkbox" id="gridCheck" value = 'remmemberPass' name="remmemberPass">
                          <label class="form-check-label" for="gridCheck">
@@ -96,9 +96,9 @@ if ($error) {
                  <div class="w-100"></div>
                  <div class="col-md-4 justify-content-center">
 
-                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                 <button type="submit" name="submit" class="btn btn-primary w-100">Go</button>
                 </div>
-                <div class="w-100"></div>
+
             </div> <!-- End Row -->
         </form>
 
