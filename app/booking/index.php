@@ -4,6 +4,9 @@
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
 <?php use Flights\Database\Tickets; ?>
 <?php
+if(!isset($_GET['flight_id'])){
+    header('location: ' .$_ENV['BASE_URL'] . '/index.php');
+}
 $flight_id = $_GET['flight_id'];
 // echo $flight_id;
  ?>
@@ -34,7 +37,7 @@ $flight_id = $_GET['flight_id'];
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="bg-light" onload = "checked(); setInterval('checked()',500)">
     <div class="container">
         <!--- This is the Traveler section-->
         <main role="main" class="container">
