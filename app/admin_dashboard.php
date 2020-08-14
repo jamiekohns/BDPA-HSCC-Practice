@@ -6,7 +6,7 @@
 use Flights\Database\User;
 
 if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1){
-    header('location: user_dashboard.php');
+    header('/dashboard');
 }
 if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
     header('location: login.php');
@@ -29,12 +29,12 @@ $user_name = $_COOKIE['user'];
    <div class="row">
      <div class="col-md-6">
        <h2>Create new user</h2>
-       <p>Create new users lower than your permissions</p>
+       <p>Create new user accounts</p>
        <p><a class="btn btn-secondary" href="admin_add_user.php" role="button">Create Accounts</a></p>
      </div>
      <div class="col-md-6">
        <h2>Modify Users</h2>
-       <p>View all user accounts and/or edit/delete accounts</p>
+       <p>View, edit, and delete accounts</p>
        <p><a class="btn btn-secondary" href="/account_modify.php" role="button">View Accounts</a></p>
      </div>
    </div>

@@ -75,9 +75,9 @@ $error = '';
                     <label for="password">Confirm Password</label>
                     <input type="password" class="form-control" id="password2" name="password2" placeholder="Please Confirm Your Password">
                 </div>
-                <div class=">
 
-                <button type="submit" name="submit" class="btn btn-primary w-100">Submit</button>
+
+                <button type="submit" name="submit" class="btn btn-primary w-100 mb-5">Submit</button>
                </div>
            </form>
 <?php include_once 'web-assets/tpl/app_footer.php'; ?>
