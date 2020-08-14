@@ -8,21 +8,8 @@ $page_title = 'Flights';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php';
 
-session_start();
 
-$mysqli = new mysqli("localhost", "root", "", "flights") OR die("Error: " .mysqli_error($mysqli));
-$result = $mysqli->query("SELECT id, first_name, last_name, email_address FROM users");
 
-if (isset($_GET['delete'])){
-    $id = $_GET['delete'];
-    $mysqli->query("DELETE FROM users WHERE id=$id") or die($mysqli->error());
-
-    $_SESSION['message'] = "Record has been Deleted!";
-    $_SESSION['msg_type'] = "danger!";
-
-    header("location: account_modify.php");
-
-}
 $user = new User();
 $users = $user->search($_POST["search"]);
 
@@ -51,22 +38,24 @@ $users = $user->search($_POST["search"]);
             </thead>
             <tbody>
                 <?php
-                foreach ($user as $users) {
+                foreach ($users as $user):
                  ?>
                 <tr>
-                    <td><?php echo $row['id'] ?></td>
-                    <td><?php echo $row['first_name'] ?></td>
-                    <td><?php echo $row['last_name'] ?></td>
-                    <td><?php echo $row['email_address'] ?></td>
+                    <td><?php echo $user['id'] ?></td>
+                    <td><?php echo $user['first_name'] ?></td>
+                    <td><?php echo $user['last_name'] ?></td>
+                    <td><?php echo $user['email_address'] ?></td>
                     <td>
-                        <a href="account_modify.php?edit=<?php echo $row['id']; ?>"
+                        <a href="account_modify.php?edit=<?php echo $user['id']; ?>"
                             class ="btn btn-info">Edit</a>
-                            <a href="account_modify.php?delete=<?php echo $row['id']; ?>"
+                            <a href="account_modify.php?delete=<?php echo $user['id']; ?>"
                                 class ="btn btn-danger">Delete</a>
                             </td>
 
                         </tr>
-                    <?php endforeach; ?>
+                    <?php
+                 endforeach;
+                 ?>
                 </tbody>
             </table>
         </div>
