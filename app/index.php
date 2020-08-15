@@ -383,9 +383,5 @@ if (isset($response['error'])){
     <div class="card"></div>
 </div>
 </div>
-<<<<<<< HEAD
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
-=======
 
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>
->>>>>>> booking fix

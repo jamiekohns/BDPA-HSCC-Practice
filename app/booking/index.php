@@ -43,10 +43,14 @@ $flight_id = $_GET['flight_id'];
         <main role="main" class="container">
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <h6 class="border-bottom border-gray pb-2 mb-0">Traveler Info</h6>
+                <form class="needs-validation" novalidate>
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="">First Name</label>
-                        <input type="" class="form-control" id="first_name">
+                        <input type="" class="form-control" id="first_name" required>
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="">Middle Name</label>
@@ -54,7 +58,10 @@ $flight_id = $_GET['flight_id'];
                     </div>
                     <div class="form-group col-md-5">
                         <label for="">Last Name</label>
-                        <input type="" class="form-control" id="last_name">
+                        <input type="" class="form-control" id="last_name" required>
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -319,7 +326,10 @@ $flight_id = $_GET['flight_id'];
                 </div>
                 <div class="form-group">
                     <label for="">Phone Number</label>
-                    <input type="text" class="form-control" id="phone_number" placeholder="This will be your emergency contact number">
+                    <input type="text" class="form-control" id="phone_number" placeholder="This will be your emergency contact number" required>
+                    <div class="invalid-feedback">
+                        Valid phone number is required.
+                    </div>
                 </div>
 
                 <div class="row">
@@ -338,7 +348,10 @@ $flight_id = $_GET['flight_id'];
                     <div class="col-md-6 mb-3">
                         <label for="state">Date Of Birth</label>
                         <div class="form-group ">
-                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of Birth">
+                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of Birth" required>
+                            <div class="invalid-feedback">
+                                Valid date of birth is required.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -433,11 +446,11 @@ $flight_id = $_GET['flight_id'];
 
 
 
-            </div>
+
 
             <!--- This is the cart view section-->
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
@@ -479,13 +492,13 @@ $flight_id = $_GET['flight_id'];
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <!--- This is the main payment information section-->
 
 
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Billing address</h4>
-                    <form class="needs-validation" novalidate>
+                    <!-- <form class="needs-validation" novalidate> -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First name</label>
@@ -908,6 +921,7 @@ $flight_id = $_GET['flight_id'];
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>

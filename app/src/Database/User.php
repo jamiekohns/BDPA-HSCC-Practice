@@ -15,7 +15,7 @@ class User extends Database {
 
     if($login['confirmed'] == 1 ?? '1'){
 
-        if(password_verify($password, $login['password_hash'] ?? 'default')){
+        if(password_verify($password, $login['password_hash'] ?? '')){
             $_SESSION['type'] = $login['user_type_id'];
             setcookie('type', $login['user_type_id'], time()+(10 * 365 * 24 * 60 * 60));
             return true;
@@ -24,12 +24,17 @@ class User extends Database {
             return false;
         }
     } else {
-        $_SESSION['confirmed'] = '0';
-        $_SESSION['user_info'] = [
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'email' => $email,
-        ];
+        if(password_verify($password, $login['password_hash'] ?? '')){
+            $_SESSION['confirmed'] = '0';
+            $_SESSION['user_info'] = [
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'email' => $email,
+            ];
+        } else {
+            return false;
+        }
+
         header('location: sign_in_info.php');
     }
     }
