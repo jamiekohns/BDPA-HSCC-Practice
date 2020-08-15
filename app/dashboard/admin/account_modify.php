@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/init.php';
+require '../../init.php';
 
 use Flights\Database\User;
 
@@ -11,7 +11,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php';
 
 
 $user = new User();
-$users = $user->search($_POST["search"]);
+$users = $user->search($_POST["search"] ?? NULL);
 
 ?>
 
@@ -23,7 +23,7 @@ $users = $user->search($_POST["search"]);
     <p>Type the name of the user that you want to edit/delete</p>
 <form method="post">
     <input name="search" class="form-control" id="myInput" type="text" placeholder="Search..">
-    <input type="submit" value="search">
+    <input type="submit" class="btn btn-primary" value="Search">
 </form>
     <br>
     <table id="myTable" class="table table-striped table-bordered table-hover">
