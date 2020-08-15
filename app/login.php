@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 require 'init.php';
 ?>
@@ -40,10 +39,10 @@ if (isset($_POST['submit'])) {
         setcookie('user', $_POST['first_name'], time() + (10 * 365 * 24 * 60 * 60));
         $_SESSION['user'] = $_POST['first_name'];
         $positive         = 'You Have Logged In';
-        header('location: user_dashboard.php');
+        header('location: /dashboard');
     } else {
         $_SESSION['last_active'] = time();
-        $_SESSION['user']        = $_POST['first_name'];
+        $_SESSION['user'] = $_POST['first_name'];
         header('location: /dashboard');
         $positive = 'You Have Logged In';
     }

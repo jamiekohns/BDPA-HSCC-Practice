@@ -13,15 +13,15 @@
         </div>
         <div class="form-group col-md-4">
             <label for="">First Name</label>
-            <input type="" class="form-control" id="first_name">
+            <input type="" class="form-control" id="first_name" value="">
         </div>
         <div class="form-group col-md-2">
             <label for="">Middle Name</label>
-            <input type="" class="form-control" id="middle_name">
+            <input type="" class="form-control" id="middle_name" value="M">
         </div>
         <div class="form-group col-md-4">
             <label for="">Last Name</label>
-            <input type="" class="form-control" id="last_name">
+            <input type="" class="form-control" id="last_name" value="L">
         </div>
         <div class="form-group col-md-1">
             <label for="Suffix">Suffix</label>

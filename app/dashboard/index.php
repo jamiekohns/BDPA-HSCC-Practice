@@ -6,7 +6,7 @@
 use Flights\Database\User;
 
 if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2||$_SESSION['type'] == 3 || $_COOKIE['type'] == 3){
-    header('location: admin_dashboard.php');
+    header('location: /dashboard/admin');
 }
 if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
     header('location: ../login.php');
@@ -21,7 +21,6 @@ if(isset($_SESSION['user'])){
 
 <div class="jumbotron mb-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
     <div class="container">
-        <!-- Edit the User to the persons actual name-->
         <h1 class="display-3"><?php echo 'Hello, ' . $user_name; ?></h1>
         <p class="h4 font-weight-light">This is your private dashboard. Here you can edit your personal information and view your flights.</p>
         <hr class="my-4">

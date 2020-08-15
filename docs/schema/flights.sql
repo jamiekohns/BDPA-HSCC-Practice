@@ -121,7 +121,7 @@ CREATE TABLE `users` (
   `user_type_id` int(11) NOT NULL,
   `confirmed` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+ALTER TABLE `users` ADD UNIQUE( `email_address`);
 --
 -- Dumping data for table `users`
 --
