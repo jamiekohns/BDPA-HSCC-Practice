@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
     } else {
         $_SESSION['last_active'] = time();
         $_SESSION['user'] = $_POST['first_name'];
+        $_SESSION['email'] = $_POST['email'];
         header('location: /dashboard');
         $positive = 'You Have Logged In';
     }

@@ -280,4 +280,17 @@ class User extends Database {
 
         }
     }
+
+    public function user_info(string $email){
+
+        $query = $this->db->prepare('SELECT * from `users` WHERE `email_address` = :email');
+
+        $query->execute([
+            ':email' => $email
+        ]);
+
+        $info = $query->fetch(PDO::FETCH_ASSOC);
+
+        $_SESSION['user_info'] = $info;
+    }
 }
