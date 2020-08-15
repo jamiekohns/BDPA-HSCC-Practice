@@ -37,7 +37,7 @@ $flight_id = $_GET['flight_id'];
     <!-- Custom styles for this template -->
     <link href="form-validation.css" rel="stylesheet">
 </head>
-<body class="bg-light" onload = "checked(); setInterval('checked()',500)">
+<body class="bg-light">
     <div class="container">
         <!--- This is the Traveler section-->
         <main role="main" class="container">
