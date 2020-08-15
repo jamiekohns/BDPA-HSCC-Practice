@@ -20,7 +20,7 @@ $error    = '';
 $positive = '';
 
 if(isset($_SESSION['user'])||isset($_COOKIE['user'])){
-    header('location: user_dashboard.php');
+    header('location: /dashboard');
 }
 if (isset($_POST['submit'])) {
     if ($_POST['first_name'] == NULL) {
@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
     } else {
         $_SESSION['last_active'] = time();
         $_SESSION['user']        = $_POST['first_name'];
-        header('location: user_dashboard.php');
+        header('location: /dashboard');
         $positive = 'You Have Logged In';
     }
 
