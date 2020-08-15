@@ -40,16 +40,15 @@ class Tickets extends Database {
 
         public function getSoldSeats($flight_id) {
             $seats = [];
-            $sql = "select * from `tickets` where `flight_id` = :flight_id";
+            $sql = "select `seat_assignment` from `tickets` where `flight_id` = :flight_id";
             $sth = $this->db->prepare($sql);
             $sth->execute([':flight_id' => $flight_id]);
-            $tickets = $sth->fetch(\PDO::FETCH_ASSOC);
-            var_dump($tickets);
-            // foreach($tickets as $ticket) {
-            //
-            //     $seats[] = $ticket["seat_assignment"];
-            //
-            // }
+            //var_dump($sth);
+            $tickets = $sth->fetchAll();
+            for($i = 0; $i < count($tickets); $i++){
+                array_push($seats, $tickets[$i]['seat_assignment']);
+            }
+
             return $seats;
         }
 

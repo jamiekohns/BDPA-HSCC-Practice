@@ -1,7 +1,7 @@
-<?php require $_SERVER['DOCUMENT_ROOT'] . '/init.php'; ?>
+<?php require __DIR__  . '/init.php'; ?>
 <?php $page_title = 'Flights' ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php'; ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
 
 <?php
     use Flights\RestRequest\ApiFlights;
@@ -346,7 +346,7 @@ if (isset($_POST['submit'])){
                         Seats
                     </a> -->
 
-                    <a class="$submit_button" href="/booking?flight_id=$flight_id">Book for $$seatPrice</a>
+                    <a class="$submit_button" href="$_ENV[BASE_URL]/booking?flight_id=$flight_id">Book for $$seatPrice</a>
                 </div>
             </div>
 
@@ -383,4 +383,5 @@ if (isset($response['error'])){
     <div class="card"></div>
 </div>
 </div>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
+
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>

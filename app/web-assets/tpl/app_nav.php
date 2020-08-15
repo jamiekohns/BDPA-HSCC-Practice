@@ -4,9 +4,11 @@
 
         <!-- <img src="/web-assets/images/BDPA-Flights-Black.jpeg" class="rounded" width="44" height="44" alt="" loading="lazy"> -->
         <span class="navbar-brand mb-0 h1 ml-3">BDPA Flights</span> <!-- Make name Airlanta -->
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/">Flights</a>
+                <a class="nav-item nav-link" href="<?=$_ENV['BASE_URL'] .  '/' ?>">Flights</a>
+                <a class="nav-item nav-link" href="/">My Trips</a>
             </div>
             <div class="navbar-nav ml-auto">
                 <?php
@@ -22,9 +24,9 @@
                             break;
                         case 1:
                             ?>
-                            <a class="nav-item nav-link" href="user_signup.php
+                            <a class="nav-item nav-link" href="<?= $_ENV['BASE_URL'] .  '/user_signup.php'?>
                             ">Signup</a>
-                            <a class="nav-item nav-link" href="login.php">Login</a>
+                            <a class="nav-item nav-link" href="<?= $_ENV['BASE_URL'] . '/login.php' ?>">Login</a>
                             <?php
                             break;
                         case 2:

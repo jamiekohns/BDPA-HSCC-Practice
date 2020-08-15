@@ -90,7 +90,7 @@ if ($error) {
                          <label class="form-check-label" for="gridCheck">
                              Remember Password
                          </label>
-                         <a class="text-secondary" href="forgot_password.php"> Forgot Your Password? </a>
+                         <a class="text-secondary offset-1" href="forgot_password.php"> Forgot Password? </a>
                      </div>
                  </div>
                  <div class="w-100"></div>

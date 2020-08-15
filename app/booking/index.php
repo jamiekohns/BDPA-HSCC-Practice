@@ -1,9 +1,12 @@
 <?php require __DIR__ . '/../init.php'; ?>
-<?php $page_title = 'Flights' ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php'; ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php'; ?>
+<?php $page_title = 'Booking' ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
 <?php use Flights\Database\Tickets; ?>
 <?php
+if(!isset($_GET['flight_id'])){
+    header('location: ' .$_ENV['BASE_URL'] . '/index.php');
+}
 $flight_id = $_GET['flight_id'];
 // echo $flight_id;
  ?>
@@ -40,10 +43,14 @@ $flight_id = $_GET['flight_id'];
         <main role="main" class="container">
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <h6 class="border-bottom border-gray pb-2 mb-0">Traveler Info</h6>
+                <form class="needs-validation" novalidate>
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="">First Name</label>
-                        <input type="" class="form-control" id="first_name">
+                        <input type="" class="form-control" id="first_name" required>
+                        <div class="invalid-feedback">
+                            Valid first name is required.
+                        </div>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="">Middle Name</label>
@@ -51,7 +58,10 @@ $flight_id = $_GET['flight_id'];
                     </div>
                     <div class="form-group col-md-5">
                         <label for="">Last Name</label>
-                        <input type="" class="form-control" id="last_name">
+                        <input type="" class="form-control" id="last_name" required>
+                        <div class="invalid-feedback">
+                            Valid last name is required.
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -316,7 +326,10 @@ $flight_id = $_GET['flight_id'];
                 </div>
                 <div class="form-group">
                     <label for="">Phone Number</label>
-                    <input type="text" class="form-control" id="phone_number" placeholder="This will be your emergency contact number">
+                    <input type="text" class="form-control" id="phone_number" placeholder="This will be your emergency contact number" required>
+                    <div class="invalid-feedback">
+                        Valid phone number is required.
+                    </div>
                 </div>
 
                 <div class="row">
@@ -335,10 +348,62 @@ $flight_id = $_GET['flight_id'];
                     <div class="col-md-6 mb-3">
                         <label for="state">Date Of Birth</label>
                         <div class="form-group ">
-                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of Birth">
+                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of Birth" required>
+                            <div class="invalid-feedback">
+                                Valid date of birth is required.
+                            </div>
                         </div>
                     </div>
                 </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <h4> Carry On Bags </h4>
+                        <div class="custom-control custom-radio">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="one" name="CarryOn" value="one" class="custom-control-input" checked>
+                                <label class="custom-control-label" for="one">One Bag</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="two" name="CarryOn" value="two" class="custom-control-input">
+                                <label class="custom-control-label" for="two">Two Bags</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <h4> Check In Bags </h4>
+                        <div class="custom-control custom-radio">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="Checkone" name="CheckIn" value="one" class="custom-control-input" checked>
+                                <label class="custom-control-label" for="Checkone">One Bag</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="Checktwo" name="CheckIn" value="two" class="custom-control-input">
+                                <label class="custom-control-label" for="Checktwo">Two Bags</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="three" name="CheckIn" value="three" class="custom-control-input">
+                                <label class="custom-control-label" for="three">Three Bags</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="four" name="CheckIn" value="four" class="custom-control-input">
+                                <label class="custom-control-label" for="four">Four Bags</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="five" name="CheckIn" value="five" class="custom-control-input">
+                                <label class="custom-control-label" for="five">Five Bags</label>
+                            </div>
+                        </div>
+                </div>
+                </div>
+
 
                 <?php
 
@@ -346,7 +411,8 @@ $flight_id = $_GET['flight_id'];
                     $map = [];
                     for ($row = 1; $row <= 30; $row++) {
                         for ($seat = 'A'; $seat <= 'C'; $seat++) {
-                            $seatName = $row.$seat;
+                            $seatName = $seat.$row;
+                            //array_push($map, $seatName);
                             $map[$seatName] = $seatName;
                         }
                     }
@@ -362,7 +428,7 @@ $flight_id = $_GET['flight_id'];
                     unset($map[$seat]);
                 }
 
-                // var_dump($map);
+                //var_dump($map);
                 ?>
 
                 <hr class="mb-4">
@@ -370,7 +436,9 @@ $flight_id = $_GET['flight_id'];
 
                 <select class="custom-select d-block w-100" id="seat" required>
                     <option value="">Choose...</option>
-                    <option value="<?php echo seatMap($seat); ?>"><?php echo seatMap($seat); ?></option>
+                    <?php foreach($map as $seat){
+                        echo '<option value='.$seat.'>' . $seat . '</option>';
+                    } ?>">
                 </select>
 
 
@@ -378,11 +446,11 @@ $flight_id = $_GET['flight_id'];
 
 
 
-            </div>
+
 
             <!--- This is the cart view section-->
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-4 order-md-2 mb-4">
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-muted">Your cart</span>
@@ -424,13 +492,13 @@ $flight_id = $_GET['flight_id'];
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <!--- This is the main payment information section-->
 
 
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Billing address</h4>
-                    <form class="needs-validation" novalidate>
+                    <!-- <form class="needs-validation" novalidate> -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstName">First name</label>
@@ -802,17 +870,20 @@ $flight_id = $_GET['flight_id'];
 
                         <div class="d-block my-3">
                             <div class="custom-control custom-radio">
-                                <input id="card_number" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                                <input type="radio" id="credit" name="paymentMethod" value="credit" class="custom-control-input" checked>
                                 <label class="custom-control-label" for="credit">Credit card</label>
                             </div>
+
                             <div class="custom-control custom-radio">
-                                <input id="card_number" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                <input type="radio" id="debit" name="paymentMethod" value="dedit" class="custom-control-input">
                                 <label class="custom-control-label" for="debit">Debit card</label>
                             </div>
+
                             <div class="custom-control custom-radio">
-                                <input id="card_number" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                <input type="radio" id="paypal" name="paymentMethod" value="paypal" class="custom-control-input">
                                 <label class="custom-control-label" for="paypal">PayPal</label>
                             </div>
+
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -850,7 +921,8 @@ $flight_id = $_GET['flight_id'];
                         <hr class="mb-4">
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>
