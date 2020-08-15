@@ -42,48 +42,42 @@ $error = '';
 
 ?>
 
-<html>
-    <head>
-        <script src="web-assets/js/jquery-3.5.1.min.js"></script>
-        <script src="web-assets/js/bootstrap.min.js"></script>
-        <link href="web-assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-        <link href="web-assets/css/style.css" type="text/css" rel="stylesheet">
-    </head>
-    <body>
         <h1 class="text-center"> Create an Account </h1>
-        <div class="container">
+        <div class="container col-md-6">
             <?php
                 if ($error) {
                     echo '<div class="alert alert-danger">'.$error.'</div>';
                 }
             ?>
+
             <form action="admin_add_user.php" method="post">
-                <div class="form-group col-md-6 ">
+                <div class="form-group ">
                     <label for="first_name">First Name</label>
                     <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Please Enter Your First Name">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label for="middle_name">Middle Name</label>
                     <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Optional">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label for="last_name">Last Name</label>
                     <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Please Enter Your Last Name">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter Your Last Email">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Please Enter Your Password">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label for="password">Confirm Password</label>
                     <input type="password" class="form-control" id="password2" name="password2" placeholder="Please Confirm Your Password">
                 </div>
-                <div class="col-md-6">
 
-                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+
+                <button type="submit" name="submit" class="btn btn-primary w-100 mb-5">Submit</button>
                </div>
            </form>
+<?php include_once 'web-assets/tpl/app_footer.php'; ?>
