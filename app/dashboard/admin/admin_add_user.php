@@ -1,9 +1,9 @@
 
 <!DOCTYPE html>
-<?php require 'init.php';?>
+<?php require '../../init.php';?>
 <?php $page_title = 'Create New User' ?>
-<?php include_once 'web-assets/tpl/app_header.php'; ?>
-<?php include_once 'web-assets/tpl/app_nav.php'; ?>
+<?php include_once '../../web-assets/tpl/app_header.php'; ?>
+<?php include_once '../../web-assets/tpl/app_nav.php'; ?>
 <?php
 use Flights\Database\User;
 use Flights\RestRequest\ApiInfo;
@@ -21,15 +21,15 @@ $error = '';
 
     if(isset($_POST['submit'])){
         if($_POST['first_name'] == NULL){
-            $error = 'Please Enter Your First Name';
+            $error = 'Requires First Name';
         } elseif ($_POST['last_name'] == NULL){
-            $error = 'Please Enter Your Last Name';
+            $error = 'Requires Last Name';
         } elseif ($_POST['password'] == NULL){
-            $error = 'Please Enter Your Password';
+            $error = 'Requires Password';
         } elseif ($_POST['password2'] !== $_POST['password']){
             $error = 'The Two Passwords Do Not Match';
         } elseif ($_POST['email'] == NULL){
-            $error = 'Please Enter Your Email Address';
+            $error = 'Requires Email Address';
         } else {
             $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 //17
@@ -53,7 +53,7 @@ $error = '';
             <form action="admin_add_user.php" method="post">
                 <div class="form-group ">
                     <label for="first_name">First Name</label>
-                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Please Enter Your First Name">
+                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Requires First Name">
                 </div>
                 <div class="form-group">
                     <label for="middle_name">Middle Name</label>
@@ -61,23 +61,23 @@ $error = '';
                 </div>
                 <div class="form-group">
                     <label for="last_name">Last Name</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Please Enter Your Last Name">
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Requires Last Name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Please Enter Your Last Email">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Requires Last Email">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Please Enter Your Password">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Requires Password">
                 </div>
                 <div class="form-group">
                     <label for="password">Confirm Password</label>
-                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Please Confirm Your Password">
+                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Please Confirm Password">
                 </div>
 
 
                 <button type="submit" name="submit" class="btn btn-primary w-100 mb-5">Submit</button>
                </div>
            </form>
-<?php include_once 'web-assets/tpl/app_footer.php'; ?>
+<?php include_once '../../web-assets/tpl/app_footer.php'; ?>
