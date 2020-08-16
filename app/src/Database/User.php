@@ -1,6 +1,8 @@
 <?php
 namespace Flights\Database;
+
 use PDO;
+use UserLog;
 
 class User extends Database {
     public function login(string $first_name, string $last_name, string $email, string $password){
@@ -18,6 +20,8 @@ class User extends Database {
         if(password_verify($password, $login['password_hash'] ?? '')){
             $_SESSION['type'] = $login['user_type_id'];
             setcookie('type', $login['user_type_id'], time()+(10 * 365 * 24 * 60 * 60));
+            (new UserLog())->log($login['id']);
+
             return true;
         }
          else {
