@@ -4,6 +4,7 @@
 <?php include_once '../web-assets/tpl/app_nav.php'; ?>
 <?php
 use Flights\Database\User;
+use Flights\Database\UserLog;
 
 if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2||$_SESSION['type'] == 3 || $_COOKIE['type'] == 3){
     header('location: /dashboard/admin');
@@ -17,7 +18,20 @@ if(isset($_SESSION['user'])){
     $user_name = $_COOKIE['user'];
 }
 ?>
+<?php
+$user = new User();
+$userLog = new UserLog;
+$user->user_info($_SESSION['email']);
 
+$lastUserLog = $userLog->getLastUserLog($_SESSION['user_info']['id']);
+// var_dump($_SESSION);
+?>
+<?php
+    if(isset($_POST['w']) && $_POST['w'] == 'update_profile'){
+        echo '<div class="alert alert-success m-0">Profile Update Successful</div>';
+        $user->user_info($_SESSION['email']);
+    }
+?>
 
 <div class="jumbotron mb-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
     <div class="container">
@@ -32,8 +46,8 @@ if(isset($_SESSION['user'])){
         <div class="collapse" id="collapseExample">
 
             <div class="container">
-                <p class="lead text-left">Last login Ip: 123.333.123</p>
-                <p class="lead text-left">Timestamp: <?php echo date("l h:ia d/m/y"); ?> </p>
+                <p class="lead text-left">Last login timestamp: <?=$lastUserLog['last_login_datetime']?></p>
+                <p class="lead text-left">Ip Address: <?=$lastUserLog['last_login_ip']?></p>
             </div>
         </div>
 

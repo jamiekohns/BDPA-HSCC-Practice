@@ -2,7 +2,6 @@
 namespace Flights\Database;
 
 use PDO;
-use UserLog;
 
 class User extends Database {
     public function login(string $first_name, string $last_name, string $email, string $password){
