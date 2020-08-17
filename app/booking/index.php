@@ -34,34 +34,7 @@ if(isset($_POST['submit'])){
 
 }
  ?>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="generator" content="Jekyll v4.0.1">
 
-    <style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
-    </style>
-    <!-- Custom styles for this template -->
-    <!-- <link href="form-validation.css" rel="stylesheet"> -->
-</head>
-<body class="bg-light">
-    <div class="container">
-        <!--- This is the Traveler section-->
-        <main role="main" class="container">
             <div class="my-3 p-3 bg-white rounded shadow-sm">
                 <h6 class="border-bottom border-gray pb-2 mb-0">Traveler Info</h6>
                 <form action="index.php" method="post" class="needs-validation" novalidate>
@@ -1027,6 +1000,4 @@ if(isset($_POST['submit'])){
                     </form>
                     </div>
                 </div>
-            </div>
-        </div>
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>
