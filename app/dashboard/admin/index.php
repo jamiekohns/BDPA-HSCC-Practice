@@ -20,7 +20,7 @@ $user_name = $_COOKIE['user'];
  <div class="jumbotron">
    <div class="container">
        <!-- Change the Admin to the persons actual name-->
-     <h1 class="display-3"><?php echo 'Hello, ' . $user_name; ?></h1>
+     <h1 class="display-3"><?php echo 'Hello, ' . ucfirst($user_name); ?></h1>
      <p>.</p>
    </div>
  </div>
