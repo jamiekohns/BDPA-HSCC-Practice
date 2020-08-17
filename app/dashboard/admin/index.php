@@ -1,7 +1,7 @@
-<?php require 'init.php';?>
+<?php require '../../init.php';?>
 <?php $page_title = 'Dashboard' ?>
-<?php include_once 'web-assets/tpl/app_header.php'; ?>
-<?php include_once 'web-assets/tpl/app_nav.php'; ?>
+<?php include_once '../../web-assets/tpl/app_header.php'; ?>
+<?php include_once '../../web-assets/tpl/app_nav.php'; ?>
 <?php
 use Flights\Database\User;
 
