@@ -20,6 +20,11 @@ class User extends Database {
         if(password_verify($password, $login['password_hash'] ?? '')){
             $_SESSION['type'] = $login['user_type_id'];
             setcookie('type', $login['user_type_id'], time()+(10 * 365 * 24 * 60 * 60));
+            $_SESSION['user_information'] = ['first_name' => $login['first_name'],
+                                            'last_name' => $login['last_name'],
+                                            'email' => $login['email_address'],];
+            setcookie('user_information', $login['user_type_id'], time()+(10 * 365 * 24 * 60 * 60));
+
             (new UserLog())->log($login['id']);
 
             return true;
