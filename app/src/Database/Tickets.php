@@ -1,6 +1,8 @@
 <?php
 
 namespace Flights\Database;
+use PDO;
+
 
 class Tickets extends Database {
     public function findById($id) {
@@ -84,18 +86,20 @@ class Tickets extends Database {
             ]);
             $ticket_address_id = $this->db->lastInsertId();
 
+
             if($user_first_name !== NULL && $user_last_name !== NULL && $user_email !== NULL){
-                $login_query = $this->db->prepare('SELECT * from `users` join `user_type` on (`user_type`.`id` = `users`.`user_type_id`)
+                $login_query = $this->db->prepare('SELECT `users`.`id` from `users` join `user_type` on (`user_type`.`id` = `users`.`user_type_id`)
                 WHERE `users`.`first_name` = :firstname and `users` . `last_name` = :lastname and `users` . `email_address` = :email');
 
                 $login_query -> execute([
                 ':firstname' => $user_first_name,
                 ':lastname' => $user_last_name,
                 ':email' => $user_email]);
+
                 $login = $login_query->fetch(PDO::FETCH_ASSOC);
                 $user_id = $login['id'];
             } else {
-                $user_id = '';
+                $user_id = NULL;
             }
 
             $payment_query = $this->db->prepare('INSERT INTO `payments` (card_number, expiration_date, cvc, cardholder_name, address_id, user_id) VALUES
@@ -107,9 +111,10 @@ class Tickets extends Database {
                 ':cvc' => $cvc,
                 ':cardholder_name' => $cardholder_name,
                 ':address_id' => $payment_address_id,
-                ':user_id' => $user_ticket,
+                ':user_id' => $user_id,
             ]);
             $payment_id = $this->db->lastInsertId();
+            //die($payment_query->debugDumpParams());
 
 
 
@@ -135,9 +140,9 @@ class Tickets extends Database {
                 ':carryon_bags' => $carry_on,
                 ':flight_id' => $flight_id,
                 ':user_id' => $user_id,
-                ':address_id' => $address_id,
+                ':address_id' => $ticket_address_id,
             ])){
-                die($ticket_query->debugDumpParams());
+
             }
 
 

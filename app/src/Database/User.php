@@ -27,7 +27,7 @@ class User extends Database {
 
             (new UserLog())->log($login['id']);
 
-            return true;
+             return true;
         }
          else {
             return false;
