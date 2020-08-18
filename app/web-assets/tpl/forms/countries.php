@@ -1,5 +1,11 @@
 <select class="custom-select d-block w-100" id="" required>
-    <option value="">Choose...</option>
+    <option value=""><?php if (isset($old_country)) {
+        echo $old_last_name;
+    } else {
+        echo 'Choose...';
+    }
+    ?>
+    </option>
     <option value="AF">Afghanistan</option>
     <option value="AX">Åland Islands</option>
     <option value="AL">Albania</option>

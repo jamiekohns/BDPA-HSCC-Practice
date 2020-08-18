@@ -1,7 +1,7 @@
 <?php
 
 namespace Flights\Database;
-
+use PDO;
 class UserLog extends Database {
     /**
     * Creates user log entry
@@ -33,7 +33,7 @@ class UserLog extends Database {
             ':user_id' => $user_id,
         ]);
 
-        return $sth->fetchAll(PDO::ASSOC);
+        return $sth->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -52,6 +52,6 @@ class UserLog extends Database {
             ':user_id' => $user_id,
         ]);
 
-        return $sth->fetch(PDO::ASSOC);
+        return $sth->fetch(PDO::FETCH_ASSOC);
     }
 }
