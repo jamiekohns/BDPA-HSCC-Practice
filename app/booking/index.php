@@ -30,7 +30,7 @@ if(isset($_POST['submit'])){
     $user['email'] ?? null, $_POST['ticket_first'], $_POST['ticket_middle'],
     $_POST['ticket_last'], $_POST['ticket_gender'], $_POST['ticket_dob'],
     $_POST['ticket_phone'], $_POST['ticket_email'], $_POST['ticket_seat'],
-    $_POST['CheckIn'],  $_POST['CarryOn'], $_GET['flight_id']);
+    $_POST['CheckIn'],  $_POST['CarryOn'], $flight_id);
     header('location: ' .$_ENV['BASE_URL'] . '/tickets.php');
 }
 ?>
