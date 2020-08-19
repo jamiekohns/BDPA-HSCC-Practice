@@ -2,6 +2,10 @@
 namespace Flights\Database;
 use PDO;
 
+/**the user class is used to authenticate and create users
+* it is also used to update user information*/
+
+
 class User extends Database {
     public function login(string $first_name, string $last_name, string $email, string $password){
         $query = $this->db->prepare('SELECT * from `users` join `user_type` on (`user_type`.`id` = `users`.`user_type_id`)

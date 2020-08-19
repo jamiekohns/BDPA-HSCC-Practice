@@ -2,6 +2,8 @@
 
 namespace Flights\RestRequest;
 
+/** the ApiInfo is used to communicate to the flight endpoints
+*this is the child class of RestRequest*/
 
 class ApiFlights extends RestRequest
 {

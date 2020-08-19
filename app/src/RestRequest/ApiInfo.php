@@ -2,6 +2,9 @@
 
 namespace Flights\RestRequest;
 
+/** the ApiInfo is used to communicate to the metadata endpoints
+*this is the child class of RestRequest*/
+
 class ApiInfo extends RestRequest {
 
     public function __construct()

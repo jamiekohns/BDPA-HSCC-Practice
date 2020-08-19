@@ -2,6 +2,10 @@
 
 namespace Flights\RestRequest;
 
+/** this is the root class to get information from the API_KEY
+* simlar to the user class, it is nerver called directly
+* instead it is called through its child classes */
+
 class RestRequest {
     protected $apiKey;
     protected $baseUrl;

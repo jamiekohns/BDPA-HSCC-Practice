@@ -3,6 +3,10 @@
 namespace Flights\Database;
 
 use PDO;
+
+/**this is the root database class and 
+*it is used to connect to the databse*/
+
 class Database {
     protected $db;
 
@@ -20,5 +24,4 @@ class Database {
         } catch (PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
         }
-    }
-}
+/**Usually never instantiated by itself it child classes are tickets and users */

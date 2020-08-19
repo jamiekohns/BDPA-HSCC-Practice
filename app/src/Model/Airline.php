@@ -2,6 +2,8 @@
 
 namespace Flights\Model;
 
+/**this is an example of a class */
+
 class Airline {
     protected $name;
     protected $codePrefix;

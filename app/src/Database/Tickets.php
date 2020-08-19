@@ -2,6 +2,9 @@
 
 namespace Flights\Database;
 
+/** this class is used to make tickets and search for tickets
+* it is the child class of Database.php*/
+
 class Tickets extends Database {
     public function findById($id) {
         $sql = "select * from `tickets` where `id` = :id";
