@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/../init.php'; ?>
 <?php $page_title = 'Booking' ?>
-<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
-<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/../web-assets/tpl/app_header.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/../web-assets/tpl/app_nav.php'; ?>
 <?php use Flights\Database\Tickets; ?>
 <?php
 if(!isset($_GET['flight_id'])){
@@ -1009,4 +1009,4 @@ if(isset($_POST['submit'])){
 </div>
 </div>
 
-<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/../web-assets/tpl/app_footer.php'; ?>
