@@ -1,12 +1,12 @@
 
-<div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:500000" id="mySidebar">
-  <button class="w3-bar-item w3-button w3-black " onclick="w3_close()">Close</button>
-
-  <p class="w3-bar-item">Flight airline and number</p>
-  <p class="w3-bar-item">Destination:</p>
+<div class="w3-sidebar w3-bar-block w3-animate-left bg-light" style="display:none;z-index:500000" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-black bg-light text-right text-dark" onclick="w3_close()">Close</button>
+  <p class="display-4 ml-3">Hello, User!</p>
+  <p class="lead ml-3">email@mail.io</p>
+  <p class="w3-bar-item h5">Flight airline and number</p>
+  <p class="w3-bar-item">Destination</p>
   <p class="w3-bar-item">Departure date and time:</p>
-  <p class="w3-bar-item">First Name: </p>
-  <p class="w3-bar-item">Email: </p>
+
 
 </div>
 <div>

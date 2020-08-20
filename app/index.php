@@ -65,7 +65,7 @@ if (isset($_POST['submit'])){
     $response = $rest->all();
 }
 ?>
-<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_sidenav.php'; ?>
+
     <!-- Page Content -->
 <div class="jumbotron  mb-0 pb-3 rounded-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
     <div class="container">
@@ -336,7 +336,7 @@ if (isset($_POST['submit'])){
                     <ul class="list-inline text-muted mb-2">
                         <li class="h6 list-inline-item font-weight-normal">$comingFrom</li>
                         <li class="h6 list-inline-item font-weight-normal float-right">$landingAt</li>
-                    </ul>                    
+                    </ul>
                 </div>
                 <div class="card-footer">
                     <!-- <a class="float-left stretched link mr-4" href="#" data-toggle="modal" data-target="#$flight_modal_id">
