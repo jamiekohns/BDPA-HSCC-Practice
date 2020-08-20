@@ -4,10 +4,11 @@
 <?php include_once $_ENV['BASE_DIRECTORY'] . 'web-assets/tpl/app_nav.php'; ?>
 <?php use Flights\Database\Tickets; ?>
 <?php
-if(!isset($_GET['flight_id'])){
+if(!isset($_GET['flight_id']) || !isset($_GET['status'])){
     header('location: ' .$_ENV['BASE_URL'] . '/index.php');
 }
 $flight_id = $_GET['flight_id'];
+$status = $_GET['status'];
 // echo $flight_id;
 
 
@@ -30,7 +31,7 @@ if(isset($_POST['submit'])){
     $user['email'] ?? null, $_POST['ticket_first'], $_POST['ticket_middle'],
     $_POST['ticket_last'], $_POST['ticket_gender'], $_POST['ticket_dob'],
     $_POST['ticket_phone'], $_POST['ticket_email'], $_POST['ticket_seat'],
-    $_POST['CheckIn'],  $_POST['CarryOn'], $flight_id);
+    $_POST['CheckIn'],  $_POST['CarryOn'], $flight_id, $status);
     header('location: ' .$_ENV['BASE_URL'] . '/tickets.php');
 }
 ?>
