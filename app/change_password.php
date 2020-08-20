@@ -4,7 +4,6 @@
 <?php include_once 'web-assets/tpl/app_header.php'; ?>
 <?php include_once 'web-assets/tpl/app_nav.php'; ?>
 <?php
-require 'init.php';
 use Flights\Database\User;
 
 if(isset($_SESSION['user']) && isset($_COOKIE['user'])){
@@ -22,7 +21,7 @@ if(isset($_POST['submit'])){
     } else {
         $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $user = new User();
-        $user->change_password($_SESSION['forgot_password']['first_name'], $_SESSION['forgot_password']['last_name'], $_SESSION['forgot_password']['email'], $password_hash);
+        $user->change_password($_SESSION['forgot_password']['email'], $password_hash);
         $password_hash = NULL;
         $_SESSION['forgot_password'] = NULL;
         $_SESSION['forgot'] = NULL;

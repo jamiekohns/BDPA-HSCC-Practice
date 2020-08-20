@@ -4,7 +4,6 @@
 <?php include_once 'web-assets/tpl/app_header.php'; ?>
 <?php include_once 'web-assets/tpl/app_nav.php'; ?>
 <?php
-require 'init.php';
 use Flights\Database\User;
 
 if(isset($_SESSION['user']) && isset($_COOKIE['user'])){
@@ -23,7 +22,7 @@ if(isset($_POST['submit'])){
         $error = 'Please Answer Your Third Security Question';
     } else {
         $user = new User();
-        if($user->verify_answers($_SESSION['forgot_password']['first_name'], $_SESSION['forgot_password']['last_name'], $_SESSION['forgot_password']['email'], $_POST['security_question_1'], $_POST['security_question_2'], $_POST['security_question_3'])){
+        if($user->verify_answers($_SESSION['forgot_password']['email'], $_POST['security_question_1'], $_POST['security_question_2'], $_POST['security_question_3'])){
             $_SESSION['forgot'] = 'YES';
             header('location: change_password.php');
         } else{

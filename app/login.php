@@ -22,15 +22,11 @@ if(isset($_SESSION['user'])||isset($_COOKIE['user'])){
     header('location: /dashboard');
 }
 if (isset($_POST['submit'])) {
-    if ($_POST['first_name'] == NULL) {
-        $error = 'Please Enter Your First Name';
-    } elseif ($_POST['last_name'] == NULL) {
-        $error = 'Please Enter Your Last Name';
-    } elseif ($_POST['email'] == NULL) {
+     if ($_POST['email'] == NULL) {
         $error = 'Please Enter Your Email Address';
     } elseif ($_POST['password'] == NULL) {
         $error = 'Please Enter Your Password';
-    } elseif (!$users->login($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'])) {
+    } elseif (!$users->login($_POST['email'], $_POST['password'])) {
         $error = 'Name or Password Do Not Match Please Try Again Later';
 
     } elseif ($_POST['password'] == NULL) {
@@ -64,15 +60,6 @@ if ($error) {
        <form action="login.php" method="post">
             <div class="row justify-content-center"> <!-- Start Row -->
                 <div class="w-100"></div>
-                 <div class="col-md-4 justify-content-center">
-                     <label for="first_name">First Name</label>
-                     <input type="text" class="form-control" id="first_name" name="first_name">
-                 </div>
-                 <div class="w-100"></div>
-                 <div class="col-md-4 justify-content-center">
-                     <label for="first_name">Last Name</label>
-                     <input type="text" class="form-control" id="last_name" name="last_name">
-                 </div>
                  <div class="w-100"></div>
                  <div class="col-md-4 justify-content-centerr">
                      <label for="email">Email</label>
