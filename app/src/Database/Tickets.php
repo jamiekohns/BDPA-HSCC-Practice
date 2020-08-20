@@ -60,7 +60,7 @@ class Tickets extends Database {
         $cardholder_name, $user_first_name, $user_last_name, $user_email,
         $ticket_first_name, $ticket_middle_name, $ticket_last_name,
         $gender, $dob, $phone_number, $ticket_email, $seat, $check_in,
-        $carry_on, $flight_id){
+        $carry_on, $flight_id, $status){
 
             $payment_address_query = $this->db->prepare('INSERT INTO `addresses` (address, city, state, zip, country) VALUES
             (:address, :city, :state, :zip, :country)');
@@ -124,7 +124,7 @@ class Tickets extends Database {
                 status_id, user_id, address_id) VALUES
             (:first_name, :middle_name, :last_name, :gender, :dob, :phone_number, :email_address,
                 :payment_id, :seat_assignment, :checkin_bags, :carryon_bags, :flight_id,
-                1, :user_id, :address_id)');
+                :status, :user_id, :address_id)');
 
             if(!$ticket_query->execute([
                 ':first_name' => $ticket_first_name,
@@ -141,10 +141,24 @@ class Tickets extends Database {
                 ':flight_id' => $flight_id,
                 ':user_id' => $user_id,
                 ':address_id' => $ticket_address_id,
+                ':status' => $status,
             ])){
 
             }
 
+
+
+        }
+
+        public function display_tickets($user_id){
+
+            $ticket_query = $this->db->prepare('SELECT * from `tickets` WHERE user_id = :user_id');
+
+            $ticket_query->execute([
+                ':user_id' => $user_id,
+            ]);
+            $tickets = $ticket_query->fetchAll();
+            return $tickets;
 
 
         }

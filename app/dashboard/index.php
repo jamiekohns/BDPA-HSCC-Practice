@@ -15,10 +15,10 @@ if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2||$_SESSION['type'] == 3 || $_
 }
 
 
-if(isset($_SESSION['user'])){
-    $user_name = $_SESSION['user'];
-} elseif (isset($_COOKIE['user'])){
-    $user_name = $_COOKIE['user'];
+if(isset($_SESSION['user_information'])){
+    $user_name = $_SESSION['user_information']['first_name'];
+} elseif (isset($_COOKIE['user_information'])){
+    $user_name = $_COOKIE['user_information']['first_name'];
 }
 ?>
 <?php
@@ -80,10 +80,16 @@ $lastUserLog = $userLog->getLastUserLog($_SESSION['user_info']['id']);
         <div class="tab-pane fade" id="billing" role="tabpanel" aria-labelledby="trips-tab">
             <?php include_once '../web-assets/tpl/forms/user_billing.php'; ?>
         </div>
+
+        <div class="tab-pane fade show mt-0 pt-0" id="trips" role="tabpanel" aria-labelledby="profile-tab">
+
+            <?php include_once '../web-assets/tpl/forms/user_tickets.php'; ?>
+
         </div>
-        <div class="tab-pane fade" id="trips" role="tabpanel" aria-labelledby="trips-tab">...</div>
+
         <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">..H.</div>
+
     </div>
 </div> <!-- /container -->
 
-<?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>

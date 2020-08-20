@@ -242,7 +242,7 @@ if (isset($_POST['submit'])){
 
                 function getHoursBetween($t1, $t2) {
                     // var_dump($t1, $t2);
-                    
+
                     $output = abs($t1 - $t2);
                     $output = $output * (2.7777778 * pow(10,-7));
                     $output = round($output, 0);
@@ -370,7 +370,7 @@ if (isset($_POST['submit'])){
                         Seats
                     </a> -->
 
-                    <a class="$submit_button" href="$_ENV[BASE_URL]/booking?flight_id=$flight_id">Book for $$seatPrice</a>
+                    <a class="$submit_button" href="$_ENV[BASE_URL]/booking?flight_id=$flight_id&status=$status">Book for $$seatPrice</a>
                 </div>
             </div>
 
