@@ -19,7 +19,7 @@ $error    = '';
 $positive = '';
 
 if(isset($_SESSION['user'])||isset($_COOKIE['user'])){
-    header('location: /dashboard');
+    header('location: ' . $_ENV['BASE_URL'] .'/dashboard');
 }
 if (isset($_POST['submit'])) {
      if ($_POST['email'] == NULL) {
@@ -32,15 +32,17 @@ if (isset($_POST['submit'])) {
     } elseif ($_POST['password'] == NULL) {
         $error = 'Please Enter Your Password';
     } elseif (isset($_POST['remmemberPass'])) {
+        die($_ENV['BASE_URL'] . '/dashboard');
         setcookie('user', $_POST['first_name'], time() + (10 * 365 * 24 * 60 * 60));
-        $_SESSION['user'] = $_POST['first_name'];
+        $_SESSION['user'] = $_POST['email'];
         $positive         = 'You Have Logged In';
-        header('location: /dashboard');
+        header('location: ' . $_ENV['BASE_URL'] .'/dashboard');
     } else {
         $_SESSION['last_active'] = time();
-        $_SESSION['user'] = $_POST['first_name'];
-        $_SESSION['email'] = $_POST['email'];
-        header('location: /dashboard');
+        $_SESSION['user'] = $_POST['email'];
+        //$_SESSION['email'] = $_POST['email'];
+        header('location: ' . $_ENV['BASE_URL'] .'/dashboard');
+        die($_ENV['BASE_URL'] . '/dashboard');
         $positive = 'You Have Logged In';
     }
 
