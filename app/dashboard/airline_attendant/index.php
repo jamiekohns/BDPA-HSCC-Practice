@@ -12,25 +12,13 @@ if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
     header('location: '. $_ENV['BASE_URL'] .'/login.php');
 }
 
-// if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
-//
-//     header('location: '. $_ENV['BASE_URL'] . '/login.php');
-// }
-// if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1){
-//
-//     header('location: '. $_ENV['BASE_URL'] . '/dashboard');
-// }
-//
-// if(isset($_SESSION['user'])){
-// $user_name = $_SESSION['user'];
-// } elseif (isset($_COOKIE['user'])){
-// $user_name = $_COOKIE['user'];
-// }
+
  ?>
+
  <div class="jumbotron">
    <div class="container">
        <!-- Change the Admin to the persons actual name-->
-     <!-- <h1 class="display-3"><?php echo 'Hello, ' . ucfirst($user_name); ?></h1> -->
+     <h1 class="display-3"><?php echo 'Hello, ' . ucfirst($_SESSION['user_information']['first_name']); ?> </h1>
      <p>.</p>
    </div>
  </div>
