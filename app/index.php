@@ -238,6 +238,22 @@ if (isset($_POST['submit'])){
                     }
                 }
 
+                // getHoursBetween() takes in two UNIX Epoch Dates ($t1, $t2) and returns the hours between the two times (as an integer). Pretty nifty eh?
+                // size order of the numbers does not matter
+                // for example, getHoursBetween(21600000, 54000000); would return 9 hrs.
+
+                function getHoursBetween($t1, $t2) {
+                    // var_dump($t1, $t2);
+                    
+                    $output = abs($t1 - $t2);
+                    $output = $output * (2.7777778 * pow(10,-7));
+                    $output = round($output, 0);
+
+                    return($output);
+                }
+                // getHoursBetween(21600000, 54000000);
+
+
                 function flight_card(array $flight){
                     $type = ucfirst($flight['type']);
                     $airline = $flight['airline'] ?? "";
@@ -250,23 +266,31 @@ if (isset($_POST['submit'])){
 
 
                     $status = ucfirst($flight['status']) ?? "";
-                    $arriveAtReceiver = epochToTime($flight['arriveAtReceiver'] ?? 0, 'h:ia'); //.ENV
-                    $departFromSender = epochToTime($flight['departFromSender'] ?? 0, 'h:ia');
-                    $departFromReceiver = epochToTime($flight['departFromReceiver'] ?? 0, 'h:ia');
-                    $flight_time = epochToTime(1594151700108 - 159416003850, 'h:i');
+                    $arriveAtReceiver = epochToTime($flight['arriveAtReceiver'] ?? 0, 'g:ia F jS  2020'); //.ENV
+                    $departFromSender = epochToTime($flight['departFromSender'] ?? 0, 'g:ia F jS  2020');
+                    $departFromReceiver = epochToTime($flight['departFromReceiver'] ?? 0, 'g:ia F jS  2020');
+                    $flight_time = getHoursBetween($flight['arriveAtReceiver'] ?? 0, $flight['departFromSender'] ?? 0);
                     $flight_modal_label = $flight_id . "_modal_label";
                     $flight_modal_id = $flight_id . "_modal_id";
                     $seatPrice = $flight['seatPrice'];
+
                     if ($bookable == false) {
                         $submit_button = 'btn btn-secondary float-right disabled';
                         echo $bookable;
-                    } elseif ($bookable == true) {
+                    }
+
+                    elseif ($bookable == true) {
                         if (!in_array($status, array('Cancelled','Past','Departed'), true)) {
+
+                            if (getHoursBetween($flight['departFromSender'] ?? 0, time()) > 36) {
                             $submit_button = 'btn btn-success float-right';
+                            }
+
                         } else {
                             $submit_button = 'btn btn-secondary float-right disabled';
                         }
                     }
+
                     switch ($status) {
                         case 'Past':
                             $status_color = 'secondary';
@@ -299,7 +323,7 @@ if (isset($_POST['submit'])){
             <div class="card mb-4">
                 <div class="card-body pt-3">
                     <span class="badge badge-$status_color font-weight-normal h6 mb-3">$status</span>
-                    <span class="text-muted float-right"></span>
+                    <span class="text-muted float-right">$flight_time hrs</span>
                     <ul class="list-inline mb-0">
                         <li class="h6 list-inline-item font-weight-normal">$flightNumber $airline</li>
                         <li class="h6 list-inline-item float-right font-weight-normal">$type</li>

@@ -6,12 +6,15 @@
 use Flights\Database\User;
 use Flights\Database\UserLog;
 
-if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2||$_SESSION['type'] == 3 || $_COOKIE['type'] == 3){
-    header('location: /dashboard/admin');
-}
 if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
-    header('location: ../login.php');
+    header('location: '. $_ENV['BASE_URL'] . '/login.php');
 }
+
+if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2||$_SESSION['type'] == 3 || $_COOKIE['type'] == 3){
+    header('location: '. $_ENV['BASE_URL'] . '/dashboard/admin');
+}
+
+
 if(isset($_SESSION['user'])){
     $user_name = $_SESSION['user'];
 } elseif (isset($_COOKIE['user'])){
@@ -21,7 +24,7 @@ if(isset($_SESSION['user'])){
 <?php
 $user = new User();
 $userLog = new UserLog;
-$user->user_info($_SESSION['email']);
+$user->user_info($_SESSION['user']);
 
 $lastUserLog = $userLog->getLastUserLog($_SESSION['user_info']['id']);
 // var_dump($_SESSION);

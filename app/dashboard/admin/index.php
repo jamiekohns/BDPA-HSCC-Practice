@@ -5,12 +5,17 @@
 <?php
 use Flights\Database\User;
 
-if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1){
-    header('/dashboard');
-}
+
+
 if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
-    header('location: login.php');
+
+    header('location: '. $_ENV['BASE_URL'] . '/login.php');
 }
+if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1){
+
+    header('location: '. $_ENV['BASE_URL'] . '/dashboard');
+}
+
 if(isset($_SESSION['user'])){
 $user_name = $_SESSION['user'];
 } elseif (isset($_COOKIE['user'])){
@@ -43,4 +48,4 @@ $user_name = $_COOKIE['user'];
  </div> <!-- /container -->
 
 
- <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
+ <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>
