@@ -242,7 +242,7 @@ if (isset($_POST['submit'])){
 
                 function getHoursBetween($t1, $t2) {
                     // var_dump($t1, $t2);
-                    
+
                     $output = abs($t1 - $t2);
                     $output = $output * (2.7777778 * pow(10,-7));
                     $output = round($output, 0);
@@ -270,7 +270,7 @@ if (isset($_POST['submit'])){
                     $flight_time = getHoursBetween($flight['arriveAtReceiver'] ?? 0, $flight['departFromSender'] ?? 0);
                     $flight_modal_label = $flight_id . "_modal_label";
                     $flight_modal_id = $flight_id . "_modal_id";
-                    $seatPrice = $flight['seatPrice'];
+                    // $seatPrice = $flight['seatPrice'];
 
                     if ($bookable == false) {
                         $submit_button = 'btn btn-secondary float-right disabled';
@@ -334,33 +334,7 @@ if (isset($_POST['submit'])){
                     <ul class="list-inline text-muted mb-2">
                         <li class="h6 list-inline-item font-weight-normal">$comingFrom</li>
                         <li class="h6 list-inline-item font-weight-normal float-right">$landingAt</li>
-                    </ul>
-                    <!-- Modal -->
-                    <div class="modal fade" id="$flight_modal_id" tabindex="-1" role="dialog" aria-labelledby="$flight_modal_label" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-light">
-                                <ul class="list-group">
-                                        <li class="list-group-item"><h5 class="modal-title font-weight-heavy" id="$flight_modal_label">$departingTo 🡪 $landingAt</h5></li>
-                                    <li class="list-group-item font-weight-bold h4">$flightNumber</li>
-                                    <li class="list-group-item font-weight-bold h4">$$seatPrice</li>
-                                </ul>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer bg-light">
-                                    <p style="align:left;" class="modal-text h3"></p>
-                                    <form>
-                                        <button type="button" class="btn btn-primary btn-lg">Book Flight</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </ul>                    
                 </div>
                 <div class="card-footer">
                     <!-- <a class="float-left stretched link mr-4" href="#" data-toggle="modal" data-target="#$flight_modal_id">
@@ -370,7 +344,7 @@ if (isset($_POST['submit'])){
                         Seats
                     </a> -->
 
-                    <a class="$submit_button" href="$_ENV[BASE_URL]/booking?flight_id=$flight_id">Book for $$seatPrice</a>
+                    <a class="$submit_button" href="$_ENV[BASE_URL]/booking?flight_id=$flight_id">Book</a>
                 </div>
             </div>
 

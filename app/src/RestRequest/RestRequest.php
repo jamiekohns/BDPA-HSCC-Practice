@@ -13,11 +13,11 @@ class RestRequest {
 
     protected function send(string $endpoint){
         $url = sprintf(
-            '%s/%s',
+            '%s%s',
             $this->baseUrl,
             $endpoint
         );
-// die($url);
+ // die($url);
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -30,6 +30,7 @@ class RestRequest {
         ]);
 
         $response = curl_exec($ch);
+        // var_dump($response);
         $response = json_decode($response, true);
 
         return $response;
