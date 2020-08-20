@@ -1,7 +1,13 @@
 <?php require __DIR__ . '/../init.php'; ?>
+<<<<<<< Updated upstream
 <?php $page_title = 'Booking' ?>
 <?php include_once $_ENV['BASE_DIRECTORY'] . 'web-assets/tpl/app_header.php'; ?>
 <?php include_once $_ENV['BASE_DIRECTORY'] . 'web-assets/tpl/app_nav.php'; ?>
+=======
+<?php $page_title = 'Flights' ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
+>>>>>>> Stashed changes
 <?php use Flights\Database\Tickets; ?>
 <?php
 if(!isset($_GET['flight_id']) || !isset($_GET['status'])){
@@ -22,6 +28,7 @@ if(isset($_POST['submit'])){
     } else {
         $user = NULL;
     }
+<<<<<<< Updated upstream
     $tickets->addTicket($_POST['booking_address'], $_POST['booking_city'],
     $_POST['booking_state'],$_POST['booking_zip'],$_POST['booking_country'],
     $_POST['ticket_address'],$_POST['ticket_city'], $_POST['ticket_state'],
@@ -45,6 +52,22 @@ if(isset($_POST['submit'])){
                     <input type="text" class="form-control" id="first_name" name="ticket_first" required>
                     <div class="invalid-feedback">
                         Valid first name is required.
+=======
+    </style>
+    <!-- Custom styles for this template -->
+    
+</head>
+<body class="bg-light">
+    <div class="container">
+        <!--- This is the Traveler section-->
+        <main role="main" class="container">
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Traveler Info</h6>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="">First Name</label>
+                        <input type="" class="form-control" id="first_name">
+>>>>>>> Stashed changes
                     </div>
                 </div>
                 <div class="form-group col-md-2">

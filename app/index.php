@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 <?php require __DIR__  . '/init.php'; ?>
+=======
+<?php require __DIR__ . '/init.php'; ?>
+>>>>>>> Stashed changes
 <?php $page_title = 'Flights' ?>
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
@@ -407,5 +411,8 @@ if (isset($response['error'])){
     <div class="card"></div>
 </div>
 </div>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>
