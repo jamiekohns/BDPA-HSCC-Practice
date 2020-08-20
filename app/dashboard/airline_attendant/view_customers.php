@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php';
 
 
 $user = new User();
-$users = $user->search($_POST["search"]??NULL);
+$users = $user->customer_search($_POST["search"]??NULL);
 
 
 ?>
@@ -21,8 +21,8 @@ $users = $user->search($_POST["search"]??NULL);
 </div>
 
 <div class="container mt-3">
-    <h2>Admin Account Modifier</h2>
-    <p>Type the name of the user that you want to edit/delete</p>
+    <h2>Customer Viewer</h2>
+    <p>Type the name of the customer that you want to cancel or view</p>
 <form method="post">
     <input name="search" class="form-control" id="myInput" type="text" placeholder="Search..">
     <input type="submit" value="search">
@@ -48,10 +48,9 @@ $users = $user->search($_POST["search"]??NULL);
                     <td><?php echo $user['last_name'] ?></td>
                     <td><?php echo $user['email_address'] ?></td>
                     <td>
-                        <a href="account_modify.php?edit=<?php echo $user['id']; ?>"
-                            class ="btn btn-info">Edit</a>
-                            <a href="account_modify.php?delete=<?php echo $user['id']; ?>"
-                                class ="btn btn-danger">Delete</a>
+                        <a href="view_customers.php?edit=<?php echo $user['id']; ?>"
+                            class ="btn btn-info">Cancel Ticket</a>
+
                             </td>
 
                         </tr>
