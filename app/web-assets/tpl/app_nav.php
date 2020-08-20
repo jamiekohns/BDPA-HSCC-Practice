@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="<?=$_ENV['BASE_URL'] .  '/' ?>">Flights</a>
-                <a class="nav-item nav-link" href="/">My Trips</a>
+                <a class="nav-item nav-link" href="/">Checkout</a>
 
             </div>
             <div class="navbar-nav ml-auto">
@@ -26,6 +26,7 @@
                             echo "Session is disabled!";
                             break;
                         case 1:
+                        ;
                             ?>
                             <a class="nav-item nav-link" href="<?= $_ENV['BASE_URL'] .  '/user_signup.php'?>
                             ">Signup</a>
@@ -33,6 +34,7 @@
                             <?php
                             break;
                         case 2:
+                            $showSideBar = true;
                             ?>
                                 <div class="dropdown">
 
@@ -61,3 +63,7 @@
         </div>
     </nav>
 </div>
+<?php if (isset($showSideBar) AND $showSideBar == true) {
+    include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_sidenav.php';
+}
+?>
