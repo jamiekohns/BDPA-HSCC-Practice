@@ -25,7 +25,7 @@ for($i = 0; $i<count($tickets); $i++):
         <span class="text-muted float-right"></span>
         <ul class="list-inline mb-0">
             <li class="h6 list-inline-item font-weight-normal"><?= $tickets[$i]['flight_id']?></li>
-            <li class="h6 list-inline-item float-right font-weight-normal">Scheduled</li>
+            <li class="h6 list-inline-item float-right font-weight-normal"><?= $tickets[$i]['status_id']?></li>
         </ul>
         <ul class="list-inline mb-0">
             <li class="h4 list-inline-item"><?= $tickets[$i]['first_name'] . ' '. $tickets[$i]['middle_name'] . ' ' . $tickets[$i]['last_name'] ?></li>
