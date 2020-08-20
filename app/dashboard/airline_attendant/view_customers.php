@@ -48,8 +48,9 @@ $users = $user->customer_search($_POST["search"]??NULL);
                     <td><?php echo $user['last_name'] ?></td>
                     <td><?php echo $user['email_address'] ?></td>
                     <td>
-                        <a href="view_customers.php?edit=<?php echo $user['id']; ?>"
-                            class ="btn btn-info">Cancel Ticket</a>
+                        <form method='get' action = 'cancel_tickets.php'>
+                        <button name = 'submit' value =<?= $user['id']?> type = 'submit' class ="btn btn-info">Cancel Ticket</button>
+                    </form>
 
                             </td>
 
