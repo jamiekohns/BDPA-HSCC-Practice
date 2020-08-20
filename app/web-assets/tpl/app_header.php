@@ -7,5 +7,6 @@
             <?php if (isset($page_title)){ echo $page_title; } else { echo 'BDPA Flights';} ?>
         </title>
         <link rel="stylesheet" href="<?= $_ENV['BASE_URL']?>/web-assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?= $_ENV['BASE_URL']?>/web-assets/css/w3.css">
     </head>
     <body class="bg-light">

@@ -1,6 +1,7 @@
 <?php require __DIR__  . '/init.php'; ?>
 <?php $page_title = 'Flights' ?>
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
+
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
 
 <?php
@@ -8,8 +9,8 @@
     use Flights\RestRequest\ApiInfo;
     use Flights\TimeHelper;
 ?>
-<?php
 
+<?php
 if (!isset($_SESSION['airports']) || !$_SESSION['airports']) {
     $info = new ApiInfo();
     $airports = $info->airports();
@@ -64,7 +65,9 @@ if (isset($_POST['submit'])){
     $response = $rest->all();
 }
 ?>
-<div class="jumbotron sticky-top mb-0 pb-3 rounded-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_sidenav.php'; ?>
+    <!-- Page Content -->
+<div class="jumbotron  mb-0 pb-3 rounded-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
     <div class="container">
         <h1 class="display-4">Anywhere. Anytime.</h1>
         <p class="lead">Search All Flights</p>
@@ -179,8 +182,7 @@ if (isset($_POST['submit'])){
 </div>
 
 </div>
-</div>
-<div style="z-index: 2000;" class="col col-12 bg-light pt-4 mt-0 pt-0 rounded-top">
+<div class="col col-12 bg-light pt-4 mt-0 pt-0 rounded-top">
     <!-- <table class="table table-hover"> We could switch to using tables like the one below to display flights
         <thead>
             <tr>
@@ -377,10 +379,10 @@ if (isset($response['error'])){
 ?>
 
     </div>
-</div>
 <div class="col-sm">
     <div class="card"></div>
 </div>
 </div>
+
 
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>

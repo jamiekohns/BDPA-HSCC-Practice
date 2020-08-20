@@ -36,6 +36,7 @@ $lastUserLog = $userLog->getLastUserLog($_SESSION['user_info']['id']);
     }
 ?>
 
+
 <div class="jumbotron mb-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
     <div class="container">
         <h1 class="display-3"><?php echo 'Hello, ' . $user_name; ?></h1>
