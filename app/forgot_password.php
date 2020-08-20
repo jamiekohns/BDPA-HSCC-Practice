@@ -10,15 +10,11 @@ if(isset($_SESSION['user']) && isset($_COOKIE['user']) ){
 }
 $error = '';
 if(isset($_POST['submit'])){
-    if ($_POST['first_name'] == NULL){
-        $error = 'Please Enter Your First Name';
-    } elseif ($_POST['last_name'] == NULL){
-        $error = 'Please Enter Your Last Name';
-    } elseif ($_POST['email'] == NULL){
+        if ($_POST['email'] == NULL){
         $error = 'Please Enter Your Email Address';
     } else {
         $user = new User();
-        $user->get_questions($_POST['first_name'], $_POST['last_name'], $_POST['email']);
+        $user->get_questions($_POST['email']);
         header('location: answer_questions.php');
     }
 
@@ -37,14 +33,6 @@ if(isset($_POST['submit'])){
     <h1 class="text-center"> Forgot Password </h1>
     <br>
     <form action="forgot_password.php" method="post">
-        <div class="form-group col-md-6 ">
-            <label for="first_name">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="first_name">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name">
-        </div>
         <div class="form-group col-md-6">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email">
