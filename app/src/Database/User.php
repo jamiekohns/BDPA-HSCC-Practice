@@ -271,6 +271,29 @@ class User extends Database {
         return $query->fetchAll();
     }
 
+    public function customer_search(string $search = null)
+    {
+        if ($search) {
+            $query = $this->db->prepare('SELECT * FROM users WHERE `user_type_id` = :type AND first_name LIKE :search OR last_name LIKE :search OR email_address LIKE :search');
+            $query->execute([':search' => '%' . $search . '%', ':type' => 1]);
+            $return = $query->fetchall();
+            //die(var_dump($return));
+
+            for($i = 0; $i<count($return); $i++){
+            if ($return[$i]['user_type_id']==2){
+                unset($return[$i]);
+            }
+
+        }
+        } else {
+            $query = $this->db->prepare('SELECT * FROM users WHERE `user_type_id` = :type');
+            $query->execute([':type' => 1]);
+            $return = $query->fetchall();
+        }
+        // die($query->debugDumpParams());
+        return $return;
+    }
+
     public function delete(string $delete = null)
     {
         if (isset($_GET['delete'])){

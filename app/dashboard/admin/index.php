@@ -40,7 +40,7 @@ $user_name = $_COOKIE['user'];
      <div class="col-md-6">
        <h2>Modify Users</h2>
        <p>View, edit, and delete accounts</p>
-       <p><a class="btn btn-secondary" href="/account_modify.php" role="button">View Accounts</a></p>
+       <p><a class="btn btn-secondary" href="account_modify.php" role="button">View Accounts</a></p>
      </div>
    </div>
    <hr>
