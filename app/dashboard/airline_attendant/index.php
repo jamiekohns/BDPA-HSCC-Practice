@@ -5,7 +5,12 @@
 <?php
 use Flights\Database\User;
 
-
+if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1||$_SESSION['type'] == 2 ||$_SESSION['type'] == 2 ||$_SESSION['type'] == 3 ||$_SESSION['type'] == 3){
+    header('location: '. $_ENV['BASE_URL'] .'/dashboard');
+}
+if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
+    header('location: '. $_ENV['BASE_URL'] .'/login.php');
+}
 
 // if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
 //

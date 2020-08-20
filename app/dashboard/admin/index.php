@@ -11,9 +11,8 @@ if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
 
     header('location: '. $_ENV['BASE_URL'] . '/login.php');
 }
-if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1){
-
-    header('location: '. $_ENV['BASE_URL'] . '/dashboard');
+if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1||$_SESSION['type'] == 4 || $_COOKIE['type'] == 4){
+    header('location: '. $_ENV['BASE_URL'] .'/dashboard');
 }
 
 if(isset($_SESSION['user'])){

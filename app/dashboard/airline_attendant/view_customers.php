@@ -1,16 +1,15 @@
 <?php require '../../init.php';?>
 <?php $page_title = 'Modify User' ?>
-<?php include_once '../../web-assets/tpl/app_header.php'; ?>
-<?php include_once '../../web-assets/tpl/app_nav.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] .'/web-assets/tpl/app_nav.php'; ?>
 <?php
 use Flights\Database\User;
 
-$page_title = 'Flights';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_header.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_nav.php';
-
-
-
+if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1||$_SESSION['type'] == 2 ||$_SESSION['type'] == 2 ||$_SESSION['type'] == 3 ||$_SESSION['type'] == 3){
+    header('location: '. $_ENV['BASE_URL'] .'/dashboard');
+}
+if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
+    header('location: '. $_ENV['BASE_URL'] .'/login.php');
 $user = new User();
 $users = $user->customer_search($_POST["search"]??NULL);
 
@@ -69,4 +68,4 @@ $users = $user->customer_search($_POST["search"]??NULL);
     </script>
 
 
-    <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/web-assets/tpl/app_footer.php'; ?>
+    <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>

@@ -10,8 +10,8 @@ if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
     header('location: '. $_ENV['BASE_URL'] . '/login.php');
 }
 
-if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2||$_SESSION['type'] == 3 || $_COOKIE['type'] == 3){
-    header('location: '. $_ENV['BASE_URL'] . '/dashboard/admin');
+if($_SESSION['type'] == 2 || $_COOKIE['type'] == 2||$_SESSION['type'] == 3 || $_COOKIE['type'] == 3||$_SESSION['type'] == 4 || $_COOKIE['type'] == 4){
+    header('location: '. $_ENV['BASE_URL'] . '/dashboard/airline_attendant');
 }
 
 

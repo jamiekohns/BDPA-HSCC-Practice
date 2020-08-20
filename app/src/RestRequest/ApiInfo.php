@@ -12,20 +12,20 @@ class ApiInfo extends RestRequest {
 
     public function airports()
     {
-        $response = $this->send('airports');
+        $response = $this->send('/airports');
 
         return $response;
     }
 
     public function airlines()
     {
-        $response = $this->send('airlines');
+        $response = $this->send('/airlines');
 
         return $response;
     }
 
     public function noFlyList()
     {
-        return $this->send('no-fly-list');
+        return $this->send('/no-fly-list');
     }
 }

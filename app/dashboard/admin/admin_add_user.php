@@ -8,11 +8,11 @@
 use Flights\Database\User;
 use Flights\RestRequest\ApiInfo;
 
-if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1){
-    header('location: user_signup.php');
+if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1||$_SESSION['type'] == 4 || $_COOKIE['type'] == 4{
+    header('location: '. $_ENV['BASE_URL'] .'/dashboard');
 }
 if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
-    header('location: login.php');
+    header('location: '. $_ENV['BASE_URL'] .'/login.php');
 }
 
 $error = '';

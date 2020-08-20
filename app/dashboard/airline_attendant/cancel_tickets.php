@@ -11,6 +11,14 @@ include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php';
 ?>
 <?php
 
+
+if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1||$_SESSION['type'] == 2 ||$_SESSION['type'] == 2 ||$_SESSION['type'] == 3 ||$_SESSION['type'] == 3){
+    header('location: '. $_ENV['BASE_URL'] .'/dashboard');
+}
+if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
+    header('location: '. $_ENV['BASE_URL'] .'/login.php');
+}
+
 use Flights\Database\Tickets;
 if(!isset($_GET['submit'])){
     header('location: ' . $_ENV['BASE_URL'] . '/dashboard/airline_attendant/view_customers.php');
