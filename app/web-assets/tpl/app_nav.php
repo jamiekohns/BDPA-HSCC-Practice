@@ -1,16 +1,19 @@
 
-<div style="z-index:1000;" class="container col-md-12 p-0 m-0  sticky-top mb-1">
+<div style="z-index:1000;" class="container col-md-12 p-0 m-0  sticky-top">
     <nav class="navbar navbar-expand-md navbar-light bg-light rounded-bottom">
 
         <!-- <img src="/web-assets/images/BDPA-Flights-Black.jpeg" class="rounded" width="44" height="44" alt="" loading="lazy"> -->
+
         <span class="navbar-brand mb-0 h1 ml-3">BDPA Flights</span> <!-- Make name Airlanta -->
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="<?=$_ENV['BASE_URL'] .  '/' ?>">Flights</a>
                 <a class="nav-item nav-link" href="/">My Trips</a>
+
             </div>
             <div class="navbar-nav ml-auto">
+
                 <?php
                     $session_status = session_status();
                     if(isset($_SESSION['user'])|| isset($_COOKIE['user'])){
