@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 05, 2020 at 03:18 AM
+-- Generation Time: Aug 19, 2020 at 01:14 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -55,6 +55,13 @@ CREATE TABLE `flight_status` (
   `abbr` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `flight_status`
+--
+
+INSERT INTO `flight_status` (`id`, `status`, `abbr`) VALUES
+(1, 'Test', 'test');
+
 -- --------------------------------------------------------
 
 --
@@ -68,8 +75,14 @@ CREATE TABLE `payments` (
   `cvc` varchar(5) NOT NULL,
   `cardholder_name` varchar(255) NOT NULL,
   `address_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payments`
+--
+
+
 
 -- --------------------------------------------------------
 
@@ -88,12 +101,18 @@ CREATE TABLE `tickets` (
   `email_address` varchar(255) NOT NULL,
   `payment_id` int(11) NOT NULL,
   `seat_assignment` varchar(20) NOT NULL,
-  `bags` int(2) NOT NULL,
+  `checkin_bags` int(2) NOT NULL,
+  `carryon_bags` int(11) NOT NULL,
   `flight_id` varchar(128) NOT NULL,
-  `status_id` int(11) NOT NULL
+  `status_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `address_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `tickets`
+--
+
 
 --
 -- Table structure for table `users`
@@ -121,13 +140,12 @@ CREATE TABLE `users` (
   `user_type_id` int(11) NOT NULL,
   `confirmed` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-ALTER TABLE `users` ADD UNIQUE( `email_address`);
+
 --
 -- Dumping data for table `users`
 --
 
 
--- --------------------------------------------------------
 
 --
 -- Table structure for table `user_log`
@@ -139,6 +157,13 @@ CREATE TABLE `user_log` (
   `last_login_ip` varchar(15) NOT NULL,
   `last_login_datetime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_log`
+--
+
+INSERT INTO `user_log` (`id`, `user_id`, `last_login_ip`, `last_login_datetime`) VALUES
+(1, 2, '192.168.64.1', '2020-08-18 15:22:03');
 
 -- --------------------------------------------------------
 
@@ -188,7 +213,10 @@ ALTER TABLE `payments`
 --
 ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `status_id` (`status_id`);
+  ADD KEY `status_id` (`status_id`),
+  ADD KEY `tickets_ibfk_2` (`payment_id`),
+  ADD KEY `tickets_ibfk_3` (`user_id`),
+  ADD KEY `tickets_ibfk_4` (`address_id`);
 
 --
 -- Indexes for table `users`
@@ -218,37 +246,37 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `flight_status`
 --
 ALTER TABLE `flight_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `user_log`
 --
 ALTER TABLE `user_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `user_type`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `addresses`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_type`
@@ -271,7 +299,10 @@ ALTER TABLE `payments`
 -- Constraints for table `tickets`
 --
 ALTER TABLE `tickets`
-  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `flight_status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `flight_status` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tickets_ibfk_4` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `users`
@@ -280,6 +311,7 @@ ALTER TABLE `users`
   ADD CONSTRAINT `addresses_fk` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `user_type_fk` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
