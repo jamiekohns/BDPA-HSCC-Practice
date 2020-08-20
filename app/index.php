@@ -345,6 +345,7 @@ if (isset($_POST['submit'])){
                     </a> -->
 
                     <a class="$submit_button" href="$_ENV[BASE_URL]/booking?flight_id=$flight_id">Book</a>
+
                 </div>
             </div>
 

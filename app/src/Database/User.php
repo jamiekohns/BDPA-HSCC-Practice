@@ -5,13 +5,14 @@ use PDO;
 
 class User extends Database {
     public function login(string $email, string $password){
-        $query = $this->db->prepare('SELECT * from `users` join `user_type` on (`user_type`.`id` = `users`.`user_type_id`) where
+        $query = $this->db->prepare('SELECT * , users.id as uid from `users` join `user_type` on (`user_type`.`id` = `users`.`user_type_id`) where
         `users` . `email_address` = :email');
 
         $query -> execute([
         ':email' => $email]);
         $login = $query->fetch(PDO::FETCH_ASSOC);
-        //die($query->debugDumpParams());
+
+
 
     if($login['confirmed'] ?? '1'){
 
@@ -20,10 +21,14 @@ class User extends Database {
             setcookie('type', $login['user_type_id'], time()+(10 * 365 * 24 * 60 * 60));
             $_SESSION['user_information'] = ['first_name' => $login['first_name'],
                                             'last_name' => $login['last_name'],
-                                            'email' => $login['email_address'],];
-            setcookie('user_information', $login['user_type_id'], time()+(10 * 365 * 24 * 60 * 60));
+                                            'email' => $login['email_address'],
+                                            'id' => $login['uid']];
+            setcookie('user_information', ['first_name' => $login['first_name'],
+                                            'last_name' => $login['last_name'],
+                                            'email' => $login['email_address'],
+                                            'id' => $login['uid']], time()+(10 * 365 * 24 * 60 * 60));
 
-            (new UserLog())->log($login['id']);
+            (new UserLog())->log($login['uid']);
 
              return true;
         }
