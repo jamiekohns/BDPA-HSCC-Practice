@@ -1,6 +1,7 @@
 <?php require __DIR__  . '/init.php'; ?>
 <?php $page_title = 'Flights' ?>
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
+
 <?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
 
 <?php
@@ -8,8 +9,8 @@
     use Flights\RestRequest\ApiInfo;
     use Flights\TimeHelper;
 ?>
-<?php
 
+<?php
 if (!isset($_SESSION['airports']) || !$_SESSION['airports']) {
     $info = new ApiInfo();
     $airports = $info->airports();
@@ -64,6 +65,7 @@ if (isset($_POST['submit'])){
     $response = $rest->all();
 }
 ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_sidenav.php'; ?>
 <div class="jumbotron sticky-top mb-0 pb-3 rounded-0" style="background-image: url(/web-assets/images/placeholder-bg-1.png); background-size: 1500px auto;">
     <div class="container">
         <h1 class="display-4">Anywhere. Anytime.</h1>
