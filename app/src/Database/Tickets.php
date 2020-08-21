@@ -163,4 +163,11 @@ class Tickets extends Database {
 
         }
 
+        public function cancel_tickets($id){
+            $query = $this->db->prepare('DELETE FROM `tickets` WHERE id = :id');
+
+            $query->execute([':id' => $id]);
+            //die($query->debugDumpParams());
+        }
+
     }
