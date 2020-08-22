@@ -10,6 +10,7 @@ if($_SESSION['type'] == 1 || $_COOKIE['type'] == 1||$_SESSION['type'] == 2 ||$_S
 }
 if(!isset($_SESSION['user']) && !isset($_COOKIE['user']) ){
     header('location: '. $_ENV['BASE_URL'] .'/login.php');
+}
 $user = new User();
 $users = $user->customer_search($_POST["search"]??NULL);
 
