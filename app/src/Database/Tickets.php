@@ -61,6 +61,16 @@ class Tickets extends Database {
         $ticket_first_name, $ticket_middle_name, $ticket_last_name,
         $gender, $dob, $phone_number, $ticket_email, $seat, $check_in,
         $carry_on, $flight_id, $status){
+        //     die($address_payment . "\n" . $city_payment . "\n" . $state_payment. "\n" .
+        // $zip_payment . "\n" . $country_payment . "\n" . $address_ticket . "\n" . $city_ticket . "\n" . $state_ticket . "\n" .
+        // $zip_ticket. "\n" .$country_ticket. "\n" . $card_number. "\n" . $expiration_date. "\n" . $cvc. "\n" .
+        // $cardholder_name. "\n" . $user_first_name. "\n" . $user_last_name. "\n" . $user_email. "\n" .
+        // $ticket_first_name. "\n" . $ticket_middle_name. "\n" . $ticket_last_name. "\n" .
+        // $gender. "\n" . $dob . "\n" . $phone_number . "\n" . $ticket_email. "\n" . $seat. "\n" . $check_in. "\n" .
+        // $carry_on. "\n" . $flight_id. "\n" . $status);
+        $permitted_chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $confirmation_id = substr(str_shuffle($permitted_chars), 0, 14);
+        //die($confirmation_id);
 
             $payment_address_query = $this->db->prepare('INSERT INTO `addresses` (address, city, state, zip, country) VALUES
             (:address, :city, :state, :zip, :country)');
@@ -121,12 +131,12 @@ class Tickets extends Database {
             $ticket_query = $this->db->prepare('INSERT INTO `tickets` (first_name,
                 middle_name, last_name, gender, dob, phone_number, email_address,
                 payment_id, seat_assignment, checkin_bags, carryon_bags, flight_id,
-                status_id, user_id, address_id) VALUES
+                status_id, user_id, address_id, confirmation_id) VALUES
             (:first_name, :middle_name, :last_name, :gender, :dob, :phone_number, :email_address,
                 :payment_id, :seat_assignment, :checkin_bags, :carryon_bags, :flight_id,
-                :status, :user_id, :address_id)');
+                :status, :user_id, :address_id, :confirmation_id)');
 
-            if(!$ticket_query->execute([
+            $ticket_query->execute([
                 ':first_name' => $ticket_first_name,
                 ':middle_name' => $ticket_middle_name,
                 ':last_name' => $ticket_last_name,
@@ -142,12 +152,10 @@ class Tickets extends Database {
                 ':user_id' => $user_id,
                 ':address_id' => $ticket_address_id,
                 ':status' => $status,
-            ])){
-
-            }
-
-
-
+                ':confirmation_id' => $confirmation_id,
+            ]);            
+         
+                return $confirmation_id;
         }
 
         public function display_tickets($user_id){
@@ -168,6 +176,38 @@ class Tickets extends Database {
 
             $query->execute([':id' => $id]);
             //die($query->debugDumpParams());
+        }
+        
+        public function check_confirmation_id($confirmation_id){
+            $confirmation_id_query = $this->db->prepare('SELECT * FROM `tickets` WHERE confirmation_id = :confirmation_id');
+
+            $confirmation_id_query->execute([':confirmation_id' => $confirmation_id,]);
+            $confirmation_id_db = $confirmation_id_query->fetch(\PDO::FETCH_ASSOC);
+
+            if($confirmation_id_db == NULL){
+                return false;
+            } elseif ($confirmation_id !== NULL){
+                return true;
+            }
+        }
+
+        public function get_ticket_by_confirmatiomn_id($name, $confirmation_id){
+            $ticket_query = $this->db->prepare('SELECT * FROM `tickets` WHERE confirmation_id = :confirmation_id AND first_name = :first_name');
+
+            $ticket_query->execute([':confirmation_id' => $confirmation_id,
+                                    ':first_name' => $name,]);
+            $ticket = $ticket_query->fetchall();
+
+            if($ticket !== NULL){
+                return $ticket;
+            } else {
+                return NULL;
+            }
+            
+        }
+
+        public function add_ticket_to_user($email, $name, $confirmation_id){
+            
         }
 
     }

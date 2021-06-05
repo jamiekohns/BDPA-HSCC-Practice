@@ -1,4 +1,3 @@
-
 <div class="w3-sidebar w3-bar-block w3-animate-left bg-light" style="display:none;z-index:500000" id="mySidebar">
   <button class="w3-bar-item w3-button w3-black bg-light text-right text-dark" onclick="w3_close()">Close</button>
   <p class="display-4 ml-3">Hello, User!</p>
