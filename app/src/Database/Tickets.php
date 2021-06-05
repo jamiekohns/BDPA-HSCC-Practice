@@ -14,31 +14,31 @@ class Tickets extends Database {
         return $ticket;
     }
 
-    public function findByNameAndConfirmationId(
-        $first_name,
-        $last_name,
-        $confirmation_id) {
+    // public function findByNameAndConfirmationId(
+    //     $first_name,
+    //     $last_name,
+    //     $confirmation_id) {
 
-            $sql = "SELECT
-            *
-            FROM
-            `tickets`
-            WHERE
-            `first_name` = :first_name
-            AND `last_name` = :last_name
-            AND `confirmationid` = :confirmationid";
+    //         $sql = "SELECT
+    //         *
+    //         FROM
+    //         `tickets`
+    //         WHERE
+    //         `first_name` = :first_name
+    //         AND `last_name` = :last_name
+    //         AND `confirmationid` = :confirmationid";
 
-            $sth = $this->db->prepare($sql);
-            $sth->execute([
-                ':first_name' => $first_name,
-                ':last_name' => $last_name,
-                ':conformationid' => $confirmation_id,
-            ]);
-            $ticket = $sth->fetch(\PDO::FETCH_ASSOC);
+    //         $sth = $this->db->prepare($sql);
+    //         $sth->execute([
+    //             ':first_name' => $first_name,
+    //             ':last_name' => $last_name,
+    //             ':conformationid' => $confirmation_id,
+    //         ]);
+    //         $ticket = $sth->fetch(\PDO::FETCH_ASSOC);
 
-            return $ticket;
+    //         return $ticket;
 
-        }
+    //     }
 
         public function getSoldSeats($flight_id) {
             $seats = [];
