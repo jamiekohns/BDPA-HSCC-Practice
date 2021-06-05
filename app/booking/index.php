@@ -1,14 +1,16 @@
 <?php require __DIR__ . '/../init.php'; ?>
 <?php $page_title = 'Booking' ?>
-<?php include_once $_ENV['BASE_DIRECTORY'] . 'web-assets/tpl/app_header.php'; ?>
-<?php include_once $_ENV['BASE_DIRECTORY'] . 'web-assets/tpl/app_nav.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_header.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_nav.php'; ?>
 <?php use Flights\Database\Tickets; ?>
 <?php
-if(!isset($_GET['flight_id']) || !isset($_GET['status'])){
+if(!isset($_GET['flight_id']) ?? null && !isset($_GET['status']) ?? null){
     header('location: ' .$_ENV['BASE_URL'] . '/index.php');
 }
 $flight_id = $_GET['flight_id'];
-$status = $_GET['status'];
+// if($_GET['status'] && NULL){
+//     $status = $_GET['status'];
+// }
 // echo $flight_id;
 
 
@@ -22,7 +24,7 @@ if(isset($_POST['submit'])){
     } else {
         $user = NULL;
     }
-    $tickets->addTicket($_POST['booking_address'], $_POST['booking_city'],
+    $confirmation_id = $tickets->addTicket($_POST['booking_address'], $_POST['booking_city'],
     $_POST['booking_state'],$_POST['booking_zip'],$_POST['booking_country'],
     $_POST['ticket_address'],$_POST['ticket_city'], $_POST['ticket_state'],
     $_POST['ticket_zip'], $_POST['ticket_country'], $_POST['booking_card_number'],
@@ -32,7 +34,7 @@ if(isset($_POST['submit'])){
     $_POST['ticket_last'], $_POST['ticket_gender'], $_POST['ticket_dob'],
     $_POST['ticket_phone'], $_POST['ticket_email'], $_POST['ticket_seat'],
     $_POST['CheckIn'],  $_POST['CarryOn'], $flight_id, $status);
-    header('location: ' .$_ENV['BASE_URL'] . '/tickets.php');
+    header('location: ' .$_ENV['BASE_URL'] . '/ticket_confirmation.php?confirmation_id=' . $confirmation_id);
 }
 ?>
 <div class="container">
@@ -566,7 +568,6 @@ if(isset($_POST['submit'])){
 <strong>$20</strong>
 </li>
 </ul>
-
 <form class="card p-2">
 <div class="input-group">
 <input type="text" class="form-control" placeholder="Promo code">
@@ -1010,4 +1011,4 @@ if(isset($_POST['submit'])){
 </div>
 </div>
 
-<?php include_once $_ENV['BASE_DIRECTORY'] . '/../web-assets/tpl/app_footer.php'; ?>
+<?php include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_footer.php'; ?>

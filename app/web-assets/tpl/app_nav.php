@@ -1,4 +1,3 @@
-
 <div style="z-index:1000;" class="container col-md-12 p-0 m-0  sticky-top">
     <nav class="navbar navbar-expand-md navbar-light bg-light rounded-bottom">
 
@@ -9,7 +8,8 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="<?=$_ENV['BASE_URL'] .  '/' ?>">Flights</a>
-                <a class="nav-item nav-link" href="/">Checkout</a>
+                <!-- <a class="nav-item nav-link" href="/">Checkout</a> -->
+                <a class="nav-item nav-link" href="<?=$_ENV['BASE_URL'] .  '/ticket.php' ?>">Ticket</a>
 
             </div>
             <div class="navbar-nav ml-auto">
@@ -49,9 +49,9 @@
                                     </button>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
-                                        <a class="dropdown-item" href="/dashboard/?tab=tickets">My Tickets</a>
-                                        <a class="dropdown-item" href="/dashboard/?tab=tickets">Settings</a>
+                                        <a class="dropdown-item" href="<?= $_ENV['BASE_URL'] .  '/dashboard'?>">Dashboard</a>
+                                        <a class="dropdown-item" href="<?= $_ENV['BASE_URL'] .  '/dashboard'?>">My Tickets</a>
+                                        <a class="dropdown-item" href="<?= $_ENV['BASE_URL'] .  '/dashboard'?>">Settings</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="/logout.php">Logout</a>
                                     </div>
@@ -63,7 +63,7 @@
         </div>
     </nav>
 </div>
-<?php if (isset($showSideBar) AND $showSideBar == true) {
-    include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_sidenav.php';
-}
+<?php //if (isset($showSideBar) AND $showSideBar == true) {
+    //include_once $_ENV['BASE_DIRECTORY'] . '/web-assets/tpl/app_sidenav.php';
+//}
 ?>

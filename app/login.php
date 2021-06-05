@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
     } elseif ($_POST['password'] == NULL) {
         $error = 'Please Enter Your Password';
     } elseif (isset($_POST['remmemberPass'])) {
-        die($_ENV['BASE_URL'] . '/dashboard');
+        //die($_ENV['BASE_URL'] . '/dashboard');
         setcookie('user', $_POST['first_name'], time() + (10 * 365 * 24 * 60 * 60));
         $_SESSION['user'] = $_POST['email'];
         $positive         = 'You Have Logged In';

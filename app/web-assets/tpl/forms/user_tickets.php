@@ -63,6 +63,7 @@ for($i = 0; $i<count($tickets); $i++):
             </div>
         </div>
     </div>
+    <a class="btn btn-white p-1 text-primary text-center align-middle" style="width: 30px; height: 30px;" href= "<?= $_ENV['BASE_URL'] ?>/ticket_add.php" >+</a>
     <div class="card-footer">
         <!-- <a class="float-left stretched link mr-4" href="#" data-toggle="modal" data-target="#$flight_modal_id">
             Details
